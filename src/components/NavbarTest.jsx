@@ -41,7 +41,7 @@ export default function NavbarTest() {
             <div className="space-y-3 items-center gap-x-6 md:flex md:space-y-0">
               <div className="relative py-2">
                 <div className="t-0 absolute left-3">
-                  <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                  <p className="flex h-2 w-2 items-center text-bold justify-center rounded-full bg-green-100 p-3 text-sm text-slate-900">
                     {quantity}
                   </p>
                 </div>

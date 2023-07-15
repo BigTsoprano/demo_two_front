@@ -32,17 +32,23 @@ const Product = ({ item }) => {
 <div style={{position:'relative', bottom:'0', height:'12vh', width:'100%'}}>
       <div className="flex items-start justify-between gap-2 px-2">
         <div className="flex flex-col">
-          <span className="text-green-600 text-sm">{item.type}</span>
+          <span className="text-green-600 text-xs">{item.type}</span>
           <Link
             to={`/product/${item._id}`}
-            className="text-sm font-sm text-gray-800 transition duration-100 hover:text-gray-500 lg:text-sm"
+            
           >
+            <p className="text-sm font-semibold  text-slate-900 transition duration-100 hover:text-gray-500 lg:text-sm">
             {item.title}
+            </p>
           </Link>
+<div style={{display:'flex', alignItems:'center', paddingTop:'10px'}}>
+          <p style={{paddingRight:'5px'}} className="text-xs font-semibold border-r ">thc: {item.thc}%</p>
+          <p style={{paddingLeft:'5px'}} className="text-xs font-semibold">cbd: {item.cbd}%</p>
+          </div>
         </div>
 
         <div className="flex flex-col items-end">
-          <span className="font-bold text-sm text-gray-600 lg:text-sm">
+          <span className="font-base text-sm text-gray-600 lg:text-sm">
             ${item.price}
           </span>
           {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
@@ -50,7 +56,7 @@ const Product = ({ item }) => {
       </div>
       <button
       style={{position:'absolute', bottom:'10px',right:"10px", padding:'6px 6px',zIndex:'100', borderRadius:'35px'}}
-        className="rounded bg-green-500 hover:shadow-md text-sm font-semibold text-slate-50  "
+        className="rounded bg-green-500 hover:shadow-lg active:shadow-none text-sm font-semibold text-slate-50  "
         onClick={handleClick}
       >
 <ShoppingCartCheckoutIcon/>

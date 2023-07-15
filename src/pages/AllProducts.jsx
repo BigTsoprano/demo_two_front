@@ -246,7 +246,7 @@ export default function AllProducts() {
             {/* </div> */}
           </div>
           <div className='py-5 border-b'>
-          <button style={{width:'80%', padding:'6px', textAlign:'left'}} className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded" onClick={handleOpenModal}><SearchIcon style={{color:'#292929', marginRight:'3px'}}/> Search</button>
+          <button style={{width:'80%', padding:'6px', textAlign:'left'}} className="text-slate-800 hover:border-indigo-500  border rounded" onClick={handleOpenModal}><SearchIcon style={{color:'#292929', marginRight:'3px'}}/> Search</button>
       {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
       </div>
           <div className="flex-col">

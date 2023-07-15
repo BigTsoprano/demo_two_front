@@ -13,9 +13,11 @@ export default function Modal({ closeModal }) {
       <div className="fixed inset-0 w-full h-full bg-black opacity-40" onClick={closeModal}></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div style={{maxHeight:'60vh', overflowY:'scroll'}} className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
-          <InstantSearch indexName="products" searchClient={searchClient} >
-            <SearchBox  />
+          <InstantSearch  indexName="products" searchClient={searchClient} >
+            <SearchBox className="rounded"  />
             <Hits hitComponent={HitComponent}   />
+          
+   
           </InstantSearch>
         </div>
       </div>
