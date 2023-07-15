@@ -11,7 +11,9 @@ const Product = ({ item }) => {
     dispatch(addProduct({ ...item, quantity: 1 }));
   };
   return (
+    
     <div className="product  bg-white rounded border hover:border-green-500 hover:bg-green-100">
+      
       <div  className="group relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">
      
       <Link

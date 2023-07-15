@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
+
 import { motion, AnimatePresence } from "framer-motion";
+import 'instantsearch.css/themes/satellite.css';
+
+import Modal from "../components/Modal";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function AllProducts() {
@@ -217,12 +222,22 @@ export default function AllProducts() {
     
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+
   return (
     <div className="bg-white">
       <NavbarTest />
-      <button  style={{ padding:'6px 12px',backgroundColor:'green'}} className='mobile_btn' onClick={handleRefresh} >dsafasd</button>
 
-
+     {/* button for filter mobile */}
+     <button  style={{ padding:'6px 12px',backgroundColor:'green'}} className='mobile_btn' onClick={handleRefresh} >dsafasd</button>
+    {/* button for search modal*/}
+      
+    
       <div style={{display:'flex', alignItems:'baseline'}} className="bottom flex  ">
         <div className="left border-r bg-white  rounded ">
           <div className="filter pb-5 border-b">
@@ -230,6 +245,10 @@ export default function AllProducts() {
             <p className="filter-title">Filter By</p>
             {/* </div> */}
           </div>
+          <div className='py-5 border-b'>
+          <button style={{width:'80%', padding:'6px', textAlign:'left'}} className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded" onClick={handleOpenModal}><SearchIcon style={{color:'#292929', marginRight:'3px'}}/> Search</button>
+      {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+      </div>
           <div className="flex-col">
         <button
           className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
@@ -432,6 +451,10 @@ export default function AllProducts() {
             <p className="filter-title">Filter By</p>
             {/* </div> */}
           </div>
+          <div className='py-5 border-b'>
+          <button style={{width:'80%', padding:'6px', textAlign:'left', marginLeft:'6px'}} className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded" onClick={handleOpenModal}><SearchIcon style={{color:'#292929', marginRight:'3px'}}/> Search</button>
+      {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+      </div>
           <div className="flex-col">
         <button
           className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
