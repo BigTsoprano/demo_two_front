@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import algoliasearch from 'algoliasearch/lite';
 import { Link } from "react-router-dom";
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-hooks-web';
@@ -6,7 +6,7 @@ import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-hooks-web';
 
 export default function Modal({ closeModal }) {
   const searchClient = algoliasearch('4S6GCGZALP', '2e97ce9cc2b75b94588b02307d058cdf');
-  const [showHits, setShowHits] = useState(false);
+  // const [showHits, setShowHits] = useState(false);
 
   return (
     <div style={{zIndex:'999',}} className="fixed inset-0 z-10 overflow-y-auto">
