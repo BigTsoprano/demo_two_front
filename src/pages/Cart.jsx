@@ -7,9 +7,13 @@ import NavbarTest from "../components/NavbarTest";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeItem } from "../redux/cartRedux";
+
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+
+
 
 const KEY = import.meta.env.VITE_APP_STRIPE;
 console.log(KEY);
@@ -38,43 +42,47 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, navigate]);
+
+
   return (
     <div className="bg-white">
       <NavbarTest />
       {/* <Announcement /> */}
       <div className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
         <div className="mb-6 sm:mb-10 lg:mb-16">
-          <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+          <h2 className="mb-4 text-left text-lg font-bold text-gray-800 border-b  md:mb-6 lg:text-lg">
             Your Cart ({cart.quantity})
           </h2>
         </div>
         {/* <Bottom> */}
-        <div className="mb-5 flex flex-col sm:mb-8 sm:divide-y sm:border-t sm:border-b">
+        <div className="cart_checkout" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', margin:'1rem 0'}}>
+        <div style={{minWidth:'50%'}}>
+        <div  className=" flex flex-col  sm:divide-y shadow-sm rounded border">
           {cart.products.map((product) => (
             <div key={product._id}>
-              <div className="flex flex-wrap gap-4 sm:py-2.5 lg:gap-6">
-                <div className="sm:-my-2.5">
-                  <div className="group relative block h-40 w-24 overflow-hidden rounded-lg bg-gray-100 sm:h-56 sm:w-40">
+              <div style={{margin:'0 20px', }} className="flex flex-wrap gap-4 sm:py-2.5 lg:gap-6">
+                
+                  <div className="group relative block h-35 w-20 overflow-hidden rounded-lg bg-white ">
                     <img
                       src={product.img}
                       loading="lazy"
                       alt="Photo by vahid kanani"
-                      className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+                      className="h-full w-full object-contain  object-center transition duration-200 group-hover:scale-110"
                     />
-                  </div>
+                
                 </div>
 
                 <div className="flex flex-1 flex-col justify-between">
                   <div>
                     <a
                       href="#"
-                      className="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl"
+                      className="mb-1 inline-block text-base font-semibold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-base"
                     >
                       {product.title}
                     </a>
-
-                    <span className="block text-gray-500">Size: S</span>
-                    <span className="block text-gray-500">Color: Black</span>
+                    <span className="block text-xs text-green-500">{product.type}</span>
+                    <span className="block text-gray-500">{product.categories}</span>
+                    <span className="block font-semibold text-sm text-slate-700">{product.weight}gs</span>
                   </div>
 
                   <div>
@@ -84,24 +92,26 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <div className="flex w-full justify-between border-t pt-4 sm:w-auto sm:border-none sm:pt-0">
-                  <div className="flex flex-col items-start gap-2">
+                <div className="flex w-full justify-between  pt-4 sm:w-auto sm:border-none sm:pt-0">
+                  <div className="q_d flex flex-col items-start gap-2">
                     <div className="flex h-12 w-20 overflow-hidden">
-                      <span className="block text-gray-500">
+                      <div>
+                      <span className="block text-slate-600 text-xs">
                         Quantity: {product.quantity}
                       </span>
+                      </div>
                     </div>
 
                     <button
                       onClick={() => dispatch(removeItem(product))}
-                      className="select-none text-sm font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
+                      className="select-none text-sm font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
                     >
                       Delete
                     </button>
                   </div>
 
-                  <div className="ml-4 pt-3 sm:pt-2 md:ml-8 lg:ml-16">
-                    <span className="block font-bold text-gray-800 md:text-lg">
+                  <div className="ml-4 flex items-center pt-3 sm:pt-2 md:ml-8 lg:ml-16">
+                    <span className="block font-semibold text-slate-800 md:text-base">
                       ${product.price * product.quantity}
                     </span>
                   </div>
@@ -110,8 +120,9 @@ const Cart = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-end gap-4">
-          <div className="w-full rounded-lg bg-gray-100 p-4 sm:max-w-xs">
+        </div>
+        <div style={{ minWidth:'40%', margin:'1rem'}} className="flex flex-col items-start gap-4">
+          <div className="w-full rounded-lg bg-green-100 p-4 sm:max-w-xs">
             <div className="space-y-1">
               <div className="flex justify-between gap-4 text-gray-500">
                 <span>Subtotal</span>
@@ -119,8 +130,8 @@ const Cart = () => {
               </div>
 
               <div className="flex justify-between gap-4 text-gray-500">
-                <span>Shipping</span>
-                <span>$4.99</span>
+                <span>Pick up</span>
+                <span>$0</span>
               </div>
             </div>
 
@@ -135,12 +146,16 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          <div className="border">
-            <p>Sample Credit Card:</p>
-            <p>4242 4242 4242 4242</p>
-            <p>08/24</p>
+          <div style={{padding:'10px',boxShadow: 'rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset'}} className="border rounded bg-slate-50">
+            <p style={{paddingBottom:'10px'}} className="font-semibold">Sample checkout card</p>
+            <p><span>Card #: </span>4242 4242 4242 4242</p>
+            <p><span>Exp. date: </span>08/24</p>
             <p>CVC: 123</p>
           </div>
+          <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+          <Link to='/'>
+          <button style={{padding:'10px 16px', marginRight:'2rem'}} className="border rounded hover:text-green-600 hover:border-green-500">keep shopping</button>
+          </Link>
           {cart.products.length > 0 && (
             <StripeCheckout
               name="Your Shop Name"
@@ -152,11 +167,13 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             >
-              <button className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
-                Check out
+              <button style={{padding:'10px 16px'}} className="inline-block shadow-md rounded-lg bg-green-500  text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-slate-800 focus-visible:ring active:bg-green-600 md:text-base">
+                Checkout <KeyboardArrowRightIcon/>
               </button>
             </StripeCheckout>
           )}
+        </div>
+        </div>
         </div>
         {/* </Bottom> */}
       </div>

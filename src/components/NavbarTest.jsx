@@ -15,11 +15,11 @@ export default function NavbarTest() {
   ];
 
   return (
-    <nav className="bg-white border-b w-full md:static md:text-sm md:border-none">
+    <nav className="bg-white shadow-sm border-b w-full md:static md:text-sm md:border-none">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
-          <Link to="/">
-            <h1>YOUR LOGO</h1>
+          <Link  to="/">
+            <h1 style={{color:'#22c44e', fontWeight:'600', fontSize:'18px'}}>Your logo</h1>
           </Link>
         </div>
         <div
