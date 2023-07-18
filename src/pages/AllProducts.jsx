@@ -44,8 +44,8 @@ export default function AllProducts() {
       try {
         const res = await axios.get(
           category
-            ? `http://localhost:5000/api/products?category=${category}`
-            : "http://localhost:5000/api/products"
+            ? `http://18.211.167.41/api/products?category=${category}`
+            : "http://18.211.167.41/api/products"
         );
         setProducts(res.data);
       } catch (err) {
