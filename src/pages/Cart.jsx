@@ -17,16 +17,10 @@ import {
 
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
-// const LocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-
 const KEY = import.meta.env.VITE_APP_STRIPE;
-console.log(KEY);
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  //   const [cartFromLocalStorage, setCartFromLocalStorage] =
-  //     useState(LocalStorage);
-  //   console.log(cartFromLocalStorage);
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,11 +28,6 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-  console.log(stripeToken);
-
-  //   useEffect(() => {
-  //     localStorage.setItem("cart", JSON.stringify(cart));
-  //   });
 
   useEffect(() => {
     const makeRequest = async () => {

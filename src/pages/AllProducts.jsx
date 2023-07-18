@@ -48,7 +48,7 @@ export default function AllProducts() {
         );
         setProducts(res.data);
       } catch (err) {
-        console.log(er);
+        console.log(err);
       }
     };
     getProducts();
@@ -96,7 +96,6 @@ export default function AllProducts() {
 
   //handle filter checkbox
   const handleClick = (e) => {
-    console.log(e);
     if (e.target.checked) {
       if (
         e.target.name === "weight" &&
@@ -188,7 +187,6 @@ export default function AllProducts() {
         updatedList = updatedList.filter((item) =>
           filters.effect.every((effect) => item.effect.includes(effect))
         );
-        console.log(updatedList);
       }
 
       setFilteredProducts(updatedList);
@@ -210,7 +208,6 @@ export default function AllProducts() {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.createdAt - b.createdAt)
       );
-      console.log(filteredProducts);
     } else if (sort === "asc") {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
@@ -236,8 +233,6 @@ export default function AllProducts() {
   const handleOpenModal = () => {
     setModalOpen(true);
   };
-  //   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-  //   const [a, setA] = useState(0);
 
   //reset checkboxes
   const resetCheckbox = (category) => {
@@ -270,9 +265,7 @@ export default function AllProducts() {
       >
         <div className="left border-r bg-white  rounded ">
           <div className="filter pb-5 border-b">
-            {/* <div className="text-xl w-40"> */}
             <p className="filter-title">Filter By</p>
-            {/* </div> */}
           </div>
           <div className="py-5 border-b">
             <button
@@ -322,12 +315,6 @@ export default function AllProducts() {
             >
               Vaporizers
             </button>
-            {/* <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setA(a + 1)}
-            >
-              reload
-            </button> */}
           </div>
           {display && (
             <div>
@@ -359,14 +346,12 @@ export default function AllProducts() {
                     <ul className="imx-4 px-2  text-sm font-medium">
                       {weights.map((weight) => (
                         <li
-                          //   className="checkbox-wrapper-47  columns-2 "
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={weight}
                         >
                           <input
                             type="checkbox"
                             name="weight"
-                            //   checked={uncheck}
                             id={weight}
                             value={weight}
                             onChange={(e) => handleClick(e)}
@@ -408,7 +393,6 @@ export default function AllProducts() {
                     <ul className="imx-4 px-2  text-sm font-medium">
                       {types.map((type) => (
                         <li
-                          //   className="checkbox-wrapper-47  columns-2 "
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={type}
                         >
@@ -499,9 +483,7 @@ export default function AllProducts() {
             >
               <div className="left2 border-r bg-white  rounded ">
                 <div className="filter pb-5 border-b">
-                  {/* <div className="text-xl w-40"> */}
                   <p className="filter-title">Filter By</p>
-                  {/* </div> */}
                 </div>
                 <div className="py-5 border-b">
                   <button
@@ -590,7 +572,6 @@ export default function AllProducts() {
                         <ul className="imx-4 px-2  text-sm font-medium">
                           {weights.map((weight) => (
                             <li
-                              //   className="checkbox-wrapper-47  columns-2 "
                               className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                               key={weight}
                             >
@@ -638,7 +619,6 @@ export default function AllProducts() {
                         <ul className="imx-4 px-2  text-sm font-medium">
                           {types.map((type) => (
                             <li
-                              //   className="checkbox-wrapper-47  columns-2 "
                               className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                               key={type}
                             >
@@ -722,50 +702,9 @@ export default function AllProducts() {
             style={{ alignItems: "flex-end" }}
             className="search-sort flex w-full justify-between border-b"
           >
-            {/* <div className="search">
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="items-center justify-center gap-3 sm:flex"
-              >
-                <div className="relative">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-400 left-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                  <input
-                    type="text"
-                    placeholder="Search"
-                    className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
-                  />
-                </div>
-                <button className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 active:shadow-none rounded-lg shadow sm:mt-0 sm:w-auto">
-                  Search
-                </button>
-              </form>
-            </div> */}
             <div className="category-title px-20 pb-5 flex justify-center items-center">
-              {/* <div className="text-xl w-40"> */}
               {category ? category : "All products"}
-              {/* </div> */}
             </div>
-            {/* <div className="sort">
-              <span>Sort Products:</span>
-              <select onChange={(e) => setSort(e.target.value)}>
-                <option value="newest">Newest</option>
-                <option value="asc">Price (asc)</option>
-                <option value="desc">Price (desc)</option>
-              </select>
-            </div> */}
             <div className="sort absolute right-28">
               <button
                 className="w-full flex items-center justify-between text-slate-700 p-2 m-2 border rounded bg-white hover:bg-green-100 duration-150"
@@ -791,9 +730,6 @@ export default function AllProducts() {
               </button>
               {isSortOpened ? (
                 <div className="imx-4 px-2 text-sm font-medium relative z-20 bg-white border rounded-lg">
-                  {/* <button onClick={setSort('newest')} className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150">
-                    Price (High to Low)
-                  </button> */}
                   <button
                     onClick={() => setSort("asc")}
                     className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-100 active:bg-gray-100 duration-150"
@@ -823,7 +759,6 @@ export default function AllProducts() {
           </div>
         </div>
       </div>
-      {/* <!-- product-grid - end --> */}
     </div>
   );
 }

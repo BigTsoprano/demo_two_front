@@ -23,13 +23,7 @@ export default function SingleProduct() {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
-        // const res2 = await publicRequest.get(
-        //   `http://localhost:5000/api/products?category=${res.categories[0]}`
-        // );
         setProduct(res.data);
-        // setSimilarProducts(res2.data);
-        console.log(res.data);
-        // console.log(res2.data);
       } catch (err) {}
     };
     getProduct();
@@ -38,12 +32,10 @@ export default function SingleProduct() {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        console.log(product);
         const res = await publicRequest.get(
           `http://localhost:5000/api/products?category=${product.categories[0]}`
         );
         setSimilarProducts(res.data);
-        console.log(res.data);
       } catch (err) {}
     };
     getProduct();
@@ -60,8 +52,6 @@ export default function SingleProduct() {
   const handleClick = () => {
     dispatch(addProduct({ ...product, quantity }));
   };
-
-  console.log(similarProducts);
 
   return (
     <div>

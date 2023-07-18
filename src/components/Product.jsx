@@ -7,7 +7,6 @@ const Product = ({ item }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    console.log(item);
     dispatch(addProduct({ ...item, quantity: 1 }));
   };
   return (
