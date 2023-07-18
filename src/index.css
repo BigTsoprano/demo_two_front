@@ -14,7 +14,23 @@ body {
    overflow-x: hidden;
 }
 
-
+.nav_bar{
+   display:flex;
+   width: 100%;
+   z-index: 1000;
+   height:10vh;
+   position: relative;
+   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+   
+   
+ }
+ .navbar_wrap{
+   display:flex;
+   width: 100%;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0 2rem;
+ }
 
 @media screen and (max-device-width: 640px) {
 .product{

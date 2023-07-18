@@ -3,6 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
@@ -249,15 +250,7 @@ export default function AllProducts() {
     <div className="bg-white">
       <NavbarTest />
 
-      {/* button for filter mobile */}
-      <button
-        style={{ padding: "6px 12px", backgroundColor: "green" }}
-        className="mobile_btn"
-        onClick={handleRefresh}
-      >
-        dsafasd
-      </button>
-      {/* button for search modal*/}
+    
 
       <div
         style={{ display: "flex", alignItems: "baseline" }}
@@ -688,64 +681,62 @@ export default function AllProducts() {
                 </div>
                 <button
                   onClick={() => setIsVisible(!isVisible)}
-                  className="filter-button"
+                  className="filter-button bg-green-100"
                 >
-                  Close
+                  Apply
                 </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <div className="right m-5 ">
+        <div style={{}}className="right m-5 ">
           <div
-            style={{ alignItems: "flex-end" }}
-            className="search-sort flex w-full justify-between border-b"
+            style={{display:'flex', alignItems:'center' }}
+            className="search-sort pb-5 flex w-full justify-between border-b"
           >
-            <div className="category-title px-20 pb-5 flex justify-center items-center">
+            <div className="category-title px-20 flex justify-center items-center">
               {category ? category : "All products"}
             </div>
             <div className="sort absolute right-28">
-              <button
-                className="w-full flex items-center justify-between text-slate-700 p-2 m-2 border rounded bg-white hover:bg-green-100 duration-150"
-                onClick={() => setIsSortOpened(!isSortOpened)}
-              >
-                <div className="flex items-center text-sm gap-x-2">
-                  Sort price
-                </div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className={`w-5 h-5 duration-150 ${
-                    isSortOpened ? "rotate-180" : ""
-                  }`}
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              {isSortOpened ? (
-                <div className="imx-4 px-2 text-sm font-medium relative z-20 bg-white border rounded-lg">
-                  <button
-                    onClick={() => setSort("asc")}
-                    className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-100 active:bg-gray-100 duration-150"
-                  >
-                    Price (High to Low)
-                  </button>
-                  <button
-                    onClick={() => setSort("desc")}
-                    className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-100 active:bg-gray-100 duration-150"
-                  >
-                    Price (Low to High)
-                  </button>
-                </div>
-              ) : (
-                ""
-              )}
+        
+               <div style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+                  {/* button for filter mobile */}
+      <button
+        style={{ padding: "6px 12px", marginLeft:'20px' }}
+        className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
+        onClick={handleRefresh}
+      >
+        Filter <TuneOutlinedIcon/>
+      </button>
+      {/* button for search modal*/}
+ 
+  <select
+  name="HeadlineAct"
+  style={{padding:'5px 10px', marginLeft:'20px'}}
+  id="HeadlineAct"
+  className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
+  onChange={(e) => {
+    const selectedOption = e.target.value;
+    // Perform sorting logic based on selectedOption
+    if (selectedOption === "asc") {
+      setSort("asc");
+      // Perform sorting in ascending order
+    } else if (selectedOption === "desc") {
+      setSort("desc");
+      // Perform sorting in descending order
+    } else if (selectedOption === "clear") {
+      setSort(""); // Clear the sorting value
+    }
+  }}
+>
+<option value="clear">Sort price</option>
+  <option value="desc">Price (High to Low)</option>
+  <option value="asc">Price (Low to High)</option>
+    </select>
+  </div>
+               
+           
             </div>
           </div>
           <div className=" bg-white sm:py-8 lg:py-10 flex justify-between w-full">

@@ -167,9 +167,20 @@ export default function SingleProduct() {
             </div>
           </div>
         </div>
-        <div className="flex">
+
+        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+        <header>
+      <h2 className="text-lg font-bold text-gray-900 sm:text-lg">
+        Related products
+      </h2>
+
+      <p className="max-w-md mt-4 text-base  text-slate-700">
+      Unveil a world of possibilities as you indulge in the finest selection curated just for you.
+      </p>
+    </header>
+        <ul className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {similarProducts.map((item) => (
-            <div
+            <li
               key={item._id}
               className="product  bg-white rounded border hover:border-green-500 hover:bg-green-100"
             >
@@ -244,9 +255,10 @@ export default function SingleProduct() {
                   <ShoppingCartCheckoutIcon />
                 </button>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
+      </div>
       </div>
     </div>
   );
