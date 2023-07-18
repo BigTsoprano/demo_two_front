@@ -33,7 +33,7 @@ export default function SingleProduct() {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          `https://cart.01ninjas.com/api/products?category=${product.categories[0]}`
+          `http://localhost:5000/api/products?category=${product.categories[0]}`
         );
         setSimilarProducts(res.data);
       } catch (err) {}

@@ -51,7 +51,7 @@ const Cart = () => {
       <div className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
         <div className="mb-6 sm:mb-10 lg:mb-16">
           <h2 className="mb-4 text-left text-lg font-bold text-gray-800 border-b  md:mb-6 lg:text-lg">
-            Your Cart Is Empty
+            Your Cart {cart.quantity > 0 ? "" : "is empty"}
           </h2>
         </div>
         {/* <Bottom> */}
