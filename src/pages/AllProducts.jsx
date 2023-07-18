@@ -44,8 +44,8 @@ export default function AllProducts() {
       try {
         const res = await axios.get(
           category
-            ? `http://18.211.167.41/api/products?category=${category}`
-            : "http://18.211.167.41/api/products"
+            ? `https://cart.01ninjas.com/api/products?category=${category}`
+            : "https://cart.01ninjas.com/api/products"
         );
         setProducts(res.data);
       } catch (err) {
