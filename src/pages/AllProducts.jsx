@@ -29,6 +29,7 @@ export default function AllProducts() {
   const [isEffectOpened, setIsEffectOpened] = useState(true);
   const [isSortOpened, setIsSortOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [display, setDisplay] = useState(false);
   const [uncheck, setUncheck] = useState(false);
 
   const checkState =
@@ -56,9 +57,9 @@ export default function AllProducts() {
       type: [],
       effect: [],
     });
-    // setEffects([]);
-    // setWeights([]);
-    // setTypes([]);
+    setEffects([0]);
+    setWeights([0]);
+    setTypes([]);
   }, [category]);
 
   //filters for each filter category
@@ -235,8 +236,19 @@ export default function AllProducts() {
   const handleOpenModal = () => {
     setModalOpen(true);
   };
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
-  const [a, setA] = useState(0);
+  //   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
+  //   const [a, setA] = useState(0);
+
+  //reset checkboxes
+  const resetCheckbox = (category) => {
+    setCategory(category);
+    setDisplay(false);
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplay(true);
+    }, 2);
+  }, [category]);
 
   return (
     <div className="bg-white">
@@ -276,37 +288,37 @@ export default function AllProducts() {
           <div className="flex-col">
             <button
               className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory(null)}
+              onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
               className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory("flower")}
+              onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
               className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory("edible")}
+              onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
               className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory("concentrate")}
+              onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
               className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory("pre-roll")}
+              onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
               className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-              onClick={() => setCategory("vaporizer")}
+              onClick={() => resetCheckbox("vaporizer")}
             >
               Vaporizers
             </button>
@@ -317,152 +329,154 @@ export default function AllProducts() {
               reload
             </button> */}
           </div>
-          <div>
-            {weights.length > 0 && (
-              <div className="border-t">
-                <button
-                  className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                  onClick={() => setIsWeightOpened(!isWeightOpened)}
-                >
-                  <div className="flex items-center text-slate-900 gap-x-2">
-                    Weight:
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className={`w-5 h-5 duration-150 ${
-                      isWeightOpened ? "rotate-180" : ""
-                    }`}
+          {display && (
+            <div>
+              {weights.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsWeightOpened(!isWeightOpened)}
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-                {isWeightOpened ? (
-                  <ul className="imx-4 px-2  text-sm font-medium">
-                    {weights.map((weight) => (
-                      <li
-                        //   className="checkbox-wrapper-47  columns-2 "
-                        className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                        key={weight}
-                      >
-                        <input
-                          type="checkbox"
-                          name="weight"
-                          //   checked={uncheck}
-                          id={weight}
-                          value={weight}
-                          onChange={(e) => handleClick(e)}
-                        />
-                        <label htmlFor={weight}>{weight}g</label>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  ""
-                )}
-              </div>
-            )}
-            {types.length > 0 && (
-              <div className="border-t">
-                <button
-                  className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                  onClick={() => setIsTypeOpened(!isTypeOpened)}
-                >
-                  <div className="flex text-slate-900 items-center gap-x-2">
-                    Type:
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className={`w-5 h-5 duration-150 ${
-                      isTypeOpened ? "rotate-180" : ""
-                    }`}
+                    <div className="flex items-center text-slate-900 gap-x-2">
+                      Weight:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isWeightOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isWeightOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {weights.map((weight) => (
+                        <li
+                          //   className="checkbox-wrapper-47  columns-2 "
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={weight}
+                        >
+                          <input
+                            type="checkbox"
+                            name="weight"
+                            //   checked={uncheck}
+                            id={weight}
+                            value={weight}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={weight}>{weight}g</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+              {types.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsTypeOpened(!isTypeOpened)}
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-                {isTypeOpened ? (
-                  <ul className="imx-4 px-2  text-sm font-medium">
-                    {types.map((type) => (
-                      <li
-                        //   className="checkbox-wrapper-47  columns-2 "
-                        className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
-                        key={type}
-                      >
-                        <input
-                          type="checkbox"
-                          name="type"
-                          id={type}
-                          value={type}
-                          onChange={(e) => handleClick(e)}
-                        />
-                        <label htmlFor={type}>{type}</label>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  ""
-                )}
-              </div>
-            )}
-            {effects.length > 0 && (
-              <div className="border-t">
-                <button
-                  className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                  onClick={() => setIsEffectOpened(!isEffectOpened)}
-                >
-                  <div className="flex items-center text-slate-900 gap-x-2">
-                    Effect:
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className={`w-5 h-5 duration-150 ${
-                      isEffectOpened ? "rotate-180" : ""
-                    }`}
+                    <div className="flex text-slate-900 items-center gap-x-2">
+                      Type:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isTypeOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isTypeOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {types.map((type) => (
+                        <li
+                          //   className="checkbox-wrapper-47  columns-2 "
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={type}
+                        >
+                          <input
+                            type="checkbox"
+                            name="type"
+                            id={type}
+                            value={type}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={type}>{type}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+              {effects.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-                {isEffectOpened ? (
-                  <ul className="imx-4 px-2  text-sm font-medium">
-                    {effects.map((effect) => (
-                      <li
-                        className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                        key={effect}
-                      >
-                        <input
-                          type="checkbox"
-                          name="effect"
-                          id={effect}
-                          value={effect}
-                          onChange={(e) => handleClick(e)}
-                        />
-                        <label htmlFor={effect}>{effect}</label>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  ""
-                )}
-              </div>
-            )}
-          </div>
+                    <div className="flex items-center text-slate-900 gap-x-2">
+                      Effect:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isEffectOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isEffectOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {effects.map((effect) => (
+                        <li
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={effect}
+                        >
+                          <input
+                            type="checkbox"
+                            name="effect"
+                            id={effect}
+                            value={effect}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={effect}>{effect}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* mobile filter */}

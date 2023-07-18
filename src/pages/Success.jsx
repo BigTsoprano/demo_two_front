@@ -25,7 +25,7 @@ const Success = () => {
             productId: item._id,
             quantity: item.quantity,
           })),
-          amount: data.amount,
+          amount: data.amount / 100,
           address: data.billing_details.address,
         });
         setOrderId(res.data._id);
