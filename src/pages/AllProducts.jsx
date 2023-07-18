@@ -3,7 +3,7 @@ import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
-import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
@@ -249,8 +249,6 @@ export default function AllProducts() {
   return (
     <div className="bg-white">
       <NavbarTest />
-
-    
 
       <div
         style={{ display: "flex", alignItems: "baseline" }}
@@ -501,37 +499,37 @@ export default function AllProducts() {
                 <div className="flex-col">
                   <button
                     className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory(null)}
+                    onClick={() => resetCheckbox(null)}
                   >
                     All
                   </button>
                   <button
                     className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory("flower")}
+                    onClick={() => resetCheckbox("flower")}
                   >
                     Flowers
                   </button>
                   <button
                     className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory("edible")}
+                    onClick={() => resetCheckbox("edible")}
                   >
                     Edibles
                   </button>
                   <button
                     className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory("concentrate")}
+                    onClick={() => resetCheckbox("concentrate")}
                   >
                     Concentrates
                   </button>
                   <button
                     className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory("pre-roll")}
+                    onClick={() => resetCheckbox("pre-roll")}
                   >
                     Pre-rolls
                   </button>
                   <button
                     className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => setCategory("vaporizer")}
+                    onClick={() => resetCheckbox("vaporizer")}
                   >
                     Vaporizers
                   </button>
@@ -690,53 +688,57 @@ export default function AllProducts() {
           )}
         </AnimatePresence>
 
-        <div style={{}}className="right m-5 ">
+        <div style={{}} className="right m-5 ">
           <div
-            style={{display:'flex', alignItems:'center' }}
+            style={{ display: "flex", alignItems: "center" }}
             className="search-sort pb-5 flex w-full justify-between border-b"
           >
             <div className="category-title px-20 flex justify-center items-center">
               {category ? category : "All products"}
             </div>
             <div className="sort absolute right-28">
-        
-               <div style={{display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-                  {/* button for filter mobile */}
-      <button
-        style={{ padding: "6px 12px", marginLeft:'20px' }}
-        className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
-        onClick={handleRefresh}
-      >
-        Filter <TuneOutlinedIcon/>
-      </button>
-      {/* button for search modal*/}
- 
-  <select
-  name="HeadlineAct"
-  style={{padding:'5px 10px', marginLeft:'20px'}}
-  id="HeadlineAct"
-  className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
-  onChange={(e) => {
-    const selectedOption = e.target.value;
-    // Perform sorting logic based on selectedOption
-    if (selectedOption === "asc") {
-      setSort("asc");
-      // Perform sorting in ascending order
-    } else if (selectedOption === "desc") {
-      setSort("desc");
-      // Perform sorting in descending order
-    } else if (selectedOption === "clear") {
-      setSort(""); // Clear the sorting value
-    }
-  }}
->
-<option value="clear">Sort price</option>
-  <option value="desc">Price (High to Low)</option>
-  <option value="asc">Price (Low to High)</option>
-    </select>
-  </div>
-               
-           
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                {/* button for filter mobile */}
+                <button
+                  style={{ padding: "6px 12px", marginLeft: "20px" }}
+                  className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
+                  onClick={handleRefresh}
+                >
+                  Filter <TuneOutlinedIcon />
+                </button>
+                {/* button for search modal*/}
+
+                <select
+                  name="HeadlineAct"
+                  style={{ padding: "5px 10px", marginLeft: "20px" }}
+                  id="HeadlineAct"
+                  className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
+                  onChange={(e) => {
+                    const selectedOption = e.target.value;
+                    // Perform sorting logic based on selectedOption
+                    if (selectedOption === "asc") {
+                      setSort("asc");
+                      // Perform sorting in ascending order
+                    } else if (selectedOption === "desc") {
+                      setSort("desc");
+                      // Perform sorting in descending order
+                    } else if (selectedOption === "clear") {
+                      setSort(""); // Clear the sorting value
+                    }
+                  }}
+                >
+                  <option value="clear">Sort price</option>
+                  <option value="desc">Price (High to Low)</option>
+                  <option value="asc">Price (Low to High)</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className=" bg-white sm:py-8 lg:py-10 flex justify-between w-full">
