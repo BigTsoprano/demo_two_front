@@ -13,7 +13,8 @@ body {
 
    overflow-x: hidden;
 }
-
+.popover{
+}
 .nav_bar{
    display:flex;
    width: 100%;
@@ -43,6 +44,10 @@ align-items: center;
 .cart_checkout{
    display:flex;
    flex-direction: column !important;
+}
+
+.popover{
+   min-width: 85% !important;
 }
 
 .q_d{

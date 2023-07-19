@@ -4,7 +4,7 @@ import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-
+import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
 
@@ -44,8 +44,8 @@ export default function AllProducts() {
       try {
         const res = await axios.get(
           category
-            ? `http://localhost:5000/api/products?category=${category}`
-            : "http://localhost:5000/api/products"
+            ? `https://cart.01ninjas.com/api/products?category=${category}`
+            : "https://cart.01ninjas.com/api/products"
         );
         setProducts(res.data);
       } catch (err) {
@@ -246,6 +246,14 @@ export default function AllProducts() {
     }, 2);
   }, [category]);
 
+  const [isSliderOpen, setIsSliderOpen] = useState(false);
+
+  const handleSliderToggle = () => {
+    setIsSliderOpen(!isSliderOpen);
+  };
+
+
+  
   return (
     <div className="bg-white">
       <NavbarTest />
@@ -256,55 +264,55 @@ export default function AllProducts() {
       >
         <div className="left border-r bg-white  rounded ">
           <div className="filter pb-5 border-b">
-            <p className="filter-title">Filter By</p>
+            <p style={{display:'flex', alignItems:'flex-end'}} className="filter-title"><TuneOutlinedIcon style={{fontsize:'16px', paddingRight:'3px'}}/>Filter by</p>
           </div>
           <div className="py-5 border-b">
             <button
               style={{ width: "80%", padding: "6px", textAlign: "left" }}
-              className="text-slate-800 hover:border-indigo-500  border rounded"
+              className="text-slate-800 text-sm hover:border-indigo-500  border rounded"
               onClick={handleOpenModal}
             >
-              <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
+              <SearchIcon style={{ color: "#292929", marginRight: "3px", fontSize:'18px' }} />{" "}
               Search
             </button>
             {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
           </div>
-          <div className="flex-col">
+          <div className="flex-col py-3">
             <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name border font-semibold rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
-              className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
-              className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("vaporizer")}
             >
-              Vaporizers
+              Vapes
             </button>
           </div>
           {display && (
@@ -315,8 +323,8 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
                   >
-                    <div className="flex items-center text-slate-900 gap-x-2">
-                      Weight:
+                    <div className="flex items-center font-semibold text-sm text-slate-900 gap-x-2">
+                      Weight
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -334,20 +342,21 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isWeightOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
+                    <ul className="imx-4 px-2  text-sm font-base">
                       {weights.map((weight) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={weight}
                         >
                           <input
+                          style={{accentColor:'#22C55E'}}
                             type="checkbox"
                             name="weight"
                             id={weight}
                             value={weight}
                             onChange={(e) => handleClick(e)}
                           />
-                          <label htmlFor={weight}>{weight}g</label>
+                          <label htmlFor={weight}>{weight}gs</label>
                         </li>
                       ))}
                     </ul>
@@ -362,8 +371,8 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
                   >
-                    <div className="flex text-slate-900 items-center gap-x-2">
-                      Type:
+                    <div className="flex text-sm font-semibold text-slate-900 items-center gap-x-2">
+                      Type
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -381,13 +390,14 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isTypeOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
+                    <ul className="imx-4 px-2  text-sm font-base">
                       {types.map((type) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={type}
                         >
                           <input
+                          style={{accentColor:'#22C55E'}}
                             type="checkbox"
                             name="type"
                             id={type}
@@ -409,8 +419,8 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <div className="flex items-center text-slate-900 gap-x-2">
-                      Effect:
+                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
+                      Effect
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -428,13 +438,14 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isEffectOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
+                    <ul className="imx-4 px-2  text-sm font-base">
                       {effects.map((effect) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={effect}
                         >
                           <input
+                          style={{accentColor:'#22C55E'}}
                             type="checkbox"
                             name="effect"
                             id={effect}
@@ -455,26 +466,14 @@ export default function AllProducts() {
         </div>
 
         {/* mobile filter */}
-        <AnimatePresence>
-          {isVisible && (
-            <motion.div
-              className="slider"
-              initial={{ x: -300 }}
-              animate={{
-                x: 0,
-              }}
-              exit={{ x: -300 }}
-              transition={{
-                type: "tween",
-                bounce: 0,
-                duration: 0.2,
-                delay: 0,
-                ease: "linear",
-              }}
+       
+            <div
+              className={`slider ${isSliderOpen ? "active" : ""}`}
+        
             >
               <div className="left2 border-r bg-white  rounded ">
                 <div className="filter pb-5 border-b">
-                  <p className="filter-title">Filter By</p>
+                  <p style={{paddingTop:'12vh', marginLeft:'1rem'}} className="filter-title">Filter By</p>
                 </div>
                 <div className="py-5 border-b">
                   <button
@@ -567,6 +566,7 @@ export default function AllProducts() {
                               key={weight}
                             >
                               <input
+                              style={{accentColor:'#22C55E'}}
                                 type="checkbox"
                                 name="weight"
                                 id={weight}
@@ -614,6 +614,7 @@ export default function AllProducts() {
                               key={type}
                             >
                               <input
+                              style={{accentColor:'#22C55E'}}
                                 type="checkbox"
                                 name="type"
                                 id={type}
@@ -661,6 +662,7 @@ export default function AllProducts() {
                               key={effect}
                             >
                               <input
+                              style={{accentColor:'#22C55E'}}
                                 type="checkbox"
                                 name="effect"
                                 id={effect}
@@ -677,23 +679,25 @@ export default function AllProducts() {
                     </div>
                   )}
                 </div>
+                <div style={{marginTop:'20px'}}>
                 <button
-                  onClick={() => setIsVisible(!isVisible)}
-                  className="filter-button bg-green-100"
+                style={{padding:'10px 12px', width:'100%',boxShadow: 'rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px'}}
+                onClick={handleSliderToggle}
+                  className="filter-button text-base text-white bg-green-500 hover:bg-white transition duration-100 hover:text-slate-900 "
                 >
                   Apply
                 </button>
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+     
 
-        <div style={{}} className="right m-5 ">
+        <div  className="right m-5 ">
           <div
-            style={{ display: "flex", alignItems: "center" }}
+          style={{display:'flex', alignItems:'center'}}
             className="search-sort pb-5 flex w-full justify-between border-b"
           >
-            <div className="category-title px-20 flex justify-center items-center">
+            <div style={{display:'flex', justifyContent:'flex-start', textAlign:'left'}} className="category-title px-5">
               {category ? category : "All products"}
             </div>
             <div className="sort absolute right-28">
@@ -706,18 +710,18 @@ export default function AllProducts() {
                 }}
               >
                 {/* button for filter mobile */}
-                <button
-                  style={{ padding: "6px 12px", marginLeft: "20px" }}
+                <button 
+                  style={{ padding: "6px 12px", marginLeft: "2rem" }}
                   className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
-                  onClick={handleRefresh}
+                  onClick={handleSliderToggle}
                 >
-                  Filter <TuneOutlinedIcon />
+                  Filter <TuneOutlinedIcon style={{marginLeft:'6px'}} />
                 </button>
                 {/* button for search modal*/}
-
+<div>
                 <select
                   name="HeadlineAct"
-                  style={{ padding: "5px 10px", marginLeft: "20px" }}
+                  style={{ padding: "10px 12px", marginLeft: "2rem" }}
                   id="HeadlineAct"
                   className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
                   onChange={(e) => {
@@ -738,6 +742,7 @@ export default function AllProducts() {
                   <option value="desc">Price (High to Low)</option>
                   <option value="asc">Price (Low to High)</option>
                 </select>
+                </div>
               </div>
             </div>
           </div>
@@ -752,6 +757,7 @@ export default function AllProducts() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

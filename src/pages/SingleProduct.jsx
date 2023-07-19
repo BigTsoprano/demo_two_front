@@ -33,7 +33,7 @@ export default function SingleProduct() {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          `http://localhost:5000/api/products?category=${product.categories[0]}`
+          `https://cart.01ninjas.com/api/products?category=${product.categories[0]}`
         );
         setSimilarProducts(res.data);
       } catch (err) {}
@@ -90,12 +90,17 @@ export default function SingleProduct() {
                     {product.type}
                   </p>
                 </div>
+                <div className="text-sm font-semibold text-slate-700" style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                  <p style={{paddingRight:'1rem'}}>thc: {product.thc}%</p>
+                  <p>cbd: {product.cbd}%</p>
+                </div>
                 {product?.effect?.map((effect) => (
                   <span className="mb-4 text-gray-500 text-sm" key={effect}>
                     {effect}{" "}
                   </span>
                 ))}
-
+               
+               
                 <p
                   className="text-base text-slate-700"
                   style={{ paddingTop: "10px" }}
@@ -155,12 +160,12 @@ export default function SingleProduct() {
                   </div>
 
                   <button
-                    style={{ padding: "7px 9px" }}
+                    style={{ padding: "7px 9px", }}
                     type="button"
                     onClick={handleClick}
-                    className="font-semibold text-base rounded bg-green-500 hover:bg-slate-700  text-white"
+                    className="font-base hover:border border-slate-900 text-white hover:text-slate-900 text-base rounded bg-green-500 hover:bg-white hover:text-slate-900  "
                   >
-                    Add to Cart
+                    Add to cart
                   </button>
                 </div>
               </div>

@@ -21,7 +21,7 @@ text-align: left;
 .category-name {
   padding: 6px 9px;
   margin: 6px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .category-title {
   overflow: hidden;
@@ -37,16 +37,10 @@ text-align: left;
 .search-sort {
   /* flex */
 }
-
-.Navbar{
-  display:flex;
-  width: 100%;
-  z-index: 1000;
-  background-color: tomato;
-  height:20vh;
-  position: fixed;
-
+.slider{
+  display:none;
 }
+
 @media screen and (max-device-width: 640px) {
 
   .left {
@@ -67,6 +61,11 @@ text-align: left;
     z-index: 900;
     background-color: white;
     transition: ease-in-out 0.3s;
+    display:flex;
+    left:-100%;
+  }
+  .slider.active{
+    left:0;
   }
   .mobile_btn{
     display:flex;
@@ -74,4 +73,7 @@ text-align: left;
   .category-title{
     padding-top:90px;
   }
+.search-sort{
+  border: none !important;
+}
 }

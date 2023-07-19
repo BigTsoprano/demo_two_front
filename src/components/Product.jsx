@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { motion } from "framer-motion";
+
 
 const Product = ({ item }) => {
   const dispatch = useDispatch();
@@ -10,8 +12,8 @@ const Product = ({ item }) => {
     dispatch(addProduct({ ...item, quantity: 1 }));
   };
   return (
-    <div className="product  bg-white rounded border hover:border-green-500 hover:bg-green-100">
-      <div className="group relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">
+    <div className="product  bg-white rounded border hover:border-green-500 ">
+      <div className="group  relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">
         <Link to={`/product/${item._id}`}>
           <img
             style={{ borderBottom: "1px solid #e5e5e5" }}
@@ -26,7 +28,7 @@ const Product = ({ item }) => {
         style={{
           position: "relative",
           bottom: "0",
-          height: "12vh",
+          minHeight: "12vh",
           width: "100%",
         }}
       >
@@ -67,7 +69,9 @@ const Product = ({ item }) => {
             {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
           </div>
         </div>
-        <button
+        <motion.button
+        whileTap={{ scale: 0.9, type: "spring", bounce: 50  }}
+whileHover={{ scale: 1.1, type: "spring", bounce: 50  }}
           style={{
             position: "absolute",
             bottom: "10px",
@@ -76,11 +80,11 @@ const Product = ({ item }) => {
             zIndex: "100",
             borderRadius: "35px",
           }}
-          className="rounded bg-green-500 hover:shadow-lg active:shadow-none text-sm font-semibold text-slate-50  "
+          className="rounded bg-green-500 hover:border active:text-green-500 border-slate-900 hover:bg-white hover:text-slate-900 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
           onClick={handleClick}
         >
           <ShoppingCartCheckoutIcon />
-        </button>
+        </motion.button>
       </div>
     </div>
     // </Container>

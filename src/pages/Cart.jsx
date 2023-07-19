@@ -14,6 +14,8 @@ import {
   removeItem,
   removeSingleProduct,
 } from "../redux/cartRedux";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -64,12 +66,12 @@ const Cart = () => {
             margin: "1rem 0",
           }}
         >
-          <div style={{ minWidth: "50%" }}>
+          <div style={{ minWidth: "50%", height:'auto' }}>
             <div className=" flex flex-col  sm:divide-y shadow-sm rounded border">
               {cart.products.map((product) => (
                 <div key={product._id}>
                   <div
-                    style={{ margin: "0 20px" }}
+                    style={{ margin: "0 20px", display:'flex', flexDirection:'row', alignItems:'center', }}
                     className="flex flex-wrap gap-4 sm:py-2.5 lg:gap-6"
                   >
                     <div className="group relative block h-35 w-20 overflow-hidden rounded-lg bg-white ">
@@ -83,23 +85,43 @@ const Cart = () => {
 
                     <div className="flex flex-1 flex-col justify-between">
                       <div>
+                      <span className="block text-xs text-green-500">
+                          {product.type}
+                        </span>
                         <a
                           href="#"
-                          className="mb-1 inline-block text-base font-semibold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-base"
+                          className="mb-1 inline-block text-sm font-semibold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-sm"
                         >
                           {product.title}
                         </a>
-                        <span className="block text-xs text-green-500">
-                          {product.type}
-                        </span>
-                        <span className="block text-gray-500">
-                          {product.categories}
-                        </span>
-                        <span className="block font-semibold text-sm text-slate-700">
-                          {product.weight}gs
-                        </span>
+                       
+                   
+                        <div style={{display:'flex', flexDirection:'row',  alignItems:'center',}} >
+                  <p style={{marginRight:'1rem'}} className="text-xs text-slate-600">weight: {product.weight}gs</p>
+                  <p className="text-xs text-slate-600">type: {product.categories}</p>
+                  </div>
+                  <div style={{display:'flex', flexDirection:'row', alignItems:'center', marginTop:'1rem'}}>
+                  <button
+                          onClick={() =>
+                            dispatch(addProduct({ ...product, quantity: 1 }))
+                          }
+                          className="select-none px-2 text-sm font-semibold hover:text-green-600 transition duration-100 text-slate-800 active:text-indigo-700"
+                        >
+                          +
+                        </button>
+                  <p style={{ padding:'4px 6px'}} className="text-xs border rounded text-slate-600">quanity: {product.quantity}</p>
+                  <button
+                          onClick={() =>
+                            dispatch(
+                              removeSingleProduct({ ...product, quantity: 1 })
+                            )
+                          }
+                          className="select-none px-2 text-sm font-semibold hover:text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
+                        >
+                          -
+                        </button>
                       </div>
-
+                              </div>
                       <div>
                         {/* <span className="mb-1 block font-bold text-gray-800 md:text-lg">
                       $49.99
@@ -107,41 +129,16 @@ const Cart = () => {
                       </div>
                     </div>
 
-                    <div className="flex w-full justify-between  pt-4 sm:w-auto sm:border-none sm:pt-0">
-                      <div className="q_d flex flex-col items-start gap-2">
-                        <div className="flex h-12 w-20 overflow-hidden">
-                          <div>
-                            <span className="block text-slate-600 text-xs">
-                              Quantity: {product.quantity}
-                            </span>
-                          </div>
-                        </div>
+                    <div style={{display:'flex', flexDirection:'column-reverse',  alignItems:'flex-end', marginBottom:'1rem', marginRight:'1rem'}} className="flex w-full   sm:w-auto sm:border-none sm:pt-0">
+                       
 
-                        <button
-                          onClick={() =>
-                            dispatch(addProduct({ ...product, quantity: 1 }))
-                          }
-                          className="select-none text-sm font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
-                        >
-                          +
-                        </button>
-                        <button
-                          onClick={() =>
-                            dispatch(
-                              removeSingleProduct({ ...product, quantity: 1 })
-                            )
-                          }
-                          className="select-none text-sm font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
-                        >
-                          -
-                        </button>
+                      
                         <button
                           onClick={() => dispatch(removeItem(product))}
-                          className="select-none text-sm font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
+                          className="select-none items-center text-xs font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
                         >
-                          Delete
+                         <DeleteForeverIcon style={{fontSize:'16px'}}/> delete
                         </button>
-                      </div>
 
                       <div className="ml-4 flex items-center pt-3 sm:pt-2 md:ml-8 lg:ml-16">
                         <span className="block font-semibold text-slate-800 md:text-base">
@@ -160,7 +157,7 @@ const Cart = () => {
           >
             <div className="w-full rounded-lg bg-green-100 p-4 sm:max-w-xs">
               <div className="space-y-1">
-                <div className="flex justify-between gap-4 text-gray-500">
+                <div className="flex justify-between gap-4 text-base text-slate-500">
                   <span>Subtotal</span>
                   <span>${cart.total}</span>
                 </div>
@@ -173,11 +170,11 @@ const Cart = () => {
 
               <div className="mt-4 border-t pt-4">
                 <div className="flex items-start justify-between gap-4 text-gray-800">
-                  <span className="text-lg font-bold">Total</span>
+                  <span className="text-base font-bold">Total</span>
 
                   <span className="flex flex-col items-end">
-                    <span className="text-lg font-bold">${cart.total} USD</span>
-                    <span className="text-sm text-gray-500">including VAT</span>
+                    <span className="text-base font-bold">${cart.total} USD</span>
+                    <span className="text-xs text-gray-500">including VAT</span>
                   </span>
                 </div>
               </div>
@@ -227,8 +224,8 @@ const Cart = () => {
                   stripeKey={KEY}
                 >
                   <button
-                    style={{ padding: "10px 16px" }}
-                    className="inline-block shadow-md rounded-lg bg-green-500  text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-slate-800 focus-visible:ring active:bg-green-600 md:text-base"
+                    style={{ padding: "10px 16px",  }}
+                    className="inline-block hover:border border-slate-900  rounded bg-green-500  text-center text-sm font-base text-white hover:text-slate-900 outline-none ring-indigo-300 transition duration-100 hover:bg-white hover:text-slate-900 focus-visible:ring active:bg-green-600 md:text-base"
                   >
                     Checkout <KeyboardArrowRightIcon />
                   </button>
