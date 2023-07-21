@@ -92,7 +92,7 @@ const dispatch = useDispatch();
 onMouseEnter={handlePopoverEnter}
 onMouseLeave={handlePopoverLeave}
 className="popover rounded shadow-md border-t border-b border-r border-l"
-  style={{minHeight:'20vh', minWidth:'35%',width:'auto', height:'auto',width:'30%', position:'absolute', backgroundColor:'#fff', right:'0', padding:'1rem', top:'10vh'}}
+  style={{minHeight:'20vh', minWidth:'300px',width:'30%', height:'auto', position:'absolute', backgroundColor:'#fff', right:'0', padding:'1rem', top:'10vh'}}
 
   >
     <p  style={{display:'flex', justifyContent:'center'}} className="font-semibold text-lg">Your cart</p>
