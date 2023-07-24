@@ -41,6 +41,8 @@ const Cart = () => {
         navigate("/success", {
           state: { data: res.data, cart: cart.products },
         });
+        console.log(res.data);
+        console.log(res.data);
       } catch {}
     };
     stripeToken && makeRequest();

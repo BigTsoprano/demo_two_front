@@ -1,16 +1,29 @@
 import { Link } from "react-router-dom";
-import { addProduct } from "../redux/cartRedux";
+import { addProduct, removeSingleProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { motion } from "framer-motion";
 
+import { useEffect, useState } from "react";
 
 const Product = ({ item }) => {
+  const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
+  //   const cart = useSelector((state) => state.cart);
 
-  const handleClick = () => {
-    dispatch(addProduct({ ...item, quantity: 1 }));
+  //   console.log(item);
+
+  const handleClick = (type) => {
+    if (type === "add") {
+      dispatch(addProduct({ ...item, quantity: 1 }));
+      setQuantity(quantity + 1);
+    } else if (type === "remove") {
+      dispatch(removeSingleProduct({ ...item, quantity: 1 }));
+      setQuantity(quantity - 1);
+    }
   };
+
+  console.log(quantity);
   return (
     <div className="product  bg-white rounded border hover:border-green-500 ">
       <div className="group  relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">
@@ -69,9 +82,9 @@ const Product = ({ item }) => {
             {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
           </div>
         </div>
-        <motion.button
-        whileTap={{ scale: 0.9, type: "spring", bounce: 50  }}
-whileHover={{ scale: 1.1, type: "spring", bounce: 50  }}
+        {/* <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          whileHover={{ scale: 1.1, type: "spring", bounce: 50 }}
           style={{
             position: "absolute",
             bottom: "10px",
@@ -81,10 +94,39 @@ whileHover={{ scale: 1.1, type: "spring", bounce: 50  }}
             borderRadius: "35px",
           }}
           className="rounded bg-green-500 hover:border active:text-green-500 border-slate-900 hover:bg-white hover:text-slate-900 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
-          onClick={handleClick}
+          onClick={() => handleClick("add")}
         >
           <ShoppingCartCheckoutIcon />
-        </motion.button>
+        </motion.button> */}
+        {!(quantity > 0) && (
+          <motion.button
+            whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+            whileHover={{ scale: 1.1, type: "spring", bounce: 50 }}
+            style={{
+              position: "absolute",
+              bottom: "10px",
+              right: "10px",
+              padding: "6px 6px",
+              zIndex: "100",
+              borderRadius: "35px",
+            }}
+            className="rounded bg-green-500 hover:border active:text-green-500 border-slate-900 hover:bg-white hover:text-slate-900 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            onClick={() => handleClick("add")}
+          >
+            <ShoppingCartCheckoutIcon />
+          </motion.button>
+        )}
+        {quantity > 0 && (
+          <div className="" style={{}}>
+            <span>
+              <button onClick={() => handleClick("add")}>+</button>
+            </span>
+            <span>{quantity}</span>
+            <span>
+              <button onClick={() => handleClick("remove")}>-</button>
+            </span>
+          </div>
+        )}
       </div>
     </div>
     // </Container>

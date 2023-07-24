@@ -19,6 +19,7 @@ export default function AllProducts() {
     type: [],
     effect: [],
   });
+  const [displayFilters, setDisplayFilters] = useState([]);
   const [effects, setEffects] = useState([]);
   const [types, setTypes] = useState([]);
   const [weights, setWeights] = useState([]);
@@ -28,10 +29,8 @@ export default function AllProducts() {
   const [isWeightOpened, setIsWeightOpened] = useState(true);
   const [isTypeOpened, setIsTypeOpened] = useState(true);
   const [isEffectOpened, setIsEffectOpened] = useState(true);
-  const [isSortOpened, setIsSortOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [display, setDisplay] = useState(false);
-  const [uncheck, setUncheck] = useState(false);
 
   const checkState =
     filters.weight.length > 0 ||
@@ -58,9 +57,6 @@ export default function AllProducts() {
       type: [],
       effect: [],
     });
-    setEffects([0]);
-    setWeights([0]);
-    setTypes([]);
   }, [category]);
 
   //filters for each filter category
@@ -99,8 +95,9 @@ export default function AllProducts() {
   const handleClick = (e) => {
     if (e.target.checked) {
       if (
-        e.target.name === "weight" &&
-        !filters.weight.toString().includes(e.target.value)
+        e.target.name === "weight"
+        // &&
+        // !filters.weight.toString().includes(e.target.value)
       ) {
         const baseHolder = products.filter(
           (item) => item.weight == e.target.value
@@ -111,9 +108,11 @@ export default function AllProducts() {
             weight: [...filters.weight, product.weight],
           });
         });
+        setDisplayFilters((prevState) => [...prevState, e.target.value + "g"]);
       } else if (
-        e.target.name === "type" &&
-        !filters.type.toString().includes(e.target.value)
+        e.target.name === "type"
+        // &&
+        // !filters.type.toString().includes(e.target.value)
       ) {
         const baseHolder = products.filter(
           (item) => item.type == e.target.value
@@ -124,9 +123,11 @@ export default function AllProducts() {
             type: [...filters.type, product.type],
           });
         });
+        setDisplayFilters((prevState) => [...prevState, e.target.value]);
       } else if (
-        e.target.name === "effect" &&
-        !filters.effect.toString().includes(e.target.value)
+        e.target.name === "effect"
+        // &&
+        // !filters.effect.toString().includes(e.target.value)
       ) {
         const baseHolder = products.filter((item) =>
           item.effect.includes(e.target.value)
@@ -137,6 +138,7 @@ export default function AllProducts() {
             effect: [...filters.effect, e.target.value],
           });
         });
+        setDisplayFilters((prevState) => [...prevState, e.target.value]);
       }
     } else {
       if (e.target.name === "weight") {
@@ -146,6 +148,9 @@ export default function AllProducts() {
             (item) => item.toString() != e.target.value
           ),
         });
+        setDisplayFilters(
+          displayFilters.filter((item) => item !== e.target.value + "g")
+        );
       }
       if (e.target.name === "type") {
         setFilters({
@@ -154,6 +159,9 @@ export default function AllProducts() {
             (item) => item.toString() != e.target.value
           ),
         });
+        setDisplayFilters(
+          displayFilters.filter((item) => item !== e.target.value)
+        );
       }
       if (e.target.name === "effect") {
         setFilters({
@@ -162,10 +170,13 @@ export default function AllProducts() {
             (item) => item.toString() != e.target.value
           ),
         });
+        setDisplayFilters(
+          displayFilters.filter((item) => item !== e.target.value)
+        );
       }
     }
   };
-
+  console.log(displayFilters);
   //apply filters
   const applyFilters = () => {
     if (products && checkState && filters) {
@@ -202,6 +213,41 @@ export default function AllProducts() {
   useEffect(() => {
     applyFilters();
   }, [filters]);
+
+  //handle display filters
+  const handleClickDisplayFilters = (filter) => {
+    let node = document.getElementById(filter);
+    setDisplayFilters(
+      displayFilters.filter((item) => item !== node.textContent)
+    );
+    let checkboxInput = document.getElementById(node.textContent);
+    checkboxInput.checked = false;
+    if (checkboxInput.name === "weight") {
+      setFilters({
+        ...filters,
+        weight: filters.weight.filter((item) => item != checkboxInput.value),
+      });
+    } else if (checkboxInput.name === "type") {
+      setFilters({
+        ...filters,
+        type: filters.type.filter((item) => item != checkboxInput.value),
+      });
+    } else if (checkboxInput.name === "effect") {
+      setFilters({
+        ...filters,
+        effect: filters.effect.filter((item) => item != checkboxInput.value),
+      });
+    }
+  };
+  const handleClearAll = () => {
+    setDisplayFilters([]);
+    setDisplay(false);
+    setFilters({
+      weight: [],
+      type: [],
+      effect: [],
+    });
+  };
 
   //apply sort
   useEffect(() => {
@@ -244,7 +290,7 @@ export default function AllProducts() {
     setTimeout(() => {
       setDisplay(true);
     }, 2);
-  }, [category]);
+  }, [category, display]);
 
   const [isSliderOpen, setIsSliderOpen] = useState(false);
 
@@ -252,8 +298,6 @@ export default function AllProducts() {
     setIsSliderOpen(!isSliderOpen);
   };
 
-
-  
   return (
     <div className="bg-white">
       <NavbarTest />
@@ -264,7 +308,24 @@ export default function AllProducts() {
       >
         <div className="left border-r bg-white  rounded ">
           <div className="filter pb-5 border-b">
-            <p style={{display:'flex', alignItems:'flex-end'}} className="filter-title"><TuneOutlinedIcon style={{fontsize:'16px', paddingRight:'3px'}}/>Filter by</p>
+            <p
+              style={{ display: "flex", alignItems: "flex-end" }}
+              className="filter-title"
+            >
+              <TuneOutlinedIcon
+                style={{ fontsize: "16px", paddingRight: "3px" }}
+              />
+
+              <span className="filter-title">Filters</span>
+              {displayFilters.length > 0 && (
+                <span>
+                  <span>({displayFilters.length})</span>{" "}
+                  <span>
+                    <button onClick={handleClearAll}>Clear All</button>
+                  </span>
+                </span>
+              )}
+            </p>
           </div>
           <div className="py-5 border-b">
             <button
@@ -272,7 +333,13 @@ export default function AllProducts() {
               className="text-slate-800 text-sm hover:border-indigo-500  border rounded"
               onClick={handleOpenModal}
             >
-              <SearchIcon style={{ color: "#292929", marginRight: "3px", fontSize:'18px' }} />{" "}
+              <SearchIcon
+                style={{
+                  color: "#292929",
+                  marginRight: "3px",
+                  fontSize: "18px",
+                }}
+              />{" "}
               Search
             </button>
             {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
@@ -349,14 +416,19 @@ export default function AllProducts() {
                           key={weight}
                         >
                           <input
-                          style={{accentColor:'#22C55E'}}
+                            style={{ accentColor: "#22C55E" }}
                             type="checkbox"
                             name="weight"
-                            id={weight}
+                            id={weight + "g"}
                             value={weight}
                             onChange={(e) => handleClick(e)}
                           />
-                          <label htmlFor={weight}>{weight}gs</label>
+
+                          {/* <label htmlFor={weight}>{weight}g</label> */}
+
+                          <label className={weight + "g"} htmlFor={weight}>
+                            {weight}g
+                          </label>
                         </li>
                       ))}
                     </ul>
@@ -397,7 +469,7 @@ export default function AllProducts() {
                           key={type}
                         >
                           <input
-                          style={{accentColor:'#22C55E'}}
+                            style={{ accentColor: "#22C55E" }}
                             type="checkbox"
                             name="type"
                             id={type}
@@ -445,7 +517,7 @@ export default function AllProducts() {
                           key={effect}
                         >
                           <input
-                          style={{accentColor:'#22C55E'}}
+                            style={{ accentColor: "#22C55E" }}
                             type="checkbox"
                             name="effect"
                             id={effect}
@@ -466,238 +538,247 @@ export default function AllProducts() {
         </div>
 
         {/* mobile filter */}
-       
-            <div
-              className={`slider ${isSliderOpen ? "active" : ""}`}
-        
-            >
-              <div className="left2 border-r bg-white  rounded ">
-                <div className="filter pb-5 border-b">
-                  <p style={{paddingTop:'12vh', marginLeft:'1rem'}} className="filter-title">Filter By</p>
-                </div>
-                <div className="py-5 border-b">
-                  <button
-                    style={{
-                      width: "80%",
-                      padding: "6px",
-                      textAlign: "left",
-                      marginLeft: "6px",
-                    }}
-                    className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded"
-                    onClick={handleOpenModal}
-                  >
-                    <SearchIcon
-                      style={{ color: "#292929", marginRight: "3px" }}
-                    />{" "}
-                    Search
-                  </button>
-                  {modalOpen && (
-                    <Modal closeModal={() => setModalOpen(false)} />
-                  )}
-                </div>
-                <div className="flex-col">
-                  <button
-                    className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox(null)}
-                  >
-                    All
-                  </button>
-                  <button
-                    className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox("flower")}
-                  >
-                    Flowers
-                  </button>
-                  <button
-                    className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox("edible")}
-                  >
-                    Edibles
-                  </button>
-                  <button
-                    className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox("concentrate")}
-                  >
-                    Concentrates
-                  </button>
-                  <button
-                    className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox("pre-roll")}
-                  >
-                    Pre-rolls
-                  </button>
-                  <button
-                    className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
-                    onClick={() => resetCheckbox("vaporizer")}
-                  >
-                    Vaporizers
-                  </button>
-                </div>
-                <div>
-                  {weights.length > 0 && (
-                    <div className="border-t">
-                      <button
-                        className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                        onClick={() => setIsWeightOpened(!isWeightOpened)}
-                      >
-                        <div className="flex items-center text-slate-900 gap-x-2">
-                          Weight:
-                        </div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className={`w-5 h-5 duration-150 ${
-                            isWeightOpened ? "rotate-180" : ""
-                          }`}
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                      {isWeightOpened ? (
-                        <ul className="imx-4 px-2  text-sm font-medium">
-                          {weights.map((weight) => (
-                            <li
-                              className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                              key={weight}
-                            >
-                              <input
-                              style={{accentColor:'#22C55E'}}
-                                type="checkbox"
-                                name="weight"
-                                id={weight}
-                                value={weight}
-                                onChange={(e) => handleClick(e)}
-                              />
-                              <label htmlFor={weight}>{weight}g</label>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  )}
-                  {types.length > 0 && (
-                    <div className="border-t">
-                      <button
-                        className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                        onClick={() => setIsTypeOpened(!isTypeOpened)}
-                      >
-                        <div className="flex text-slate-900 items-center gap-x-2">
-                          Type:
-                        </div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className={`w-5 h-5 duration-150 ${
-                            isTypeOpened ? "rotate-180" : ""
-                          }`}
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                      {isTypeOpened ? (
-                        <ul className="imx-4 px-2  text-sm font-medium">
-                          {types.map((type) => (
-                            <li
-                              className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
-                              key={type}
-                            >
-                              <input
-                              style={{accentColor:'#22C55E'}}
-                                type="checkbox"
-                                name="type"
-                                id={type}
-                                value={type}
-                                onChange={(e) => handleClick(e)}
-                              />
-                              <label htmlFor={type}>{type}</label>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  )}
-                  {effects.length > 0 && (
-                    <div className="border-t">
-                      <button
-                        className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                        onClick={() => setIsEffectOpened(!isEffectOpened)}
-                      >
-                        <div className="flex items-center text-slate-900 gap-x-2">
-                          Effect:
-                        </div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          className={`w-5 h-5 duration-150 ${
-                            isEffectOpened ? "rotate-180" : ""
-                          }`}
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                      {isEffectOpened ? (
-                        <ul className="imx-4 px-2  text-sm font-medium">
-                          {effects.map((effect) => (
-                            <li
-                              className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                              key={effect}
-                            >
-                              <input
-                              style={{accentColor:'#22C55E'}}
-                                type="checkbox"
-                                name="effect"
-                                id={effect}
-                                value={effect}
-                                onChange={(e) => handleClick(e)}
-                              />
-                              <label htmlFor={effect}>{effect}</label>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  )}
-                </div>
-                <div style={{marginTop:'20px'}}>
-                <button
-                style={{padding:'10px 12px', width:'100%',boxShadow: 'rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px'}}
-                onClick={handleSliderToggle}
-                  className="filter-button text-base text-white bg-green-500 hover:bg-white transition duration-100 hover:text-slate-900 "
-                >
-                  Apply
-                </button>
-                </div>
-              </div>
-            </div>
-     
 
-        <div  className="right m-5 ">
+        <div className={`slider ${isSliderOpen ? "active" : ""}`}>
+          <div className="left2 border-r bg-white  rounded ">
+            <div className="filter pb-5 border-b">
+              <p
+                style={{ paddingTop: "12vh", marginLeft: "1rem" }}
+                className="filter-title"
+              >
+                Filter By
+              </p>
+            </div>
+            <div className="py-5 border-b">
+              <button
+                style={{
+                  width: "80%",
+                  padding: "6px",
+                  textAlign: "left",
+                  marginLeft: "6px",
+                }}
+                className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded"
+                onClick={handleOpenModal}
+              >
+                <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
+                Search
+              </button>
+              {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+            </div>
+            <div className="flex-col">
+              <button
+                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox(null)}
+              >
+                All
+              </button>
+              <button
+                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox("flower")}
+              >
+                Flowers
+              </button>
+              <button
+                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox("edible")}
+              >
+                Edibles
+              </button>
+              <button
+                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox("concentrate")}
+              >
+                Concentrates
+              </button>
+              <button
+                className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox("pre-roll")}
+              >
+                Pre-rolls
+              </button>
+              <button
+                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                onClick={() => resetCheckbox("vaporizer")}
+              >
+                Vaporizers
+              </button>
+            </div>
+            <div>
+              {weights.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsWeightOpened(!isWeightOpened)}
+                  >
+                    <div className="flex items-center text-slate-900 gap-x-2">
+                      Weight:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isWeightOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isWeightOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {weights.map((weight) => (
+                        <li
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={weight}
+                        >
+                          <input
+                            style={{ accentColor: "#22C55E" }}
+                            type="checkbox"
+                            name="weight"
+                            id={weight}
+                            value={weight}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={weight}>{weight}g</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+              {types.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsTypeOpened(!isTypeOpened)}
+                  >
+                    <div className="flex text-slate-900 items-center gap-x-2">
+                      Type:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isTypeOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isTypeOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {types.map((type) => (
+                        <li
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={type}
+                        >
+                          <input
+                            style={{ accentColor: "#22C55E" }}
+                            type="checkbox"
+                            name="type"
+                            id={type}
+                            value={type}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={type}>{type}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+              {effects.length > 0 && (
+                <div className="border-t">
+                  <button
+                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    onClick={() => setIsEffectOpened(!isEffectOpened)}
+                  >
+                    <div className="flex items-center text-slate-900 gap-x-2">
+                      Effect:
+                    </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className={`w-5 h-5 duration-150 ${
+                        isEffectOpened ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isEffectOpened ? (
+                    <ul className="imx-4 px-2  text-sm font-medium">
+                      {effects.map((effect) => (
+                        <li
+                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
+                          key={effect}
+                        >
+                          <input
+                            style={{ accentColor: "#22C55E" }}
+                            type="checkbox"
+                            name="effect"
+                            id={effect}
+                            value={effect}
+                            onChange={(e) => handleClick(e)}
+                          />
+                          <label htmlFor={effect}>{effect}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+            </div>
+            <div style={{ marginTop: "20px" }}>
+              <button
+                style={{
+                  padding: "10px 12px",
+                  width: "100%",
+                  boxShadow:
+                    "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
+                }}
+                onClick={handleSliderToggle}
+                className="filter-button text-base text-white bg-green-500 hover:bg-white transition duration-100 hover:text-slate-900 "
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="right m-5 ">
           <div
-          style={{display:'flex', alignItems:'center'}}
+            style={{ display: "flex", alignItems: "center" }}
             className="search-sort pb-5 flex w-full justify-between border-b"
           >
-            <div style={{display:'flex', justifyContent:'flex-start', textAlign:'left'}} className="category-title px-5">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                textAlign: "left",
+              }}
+              className="category-title px-5"
+            >
               {category ? category : "All products"}
             </div>
             <div className="sort absolute right-28">
@@ -710,42 +791,60 @@ export default function AllProducts() {
                 }}
               >
                 {/* button for filter mobile */}
-                <button 
+                <button
                   style={{ padding: "6px 12px", marginLeft: "2rem" }}
                   className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
                   onClick={handleSliderToggle}
                 >
-                  Filter <TuneOutlinedIcon style={{marginLeft:'6px'}} />
+                  Filter <TuneOutlinedIcon style={{ marginLeft: "6px" }} />
                 </button>
                 {/* button for search modal*/}
-<div>
-                <select
-                  name="HeadlineAct"
-                  style={{ padding: "10px 12px", marginLeft: "2rem" }}
-                  id="HeadlineAct"
-                  className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
-                  onChange={(e) => {
-                    const selectedOption = e.target.value;
-                    // Perform sorting logic based on selectedOption
-                    if (selectedOption === "asc") {
-                      setSort("asc");
-                      // Perform sorting in ascending order
-                    } else if (selectedOption === "desc") {
-                      setSort("desc");
-                      // Perform sorting in descending order
-                    } else if (selectedOption === "clear") {
-                      setSort(""); // Clear the sorting value
-                    }
-                  }}
-                >
-                  <option value="clear">Sort price</option>
-                  <option value="desc">Price (High to Low)</option>
-                  <option value="asc">Price (Low to High)</option>
-                </select>
+                <div>
+                  <select
+                    name="HeadlineAct"
+                    style={{ padding: "10px 12px", marginLeft: "2rem" }}
+                    id="HeadlineAct"
+                    className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
+                    onChange={(e) => {
+                      const selectedOption = e.target.value;
+                      // Perform sorting logic based on selectedOption
+                      if (selectedOption === "asc") {
+                        setSort("asc");
+                        // Perform sorting in ascending order
+                      } else if (selectedOption === "desc") {
+                        setSort("desc");
+                        // Perform sorting in descending order
+                      } else if (selectedOption === "clear") {
+                        setSort(""); // Clear the sorting value
+                      }
+                    }}
+                  >
+                    <option value="clear">Sort price</option>
+                    <option value="desc">Price (High to Low)</option>
+                    <option value="asc">Price (Low to High)</option>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
+          {displayFilters.length > 0 && (
+            <div>
+              {displayFilters.map((filter, index) => (
+                <span
+                  key={filter}
+                  id={index}
+                  onClick={() => handleClickDisplayFilters(index)}
+                  style={{
+                    padding: "3px",
+                    border: "1px solid black",
+                    margin: "3px",
+                  }}
+                >
+                  {filter}
+                </span>
+              ))}
+            </div>
+          )}
           <div className=" bg-white sm:py-8 lg:py-10 flex justify-between w-full">
             {unmatchedFilters ? (
               <div>no matched results</div>

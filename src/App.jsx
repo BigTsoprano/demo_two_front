@@ -5,6 +5,7 @@ import Success from "./pages/Success";
 import AllProducts from "./pages/AllProducts";
 import TestFilter from "./pages/TestFilter";
 import SingleProduct from "./pages/SingleProduct";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/testfilter" element={<TestFilter />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
     </Router>
   );
