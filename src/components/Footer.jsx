@@ -137,13 +137,13 @@ function Footer() {
           &copy; 2023 Canna All rights reserved.
         </div>
       </div>
-      <style jsx>{`
+      {/* <style jsx>{`
         .svg-icon path,
         .svg-icon polygon,
         .svg-icon rect {
-          fill: currentColor;
+          fill: currentColor;   
         }
-      `}</style>
+      `}</style> */}
     </footer>
   );
 }

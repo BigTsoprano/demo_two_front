@@ -23,7 +23,7 @@ const Product = ({ item }) => {
     }
   };
 
-  console.log(quantity);
+  //   console.log(quantity);
   return (
     <div className="product  bg-white rounded border hover:border-green-500 ">
       <div className="group  relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">

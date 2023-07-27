@@ -8,11 +8,14 @@ import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
 
+import Slider from "@mui/material/Slider";
+
 import Modal from "../components/Modal";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function AllProducts() {
   const [products, setProducts] = useState(null);
+  const [products2, setProducts2] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filters, setFilters] = useState({
     weight: [],
@@ -31,6 +34,11 @@ export default function AllProducts() {
   const [isEffectOpened, setIsEffectOpened] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [display, setDisplay] = useState(false);
+  const [showMoreWeight, setShowMoreWeight] = useState(false);
+  const [showMoreEffect, setShowMoreEffect] = useState(false);
+
+  const [thc, setThc] = useState([0, 100]);
+  const [cbd, setCbd] = useState([0, 100]);
 
   const checkState =
     filters.weight.length > 0 ||
@@ -47,6 +55,7 @@ export default function AllProducts() {
             : "http://localhost:5000/api/products"
         );
         setProducts(res.data);
+        setProducts2(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -62,15 +71,17 @@ export default function AllProducts() {
   //filters for each filter category
   useEffect(() => {
     if (products) {
-      setFilteredProducts(products);
+      //   setFilteredProducts(products);
       setEffects([
         ...new Set(
           products
             .map((product) => product.effect)
             .filter((effect) => effect != undefined)
             .flat()
+            .slice(0, showMoreEffect ? 99 : 7)
         ),
       ]);
+
       setTypes([
         ...new Set(
           products
@@ -81,16 +92,17 @@ export default function AllProducts() {
       ]);
       setWeights([
         ...new Set(
-          products
+          products2
             .map((product) => product.weight)
             .filter((effect) => effect != undefined)
             .sort((a, b) => b - a)
             .flat()
+            .slice(0, showMoreWeight ? 99 : 7)
         ),
       ]);
     }
-  }, [products, category]);
-
+  }, [products, category, showMoreWeight, showMoreEffect]);
+  console.log(filteredProducts);
   //handle filter checkbox
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -177,11 +189,31 @@ export default function AllProducts() {
     }
   };
   console.log(displayFilters);
+
+  //thc
+  const rangeTHC = (event, newValue) => {
+    setThc(newValue);
+  };
+
+  //cbd
+  const rangeCBD = (event, newValue) => {
+    console.log(newValue);
+    setCbd(newValue);
+    // let filterCbd = products.filter((product) => {
+    //   return cbd[0] <= product.cbd && product.cbd <= cbd[1];
+    // });
+
+    // setFilteredProducts(filterCbd);
+    // if (filterCbd.length < 1) {
+    //   setUnmatchedFilters(true);
+    // } else setUnmatchedFilters(false);
+  };
+
   //apply filters
   const applyFilters = () => {
-    if (products && checkState && filters) {
+    if (products) {
       let updatedList = products;
-
+      console.log(updatedList);
       if (filters.weight.length > 0) {
         // if (!updatedList.length) return;
         updatedList = updatedList.filter((item) =>
@@ -201,25 +233,39 @@ export default function AllProducts() {
         );
       }
 
-      setFilteredProducts(updatedList);
+      let filterThc = updatedList.filter((product) => {
+        return thc[0] <= product.thc && product.thc <= thc[1];
+      });
+
+      let filterCbd = filterThc.filter((product) => {
+        return cbd[0] <= product.cbd && product.cbd <= cbd[1];
+      });
+      setFilteredProducts(filterCbd);
+      //   if (filterCbd.length < 1) {
+      //     setUnmatchedFilters(true);
+      //   } else setUnmatchedFilters(false);
+
+      //   setFilteredProducts(filterThc);
+      console.log(filteredProducts);
+      console.log(filterCbd.length);
 
       if (updatedList.length < 1) setUnmatchedFilters(true);
+      else if (filterThc.length < 1 || filterCbd.length < 1)
+        setUnmatchedFilters(true);
       else setUnmatchedFilters(false);
     }
-    if (!checkState) {
-      setFilteredProducts([]);
-    }
+    // if (!checkState) {
+    //   setFilteredProducts([]);
+    // }
   };
   useEffect(() => {
     applyFilters();
-  }, [filters]);
+  }, [filters, thc, cbd]);
 
+  console.log(filteredProducts);
   //handle display filters
   const handleClickDisplayFilters = (filter) => {
     let node = document.getElementById(filter);
-    setDisplayFilters(
-      displayFilters.filter((item) => item !== node.textContent)
-    );
     let checkboxInput = document.getElementById(node.textContent);
     checkboxInput.checked = false;
     if (checkboxInput.name === "weight") {
@@ -238,6 +284,9 @@ export default function AllProducts() {
         effect: filters.effect.filter((item) => item != checkboxInput.value),
       });
     }
+    setDisplayFilters(
+      displayFilters.filter((item) => item !== node.textContent)
+    );
   };
   const handleClearAll = () => {
     setDisplayFilters([]);
@@ -266,14 +315,14 @@ export default function AllProducts() {
     }
   }, [sort]);
 
-  const handleRefresh = () => {
-    setIsVisible(true);
-    setFilters({
-      weight: [],
-      type: [],
-      effect: [],
-    });
-  };
+  //   const handleRefresh = () => {
+  //     setIsVisible(true);
+  //     setFilters({
+  //       weight: [],
+  //       type: [],
+  //       effect: [],
+  //     });
+  //   };
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -284,7 +333,13 @@ export default function AllProducts() {
   //reset checkboxes
   const resetCheckbox = (category) => {
     setCategory(category);
+    setDisplayFilters([]);
     setDisplay(false);
+    setFilters({
+      weight: [],
+      type: [],
+      effect: [],
+    });
   };
   useEffect(() => {
     setTimeout(() => {
@@ -297,7 +352,6 @@ export default function AllProducts() {
   const handleSliderToggle = () => {
     setIsSliderOpen(!isSliderOpen);
   };
-
   return (
     <div className="bg-white">
       <NavbarTest />
@@ -417,6 +471,7 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(weight + "g")}
                             type="checkbox"
                             name="weight"
                             id={weight + "g"}
@@ -431,12 +486,61 @@ export default function AllProducts() {
                           </label>
                         </li>
                       ))}
+                      {!showMoreWeight ? (
+                        <button onClick={() => setShowMoreWeight(true)}>
+                          show more
+                        </button>
+                      ) : (
+                        <button onClick={() => setShowMoreWeight(false)}>
+                          show less
+                        </button>
+                      )}
                     </ul>
                   ) : (
                     ""
                   )}
                 </div>
               )}
+              <div className="border-t mt-5">
+                <p style={{ paddingTop: "10px", fontWeight: "300" }}>
+                  THC: {thc[0]}% - {thc[1]}%
+                </p>
+                <Slider
+                  getAriaLabel={() => "Minimum distance"}
+                  style={{
+                    height: 3,
+                    width: 200,
+                    marginLeft: 0,
+                    marginTop: 0,
+                    color: "green",
+                  }}
+                  value={thc}
+                  onChange={rangeTHC}
+                  // valueLabelDisplay="auto"
+                  // getAriaValueText={() => `$`}
+                  // color="green"
+                  disableSwap
+                />
+                <p style={{ paddingTop: "20px", fontWeight: "300" }}>
+                  CBD: {cbd[0]}% - {cbd[1]}%
+                </p>
+                <Slider
+                  getAriaLabel={() => "Minimum distance"}
+                  style={{
+                    height: 3,
+                    width: 200,
+                    marginLeft: 0,
+                    marginTop: 0,
+                    color: "green",
+                  }}
+                  value={cbd}
+                  onChange={rangeCBD}
+                  // valueLabelDisplay="auto"
+                  // getAriaValueText={() => `$`}
+                  // color="green"
+                  disableSwap
+                />
+              </div>
               {types.length > 0 && (
                 <div className="border-t">
                   <button
@@ -470,6 +574,7 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(type)}
                             type="checkbox"
                             name="type"
                             id={type}
@@ -518,6 +623,7 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(effect)}
                             type="checkbox"
                             name="effect"
                             id={effect}
@@ -527,6 +633,15 @@ export default function AllProducts() {
                           <label htmlFor={effect}>{effect}</label>
                         </li>
                       ))}
+                      {!showMoreEffect ? (
+                        <button onClick={() => setShowMoreEffect(true)}>
+                          show more
+                        </button>
+                      ) : (
+                        <button onClick={() => setShowMoreEffect(false)}>
+                          show less
+                        </button>
+                      )}
                     </ul>
                   ) : (
                     ""
@@ -637,13 +752,16 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(weight + "g")}
                             type="checkbox"
                             name="weight"
-                            id={weight}
+                            id={weight + "g"}
                             value={weight}
                             onChange={(e) => handleClick(e)}
                           />
-                          <label htmlFor={weight}>{weight}g</label>
+                          <label className={weight + "g"} htmlFor={weight}>
+                            {weight}g
+                          </label>
                         </li>
                       ))}
                     </ul>
@@ -685,6 +803,7 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(type)}
                             type="checkbox"
                             name="type"
                             id={type}
@@ -733,6 +852,7 @@ export default function AllProducts() {
                         >
                           <input
                             style={{ accentColor: "#22C55E" }}
+                            checked={displayFilters.includes(effect)}
                             type="checkbox"
                             name="effect"
                             id={effect}

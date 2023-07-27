@@ -1,117 +1,86 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function TestFilter() {
-  const menuItems = [
-    {
-      name: "Danya",
-      label: "@danya",
-      avatar: "https://randomuser.me/api/portraits/women/79.jpg",
-    },
-    {
-      name: "Osama",
-      label: "@osama",
-      avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-    },
-    {
-      name: "Loyan",
-      label: "@loyan",
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-    },
-    {
-      name: "Carllose",
-      label: "@carllose",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=a72ca28288878f8404a795f39642a46f",
-    },
-    {
-      name: "Micheal",
-      label: "@micheal",
-      avatar: "https://randomuser.me/api/portraits/men/46.jpg",
-    },
-  ];
-
-  const [selectedItem, setSelectedItem] = useState({
-    item: menuItems[0],
-    idx: 0,
-  });
-  const [state, setState] = useState(false);
-  const selectMenuRef = useRef();
-
-  useEffect(() => {
-    const handleSelectMenu = (e) => {
-      if (!selectMenuRef.current.contains(e.target)) {
-        setState(false);
-      }
-    };
-
-    document.addEventListener("click", handleSelectMenu);
-  }, []);
-
   return (
-    <div className="relative max-w-xs px-4 text-base">
-      <button
-        ref={selectMenuRef}
-        className="flex items-center gap-2 w-full px-3 py-2 text-gray-500 bg-white border rounded-md shadow-sm cursor-default outline-none focus:border-indigo-600"
-        aria-haspopup="true"
-        aria-expanded="true"
-        aria-labelledby="listbox-label"
-        onClick={() => setState(!state)}
-      >
-        <div className="flex-1 text-left flex items-center gap-x-1">
-          {selectedItem.item.name}
-          <span className="text-sm">{selectedItem.item.label}</span>
-        </div>
-      </button>
-
-      {state ? (
-        <div className="relative w-full">
-          <ul
-            className="absolute w-full mt-3 overflow-y-auto bg-white border rounded-md shadow-sm max-h-64"
-            role="listbox"
-          >
-            {menuItems.map((el, idx) => (
-              <li
-                key={idx}
-                onClick={() =>
-                  setSelectedItem({
-                    item: el,
-                    idx,
-                  })
-                }
-                role="option"
-                aria-selected={selectedItem.idx == idx ? true : false}
-                className={`${
-                  selectedItem.idx == idx ? "text-indigo-600 bg-indigo-50" : ""
-                } flex items-center justify-between gap-2 px-3 cursor-default py-2 duration-150 text-gray-500 hover:text-indigo-600 hover:bg-indigo-50`}
-              >
-                <img src={el.avatar} className="w-6 h-6 rounded-full" />
-                <div className="flex-1 text-left flex items-center gap-x-1">
-                  {el.name}
-                  <span className="text-sm">{el.label}</span>
+    <>
+      <div className="flex w-64 m-auto items-center h-32 justify-center">
+        <div className="py-1 relative min-w-full">
+          <div className="h-2 bg-gray-200 rounded-full">
+            <div
+              className="absolute h-2 rounded-full bg-teal-600 w-0"
+              style={{ width: "24.1935%", left: "11.2903%" }}
+            ></div>
+            <div
+              className="absolute h-4 flex items-center justify-center w-4 rounded-full bg-white shadow border border-gray-300 -ml-2 top-0 cursor-pointer"
+              unselectable="on"
+              onselectstart="return false;"
+              style={{ left: "11.2903%" }}
+            >
+              <div className="relative -mt-2 w-1">
+                <div
+                  className="absolute z-40 opacity-100 bottom-100 mb-2 left-0 min-w-full"
+                  style={{ marginLeft: "-25px" }}
+                >
+                  <div className="relative shadow-md">
+                    <div className="bg-black -mt-8 text-white truncate text-xs rounded py-1 px-4">
+                      $ 15
+                    </div>
+                    <svg
+                      className="absolute text-black w-full h-2 left-0 top-100"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 255 255"
+                      xmlSpace="preserve"
+                    >
+                      <polygon
+                        className="fill-current"
+                        points="0,0 127.5,127.5 255,0"
+                      ></polygon>
+                    </svg>
+                  </div>
                 </div>
-                {selectedItem.idx == idx ? (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 text-indigo-600"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                ) : (
-                  ""
-                )}
-              </li>
-            ))}
-          </ul>
+              </div>
+            </div>
+            <div
+              className="absolute h-4 flex items-center justify-center w-4 rounded-full bg-white shadow border border-gray-300 -ml-2 top-0 cursor-pointer"
+              unselectable="on"
+              onselectstart="return false;"
+              style={{ left: "35.4839%" }}
+            >
+              <div className="relative -mt-2 w-1">
+                <div
+                  className="absolute z-40 opacity-100 bottom-100 mb-2 left-0 min-w-full"
+                  style={{ marginLeft: "-25px" }}
+                >
+                  <div className="relative shadow-md">
+                    <div className="bg-black -mt-8 text-white truncate text-xs rounded py-1 px-4">
+                      $ 30
+                    </div>
+                    <svg
+                      className="absolute text-black w-full h-2 left-0 top-100"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 255 255"
+                      xmlSpace="preserve"
+                    >
+                      <polygon
+                        className="fill-current"
+                        points="0,0 127.5,127.5 255,0"
+                      ></polygon>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="absolute text-gray-800 -ml-1 bottom-0 left-0 -mb-6">
+              $ 8
+            </div>
+            <div className="absolute text-gray-800 -mr-1 bottom-0 right-0 -mb-6">
+              $ 70
+            </div>
+          </div>
         </div>
-      ) : (
-        ""
-      )}
-    </div>
+      </div>
+    </>
   );
 }
