@@ -58,7 +58,7 @@ export default function SingleProduct() {
       <div className="antialiased">
         <NavbarTest />
 
-        <div className="py-6">
+        <div style={{paddingTop:'15vh'}} className="py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <div className="flex flex-col md:flex-row -mx-4">
               <div
