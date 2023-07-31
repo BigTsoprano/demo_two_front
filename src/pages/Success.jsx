@@ -30,7 +30,10 @@ const Success = () => {
         });
         setOrderId(res.data._id);
         dispatch(resetCart());
+        console.log(data);
+        console.log("first");
       } catch {}
+      console.log("second");
     };
     data && createOrder();
   }, [cart, data]);

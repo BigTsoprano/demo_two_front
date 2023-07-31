@@ -8,23 +8,29 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const Product = ({ item }) => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQquantity] = useState(0);
   const dispatch = useDispatch();
-  //   const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
 
-  //   console.log(item);
+  useEffect(() => {
+    cart.products.forEach((product) => {
+      if (item._id === product._id) {
+        setQquantity(product.quantity);
+      }
+
+      return;
+    });
+  }, [cart.products]);
 
   const handleClick = (type) => {
     if (type === "add") {
       dispatch(addProduct({ ...item, quantity: 1 }));
-      setQuantity(quantity + 1);
     } else if (type === "remove") {
+      if (quantity == 1) setQquantity(0);
       dispatch(removeSingleProduct({ ...item, quantity: 1 }));
-      setQuantity(quantity - 1);
     }
   };
 
-  //   console.log(quantity);
   return (
     <motion.div layout  initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}

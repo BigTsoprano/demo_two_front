@@ -28,24 +28,28 @@ export default function CheckoutForm() {
     console.log(elements);
     setIsProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
+    const confirm = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // payment_method_data,
         // Make sure to change this to your payment completion page
         // return_url: `${window.location.origin}/success`,
-        return_url: navigate("/success", {
-          state: { data: payment_method_data, cart: cart.products },
-        }),
+        // return_url: navigate("/success", {
+        //   state: { data: payment_method_data, cart: cart.products },
+        // }),
       },
     });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
+    if (
+      confirm.error.type === "card_error" ||
+      confirm.error.type === "validation_error"
+    ) {
+      setMessage(confirm.error.message);
     } else {
       setMessage("An unexpected error occured.");
     }
 
+    console.log(confirm);
     setIsProcessing(false);
   };
 

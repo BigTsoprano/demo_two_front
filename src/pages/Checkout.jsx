@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetCart } from "../redux/cartRedux";
 import { publicRequest } from "../requestMethods";
 
-export default function TestFilter() {
+export default function Checkout() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ export default function TestFilter() {
   const [medicalExpiration, setMedicalExpiration] = useState("");
   const [medicalExpirationInOrder, setMedicalExpirationInOrder] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const ChangeBirthdayOrder = () => {
@@ -44,7 +44,7 @@ export default function TestFilter() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
       const res = await publicRequest.post("/orders", {
         //   userId: currentUser._id,
@@ -59,13 +59,25 @@ export default function TestFilter() {
         phoneNumber,
         birthday,
         email,
-        medicalCardNumber: medicalExpirationInOrder,
+        medicalCardNumber: medicalCardNumber,
         state: medicalState,
         medicalCardExpiration: medicalExpirationInOrder,
       });
       //   setOrderId(res.data._id);
+
       dispatch(resetCart());
     } catch {}
+    setIsLoading(false);
+    setFirstName("");
+    setLastName("");
+    setPhoneNumber("");
+    setBirthday("");
+    setBirthdayInOrder("");
+    setEmail("");
+    setMedicalCardNumber("");
+    setMedicalState("");
+    setMedicalExpiration("");
+    setMedicalExpirationInOrder("");
   };
 
   console.log(birthday.split("-"));
@@ -196,6 +208,7 @@ export default function TestFilter() {
                     className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
                     <input
+                      required={medical}
                       type="text"
                       id="MedicalNumber"
                       placeholder="Medical Number"
@@ -213,6 +226,7 @@ export default function TestFilter() {
                     className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
                     <input
+                      required={medical}
                       type="text"
                       id="MedicalState"
                       placeholder="State"
@@ -230,6 +244,7 @@ export default function TestFilter() {
                     className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
                     <input
+                      required={medical}
                       type="date"
                       id="MedicalExpiration"
                       placeholder="Medical Card Expiration"
@@ -245,7 +260,14 @@ export default function TestFilter() {
                 </div>
               )}
             </div>
-            <button type="submit">Submit</button>
+            <button
+              //   disabled={isLoading || cart.products.length == 0}
+              disabled={isLoading || cart.products.length == 0}
+              type="submit"
+              className="px-5 py-3 text-white duration-150 bg-green-500 rounded-lg hover:bg-green-700 active:shadow-lg"
+            >
+              {isLoading ? "Loading..." : "Submit"}
+            </button>
           </form>
         </div>
       </div>

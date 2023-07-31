@@ -6,6 +6,7 @@ import AllProducts from "./pages/AllProducts";
 import TestFilter from "./pages/TestFilter";
 import SingleProduct from "./pages/SingleProduct";
 import Payment from "./pages/Payment";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<AllProducts />} />
         <Route path="/checkout" element={<Cart />} />
+        <Route path="/form" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/testfilter" element={<TestFilter />} />

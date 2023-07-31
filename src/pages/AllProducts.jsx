@@ -102,7 +102,7 @@ export default function AllProducts() {
       ]);
     }
   }, [products, category, showMoreWeight, showMoreEffect]);
-  console.log(filteredProducts);
+  //   console.log(filteredProducts);
   //handle filter checkbox
   const handleClick = (e) => {
     if (e.target.checked) {
@@ -188,7 +188,7 @@ export default function AllProducts() {
       }
     }
   };
-  console.log(displayFilters);
+  //   console.log(displayFilters);
 
   //thc
   const rangeTHC = (event, newValue) => {
@@ -213,7 +213,7 @@ export default function AllProducts() {
   const applyFilters = () => {
     if (products) {
       let updatedList = products;
-      console.log(updatedList);
+
       if (filters.weight.length > 0) {
         // if (!updatedList.length) return;
         updatedList = updatedList.filter((item) =>
@@ -241,28 +241,17 @@ export default function AllProducts() {
         return cbd[0] <= product.cbd && product.cbd <= cbd[1];
       });
       setFilteredProducts(filterCbd);
-      //   if (filterCbd.length < 1) {
-      //     setUnmatchedFilters(true);
-      //   } else setUnmatchedFilters(false);
-
-      //   setFilteredProducts(filterThc);
-      console.log(filteredProducts);
-      console.log(filterCbd.length);
 
       if (updatedList.length < 1) setUnmatchedFilters(true);
       else if (filterThc.length < 1 || filterCbd.length < 1)
         setUnmatchedFilters(true);
       else setUnmatchedFilters(false);
     }
-    // if (!checkState) {
-    //   setFilteredProducts([]);
-    // }
   };
   useEffect(() => {
     applyFilters();
   }, [filters, thc, cbd]);
 
-  console.log(filteredProducts);
   //handle display filters
   const handleClickDisplayFilters = (filter) => {
     let node = document.getElementById(filter);
