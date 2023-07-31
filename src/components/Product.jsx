@@ -72,7 +72,7 @@ const Product = ({ item }) => {
                   padding: "6px 6px",
                   zIndex: "100",
                 }}
-              className="rounded-lg drop-shadow-md bg-red-500  active:text-green-500 border-slate-900 hover:bg-green-100 hover:text-green-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  " onClick={() => handleClick("remove")}><RemoveIcon/></button>
+              className="drop-shadow-md bg-red-500  active:text-green-500 border-slate-900 hover:bg-green-100 hover:text-green-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  " onClick={() => handleClick("remove")}><RemoveIcon/></button>
             </span>
             <span style={{margin:'20px'}}>{quantity}</span>
           </div>
