@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function Filters() {
   const [products, setProducts] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -210,6 +211,11 @@ export default function Filters() {
       effect: [],
     });
   };
+
+
+  const [checked, setChecked] = useState(false)
+
+
   return (
     <div
       style={{ display: "flex", alignItems: "baseline" }}
@@ -226,6 +232,7 @@ export default function Filters() {
                 <div className="flex items-center text-slate-900 gap-x-2">
                   Weight:
                 </div>
+                
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -249,7 +256,10 @@ export default function Filters() {
                       className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                       key={weight}
                     >
+
+                      
                       <input
+                      
                         type="checkbox"
                         name="weight"
                         id={weight}
@@ -260,6 +270,7 @@ export default function Filters() {
                     </li>
                   ))}
                 </ul>
+                
               ) : (
                 ""
               )}
@@ -297,6 +308,7 @@ export default function Filters() {
                       className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                       key={type}
                     >
+                      
                       <input
                         type="checkbox"
                         name="type"
@@ -305,7 +317,9 @@ export default function Filters() {
                         onChange={(e) => handleClick(e)}
                       />
                       <label htmlFor={type}>{type}</label>
+                      
                     </li>
+                    
                   ))}
                 </ul>
               ) : (

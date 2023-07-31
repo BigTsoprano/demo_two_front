@@ -36,7 +36,7 @@ const dispatch = useDispatch();
 
 
   return (
-   <div className="nav_bar bg-white">
+   <div className="nav_bar drop-shadow-sm bg-white">
     <div className="navbar_wrap">
     <Link  to="/">
 <h1 style={{color:'#22c44e', fontWeight:'600', fontSize:'18px'}}>Your logo</h1>

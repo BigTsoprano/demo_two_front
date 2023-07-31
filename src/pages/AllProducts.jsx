@@ -7,7 +7,7 @@ import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
-
+import ClearIcon from '@mui/icons-material/Clear';
 import Slider from "@mui/material/Slider";
 
 import Modal from "../components/Modal";
@@ -357,11 +357,11 @@ export default function AllProducts() {
       <NavbarTest />
 
       <div
-        style={{ display: "flex", alignItems: "baseline" }}
+        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh' }}
         className="bottom flex  "
       >
-        <div className="left border-r bg-white  rounded ">
-          <div className="filter pb-5 border-b">
+        <div style={{height:'100%',  paddingTop: '2rem', margin: '-2rem 0'}} className="left border-r bg-white  rounded ">
+          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
             <p
               style={{ display: "flex", alignItems: "flex-end" }}
               className="filter-title"
@@ -381,10 +381,10 @@ export default function AllProducts() {
               )}
             </p>
           </div>
-          <div className="py-5 border-b">
+          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-5 border-b">
             <button
               style={{ width: "80%", padding: "6px", textAlign: "left" }}
-              className="text-slate-800 text-sm hover:border-indigo-500  border rounded"
+              className="text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded"
               onClick={handleOpenModal}
             >
               <SearchIcon
@@ -400,37 +400,37 @@ export default function AllProducts() {
           </div>
           <div className="flex-col py-3">
             <button
-              className="category-name font-semibold  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold  bg-slate-100 rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
-              className="category-name border font-semibold rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
-              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
-              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
-              className="category-name font-semibold  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold  bg-slate-100 rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
-              className="category-name border font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
               onClick={() => resetCheckbox("vaporizer")}
             >
               Vapes
@@ -655,8 +655,8 @@ export default function AllProducts() {
         {/* mobile filter */}
 
         <div className={`slider ${isSliderOpen ? "active" : ""}`}>
-          <div className="left2 border-r bg-white  rounded ">
-            <div className="filter pb-5 border-b">
+          <div className="left2 border-r bg-white  rounded-lg ">
+            <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
               <p
                 style={{ paddingTop: "12vh", marginLeft: "1rem" }}
                 className="filter-title"
@@ -672,7 +672,7 @@ export default function AllProducts() {
                   textAlign: "left",
                   marginLeft: "6px",
                 }}
-                className="text-slate-800 hover:border-green-500 hover:bg-green-100 border rounded"
+                className="text-slate-800 hover:border-green-500 hover:bg-green-100  rounded"
                 onClick={handleOpenModal}
               >
                 <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
@@ -682,19 +682,19 @@ export default function AllProducts() {
             </div>
             <div className="flex-col">
               <button
-                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name  rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox(null)}
               >
                 All
               </button>
               <button
-                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("flower")}
               >
                 Flowers
               </button>
               <button
-                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("edible")}
               >
                 Edibles
@@ -889,7 +889,7 @@ export default function AllProducts() {
         <div className="right m-5 ">
           <div
             style={{ display: "flex", alignItems: "center" }}
-            className="search-sort pb-5 flex w-full justify-between border-b"
+            className="search-sort pb-5 flex w-full justify-between "
           >
             <div
               style={{
@@ -924,7 +924,7 @@ export default function AllProducts() {
                     name="HeadlineAct"
                     style={{ padding: "10px 12px", marginLeft: "2rem" }}
                     id="HeadlineAct"
-                    className="mt-1.5 w-full rounded border text-gray-700 sm:text-sm"
+                    className="mt-1.5 w-full rounded bg-slate-100 text-gray-700 sm:text-sm"
                     onChange={(e) => {
                       const selectedOption = e.target.value;
                       // Perform sorting logic based on selectedOption
@@ -948,18 +948,20 @@ export default function AllProducts() {
             </div>
           </div>
           {displayFilters.length > 0 && (
-            <div>
+            <div style={{display:'flex', alignItems:'center'}} className="">
               {displayFilters.map((filter, index) => (
                 <span
+                
+                className="bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition duration-150 delay-50 text-xs font-semibold rounded-lg "
                   key={filter}
                   id={index}
                   onClick={() => handleClickDisplayFilters(index)}
                   style={{
-                    padding: "3px",
-                    border: "1px solid black",
-                    margin: "3px",
+                    padding: "5px 8px",
+                    margin: ".2rem",
                   }}
                 >
+                  <ClearIcon className="" style={{fontSize:'16px ', marginRight:'3px'}}/>
                   {filter}
                 </span>
               ))}
@@ -969,9 +971,11 @@ export default function AllProducts() {
             {unmatchedFilters ? (
               <div>no matched results</div>
             ) : (
+             
               <Products
                 products={filteredProducts.length ? filteredProducts : products}
               />
+             
             )}
           </div>
         </div>
