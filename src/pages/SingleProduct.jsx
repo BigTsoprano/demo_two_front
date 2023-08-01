@@ -7,7 +7,7 @@ import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
@@ -234,16 +234,17 @@ export default function SingleProduct() {
           </motion.button>
 
                 </div>
-                  <button
-                    style={{ padding: "7px 9px", }}
+                  <motion.button
+                    whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+                    style={{ padding: "9px 9px", }}
                     type="button"
                     onClick={handleClick}
-                    className="group w-full  [transform:translateZ(0)] px-6 py-3 rounded-lg bg-green-500 overflow-hidden relative before:absolute before:bg-white before:border before:border-2 before border-slate-900 before:bottom-0 before:left-0 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-0 before:transition before:ease-in-out before:duration-500 "
+                    className="group w-full  [transform:translateZ(0)] px-6 py-3 rounded-lg bg-green-500 overflow-hidden relative before:shadow-md before:rounded-lg before:absolute before:bg-white before:border before:text-slate-900 before:border-slate-900 before:bottom-0 before:left-0 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-0 before:transition before:ease-in-out before:duration-500 "
                   >
-                    <span class="relative z-0 text-black group-hover:text-gray-200 transition ease-in-out duration-500">
+                    <span class="relative z-0 text-black group-hover:text-slate-900 transition ease-in-out duration-500">
                     Add to cart
                     </span>
-                  </button>
+                  </motion.button>
               
 
               </div>
@@ -261,83 +262,144 @@ export default function SingleProduct() {
       Unveil a world of possibilities as you indulge in the finest selection curated just for you.
       </p>
     </header>
+    {/* product section*/}
         <ul className="grid gap-4 mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {similarProducts.map((item) => (
             <li
               key={item._id}
-              className="product  bg-white rounded border hover:border-green-500 hover:bg-green-100"
+              className="product_one  bg-white rounded-lg  hover:border-green-500"
             >
-              <div className="group relative mb-2 block h-56 overflow-hidden rounded bg-gray-100  lg:mb-3">
-                <Link to={`/product/${item._id}`}>
-                  <img
-                    style={{ borderBottom: "1px solid #e5e5e5" }}
-                    src={item.img}
-                    loading="lazy"
-                    alt="Photo by Austin Wade"
-                    className="h-full w-full bg-white object-contain shadow-0 object-center transition duration-200 group-hover:scale-110"
-                  />
-                </Link>
-              </div>
               <div
-                style={{
-                  position: "relative",
-                  bottom: "0",
-                  height: "12vh",
-                  width: "100%",
-                }}
-              >
-                <div className="flex items-start justify-between gap-2 px-2">
-                  <div className="flex flex-col">
-                    <span className="text-green-600 text-xs">{item.type}</span>
-                    <Link to={`/product/${item._id}`}>
-                      <p className="text-sm font-semibold  text-slate-900 transition duration-100 hover:text-gray-500 lg:text-sm">
-                        {item.title}
-                      </p>
-                    </Link>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        paddingTop: "10px",
-                      }}
-                    >
-                      <p
-                        style={{ paddingRight: "5px" }}
-                        className="text-xs font-semibold border-r "
-                      >
-                        thc: {item.thc}%
-                      </p>
-                      <p
-                        style={{ paddingLeft: "5px" }}
-                        className="text-xs font-semibold"
-                      >
-                        cbd: {item.cbd}%
-                      </p>
-                    </div>
-                  </div>
+        style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px' }}
+        className="group  relative mb-2 block overflow-hidden transition duration-100 hover:shadow-sm  bg-gray-100   lg:mb-3"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          transition={{ duration: 0.1 }}
+            style={{
+              padding: "6px 6px",
+              zIndex: "99",
+            }}
+            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            onClick={() => handleClick("add")}
+          >
+            <AddIcon />
+          </motion.button>
 
-                  <div className="flex flex-col items-end">
-                    <span className="font-base text-sm text-gray-600 lg:text-sm">
-                      ${item.price}
-                    </span>
-                    {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
-                  </div>
-                </div>
-                <button
+          {quantity > 0 && (
+            <div className="" style={{}}>
+              <span>
+                <motion.button
+                whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
                   style={{
-                    position: "absolute",
-                    bottom: "10px",
-                    right: "10px",
                     padding: "6px 6px",
-                    zIndex: "100",
-                    borderRadius: "35px",
+                    zIndex: "999",
                   }}
-                  className="rounded bg-green-500 hover:shadow-lg active:shadow-none text-sm font-semibold text-slate-50  "
-                  onClick={handleClick}
+                  className="drop-shadow-md relative bg-white rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
+                  onClick={() => handleClick("remove")}
                 >
-                  <ShoppingCartCheckoutIcon />
-                </button>
-              </div>
+                  <RemoveIcon />
+                </motion.button>
+              </span>
+              <span className="relative" style={{ margin: "20px", zIndex:'999' }}>{quantity}</span>
+            </div>
+          )}
+        </div>
+        <Link to={`/product/${item._id}`}>
+
+          <AnimatePresence>
+          {quantity > 0 && (
+          <motion.div   initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0}}
+          transition={{ duration: 0.2 }}  style={{background: 'rgba(0,0,0,.05)', transition:'ease-in-out .3s '}} className="absolute w-full h-full transition duration-100 backdrop-blur-sm "></motion.div>
+          )}
+          </AnimatePresence>
+
+          <img
+            style={{ borderBottom: "1px solid #e5e5e5" }}
+            src={item.img}
+            loading="lazy"
+            alt="Photo by Austin Wade"
+            className="w-full h-full bg-white object-contain shadow-0 object-center transition duration-200 "
+          />
+        </Link>
+      </div>
+
+      <div
+        className="card_hover"
+        style={{
+          position: "relative",
+          bottom: "0",
+          minHeight: "13vh",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{}}
+          className="flex  items-start justify-between gap-2 px-2"
+        >
+          <div className="flex flex-col">
+            <span className="text-green-600 text-xs">{item.type}</span>
+            <Link to={`/product/${item._id}`}>
+              <p className="text-sm font-semibold  text-slate-900 transition duration-100 hover:text-gray-500 lg:text-sm">
+                {item.title}
+              </p>
+            </Link>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                paddingTop: "10px",
+              }}
+            >
+              <p
+                style={{ paddingRight: "5px" }}
+                className="text-xs font-base border-r "
+              >
+                thc: {item.thc}%
+              </p>
+              <p style={{ paddingLeft: "5px" }} className="text-xs font-base">
+                cbd: {item.cbd}%
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-end">
+            <span className="font-base text-sm text-gray-600 lg:text-sm">
+              ${item.price}
+            </span>
+            {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
+          </div>
+        </div>
+        {/* <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          whileHover={{ scale: 1.1, type: "spring", bounce: 50 }}
+          style={{
+            position: "absolute",
+            bottom: "10px",
+            right: "10px",
+            padding: "6px 6px",
+            zIndex: "100",
+            borderRadius: "35px",
+          }}
+          className="rounded bg-green-500 hover:border active:text-green-500 border-slate-900 hover:bg-white hover:text-slate-900 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+          onClick={() => handleClick("add")}
+        >
+          <ShoppingCartCheckoutIcon />
+        </motion.button> */}
+      </div>
             </li>
           ))}
         </ul>

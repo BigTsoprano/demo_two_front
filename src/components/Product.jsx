@@ -31,12 +31,6 @@ const Product = ({ item }) => {
     }
   };
 
-  const [showBlur, setShowBlur] = useState(false);
-
-  const handleBlur = () => {
-    setShowBlur(true);
-    handleClick("add");
-  };
 
   return (
     <motion.div
@@ -98,8 +92,8 @@ const Product = ({ item }) => {
 
           <AnimatePresence>
           {quantity > 0 && (
-          <motion.div   initial={{ opacity: 0}}
-          animate={{ opacity: 1}}
+          <motion.div   initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0}}
           transition={{ duration: 0.2 }}  style={{background: 'rgba(0,0,0,.05)', transition:'ease-in-out .3s '}} className="absolute w-full h-full transition duration-100 backdrop-blur-sm "></motion.div>
           )}
