@@ -692,7 +692,7 @@ export default function AllProducts() {
                   textAlign: "left",
                   marginLeft: "6px",
                 }}
-                className="text-slate-800 hover:bg-green-500 hover:bg-green-100  rounded"
+                className="text-slate-800 hover:bg-green-500 bg-slate-100  rounded-lg"
                 onClick={handleOpenModal}
               >
                 <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
@@ -702,37 +702,37 @@ export default function AllProducts() {
             </div>
             <div className="flex-col">
               <button
-                className="category-name  rounded-lg  text-slate-100 "
+                className="category-name  rounded-lg  text-slate-900 bg-slate-100 "
                 onClick={() => resetCheckbox(null)}
               >
                 All
               </button>
               <button
-                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-600"
+                className="category-name border rounded-lg bg-slate-100  text-slate-900 hover:text-green-600"
                 onClick={() => resetCheckbox("flower")}
               >
                 Flowers
               </button>
               <button
-                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("edible")}
               >
                 Edibles
               </button>
               <button
-                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("concentrate")}
               >
                 Concentrates
               </button>
               <button
-                className="category-name  border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name  border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("pre-roll")}
               >
                 Pre-rolls
               </button>
               <button
-                className="category-name border rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("vaporizer")}
               >
                 Vaporizers

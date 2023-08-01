@@ -134,6 +134,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 }
+.single_slider{
+   min-width: 95% !important;
+}
 
 .cart_checkout{
    display:flex;
@@ -147,6 +150,9 @@ align-items: center;
 .q_d{
    display:flex;
    flex-direction: row !important;
+}
+.product_one{
+   min-width: 310px !important;
 }
 
 }

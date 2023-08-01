@@ -75,7 +75,7 @@ export default function SingleProduct() {
         <div style={{paddingTop:'15vh'}} className="py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <div className="flex flex-col md:flex-row -mx-4">
-           <div className="" style={{minWidth:'45%',maxWidth:'45%', height:'100%',paddingRight:'1rem', margin:'10px'}}>
+           <div className="single_slider" style={{minWidth:'45%',maxWidth:'45%', height:'100%',paddingRight:'1rem', margin:'10px'}}>
                  <Swiper
         style={{
           '--swiper-navigation-color': '#000',
