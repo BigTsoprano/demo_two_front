@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api/";
+const BASE_URL = "https://cart.01ninjas.com/api/";
 const TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NWRhNTY0NTYwZDcyMTMwYjVmYzFhOCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4Nzc0NzUwOSwiZXhwIjoxNjg4MDA2NzA5fQ.QpTW5OjBNxg0m1hfKm0jS0VW4cD-3fGtGOz3TYrl1Yw";
 
