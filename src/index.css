@@ -75,7 +75,15 @@ body {
    padding: 0 2rem;
  }
 
-
+ .show_more li:nth-child(n+6) {
+   display: none;
+ }
+ 
+ #showMore:focus ~ .imx-4 li {
+   display: list-item;
+ }
+ 
+ 
  .swiper {
    width: 100%;
    height: auto;

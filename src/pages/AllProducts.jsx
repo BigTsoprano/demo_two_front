@@ -7,7 +7,7 @@ import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
-import ClearIcon from "@mui/icons-material/Clear";
+import ClearIcon from '@mui/icons-material/Clear';
 import Slider from "@mui/material/Slider";
 
 import Modal from "../components/Modal";
@@ -71,14 +71,14 @@ export default function AllProducts() {
   //filters for each filter category
   useEffect(() => {
     if (products) {
-      setFilteredProducts(products);
+      //   setFilteredProducts(products);
       setEffects([
         ...new Set(
           products
             .map((product) => product.effect)
             .filter((effect) => effect != undefined)
             .flat()
-            .slice(0, showMoreEffect ? 99 : 7)
+            // .slice(0, showMoreEffect ? 99 : 7)
         ),
       ]);
 
@@ -97,7 +97,7 @@ export default function AllProducts() {
             .filter((effect) => effect != undefined)
             .sort((a, b) => b - a)
             .flat()
-            .slice(0, showMoreWeight ? 99 : 7)
+            // .slice(0, showMoreWeight ? 99 : 7)
         ),
       ]);
     }
@@ -344,42 +344,34 @@ export default function AllProducts() {
 
   const containerVariants = {
     hidden: { x: "-100%" },
-    visible: {
-      x: 0,
-      transition: { duration: 0.7, delay: 0.3, ease: "linear" },
+    visible: { x: 0 ,
+    transition: {duration: 0.7, delay: 0.3, ease: "linear" }
     },
     exit: {
       x: "-100%",
-      transition: { ease: "easeInOut" },
-    },
+      transition:{ease: "easeInOut"}
+    }
   };
+
+  
+
+
 
   return (
     <div className="bg-white">
+
       <div
-        style={{
-          display: "flex",
-          alignItems: "baseline",
-          paddingTop: "11vh",
-          marginBottom: "-4rem",
-          paddingBottom: "4rem",
-          minHeight: "120vh",
-        }}
+        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',marginBottom:'-4rem', paddingBottom:'4rem', minHeight:'120vh' }}
         className="bottom flex  "
       >
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={containerVariants}
-          style={{ marginTop: "-4rem", paddingTop: "4rem" }}
-          className="left border-r bg-white  rounded "
-        >
-          <div
-            style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-            className="filter pb-5 border-b"
-          >
+        <motion.div initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}
+      style={{marginTop:'-4rem', paddingTop:'4rem'}}
+      className="left border-r bg-white  rounded ">
+          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
             <p
               style={{ display: "flex", alignItems: "flex-end" }}
               className="filter-title"
@@ -399,10 +391,7 @@ export default function AllProducts() {
               )}
             </p>
           </div>
-          <div
-            style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-            className="py-5 border-b"
-          >
+          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-5 border-b">
             <button
               style={{ width: "80%", padding: "6px", textAlign: "left" }}
               className="search_btn hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded-lg"
@@ -417,8 +406,9 @@ export default function AllProducts() {
               />{" "}
               Search
             </button>
+            
           </div>
-          <div className="flex-col py-3">
+          <div  className="flex-col py-3">
             <button
               className="category-name font-semibold  bg-slate-100 hover:bg-green-100 rounded-lg text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox(null)}
@@ -459,10 +449,7 @@ export default function AllProducts() {
           {display && (
             <div>
               {weights.length > 0 && (
-                <div
-                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-                  className="border-t"
-                >
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
@@ -486,7 +473,7 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isWeightOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-base">
+                    <ul className="show_more px-2  text-sm font-base">
                       {weights.map((weight) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
@@ -507,27 +494,21 @@ export default function AllProducts() {
                           <label className={weight + "g"} htmlFor={weight}>
                             {weight}g
                           </label>
+                          
                         </li>
+                        
                       ))}
-                      {!showMoreWeight ? (
-                        <button onClick={() => setShowMoreWeight(true)}>
-                          show more
-                        </button>
-                      ) : (
-                        <button onClick={() => setShowMoreWeight(false)}>
-                          show less
-                        </button>
-                      )}
+
                     </ul>
+                    
                   ) : (
                     ""
                   )}
+              
                 </div>
+                
               )}
-              <div
-                style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-                className="border-t mt-5"
-              >
+              <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t mt-5">
                 <p style={{ paddingTop: "10px", fontWeight: "300" }}>
                   thc: {thc[0]}% - {thc[1]}%
                 </p>
@@ -568,10 +549,7 @@ export default function AllProducts() {
                 />
               </div>
               {types.length > 0 && (
-                <div
-                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-                  className="border-t"
-                >
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
@@ -620,10 +598,7 @@ export default function AllProducts() {
                 </div>
               )}
               {effects.length > 0 && (
-                <div
-                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-                  className="border-t"
-                >
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
@@ -653,6 +628,7 @@ export default function AllProducts() {
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={effect}
                         >
+                          
                           <input
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(effect)}
@@ -688,10 +664,7 @@ export default function AllProducts() {
 
         <div className={`slider ${isSliderOpen ? "active" : ""}`}>
           <div className="left2 border-r bg-white  rounded-lg ">
-            <div
-              style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
-              className="filter pb-5 border-b"
-            >
+            <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
               <p
                 style={{ paddingTop: "12vh", marginLeft: "1rem" }}
                 className="filter-title"
@@ -983,10 +956,11 @@ export default function AllProducts() {
             </div>
           </div>
           {displayFilters.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center" }} className="">
+            <div style={{display:'flex', alignItems:'center'}} className="">
               {displayFilters.map((filter, index) => (
                 <span
-                  className="bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition duration-150 delay-50 text-xs font-semibold rounded-lg "
+                
+                className="bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition duration-150 delay-50 text-xs font-semibold rounded-lg "
                   key={filter}
                   id={index}
                   onClick={() => handleClickDisplayFilters(index)}
@@ -996,10 +970,7 @@ export default function AllProducts() {
                   }}
                 >
                   {filter}
-                  <ClearIcon
-                    className=""
-                    style={{ fontSize: "16px ", marginRight: "3px" }}
-                  />
+                  <ClearIcon className="" style={{fontSize:'16px ', marginRight:'3px'}}/>
                 </span>
               ))}
             </div>
@@ -1008,9 +979,11 @@ export default function AllProducts() {
             {unmatchedFilters ? (
               <div>no matched results</div>
             ) : (
+             
               <Products
                 products={filteredProducts.length ? filteredProducts : products}
               />
+             
             )}
           </div>
         </div>
