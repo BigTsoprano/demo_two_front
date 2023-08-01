@@ -86,8 +86,8 @@ export default function Checkout() {
 
   return (
     <>
-      <div>
-        <div className="wrapper ml-40 mr-40">
+      <div >
+        <div style={{paddingTop:'15vh'}} className="wrapper ml-40 mr-40">
           <h1 className="text-3xl font-bold border-b pb-5">Checkout</h1>
           <form action="" onSubmit={handleSubmit}>
             <div className="customer mt-10">

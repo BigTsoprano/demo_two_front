@@ -91,8 +91,8 @@ const dispatch = useDispatch();
  }}
 onMouseEnter={handlePopoverEnter}
 onMouseLeave={handlePopoverLeave}
-className="popover rounded shadow-md border-t border-b border-r border-l"
-  style={{minHeight:'20vh', minWidth:'300px',width:'30%', height:'auto', position:'absolute', backgroundColor:'#fff', right:'0', padding:'1rem', top:'10vh'}}
+className="popover  shadow-md border-t border-b border-r border-l"
+  style={{minHeight:'20vh', minWidth:'300px',width:'30%', height:'auto', position:'absolute', backgroundColor:'#fff', right:'0', padding:'1rem', top:'10vh', borderBottomLeftRadius:'8px'}}
 
   >
     <p  style={{display:'flex', justifyContent:'center'}} className="font-semibold text-lg">Your cart</p>
@@ -119,7 +119,7 @@ className="popover rounded shadow-md border-t border-b border-r border-l"
              <p className="font-semibold">SubTotal:</p> <p>${cart.total}</p>
              </div>
              <Link to="/checkout">
-              <button style={{padding:'10px 12px', width:'100%'}} className="bg-green-500 hover:border text-white hover:text-slate-900 rounded hover:bg-white border-slate-900">Go to checkout</button>
+              <button style={{padding:'10px 12px', width:'100%'}} className="bg-green-500 hover:border text-white hover:text-slate-900 rounded-lg hover:bg-white border-slate-900">Go to checkout</button>
 </Link>
 </motion.div>
 )}

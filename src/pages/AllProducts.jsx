@@ -341,15 +341,36 @@ export default function AllProducts() {
   const handleSliderToggle = () => {
     setIsSliderOpen(!isSliderOpen);
   };
+
+  const containerVariants = {
+    hidden: { x: "-100%" },
+    visible: { x: 0 ,
+    transition: {duration: 0.7, delay: 0.3, ease: "linear" }
+    },
+    exit: {
+      x: "-100%",
+      transition:{ease: "easeInOut"}
+    }
+  };
+
+  
+
+
+
   return (
     <div className="bg-white">
-      <NavbarTest />
 
       <div
-        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh' }}
+        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',marginBottom:'-4rem', paddingBottom:'4rem', minHeight:'120vh' }}
         className="bottom flex  "
       >
-        <div style={{height:'100%',  paddingTop: '2rem', margin: '-2rem 0'}} className="left border-r bg-white  rounded ">
+        {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+        <motion.div initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants}
+      style={{marginTop:'-4rem', paddingTop:'4rem'}}
+      className="left border-r bg-white  rounded ">
           <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
             <p
               style={{ display: "flex", alignItems: "flex-end" }}
@@ -373,7 +394,7 @@ export default function AllProducts() {
           <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-5 border-b">
             <button
               style={{ width: "80%", padding: "6px", textAlign: "left" }}
-              className="text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded"
+              className="search_btn hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded-lg"
               onClick={handleOpenModal}
             >
               <SearchIcon
@@ -385,41 +406,41 @@ export default function AllProducts() {
               />{" "}
               Search
             </button>
-            {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+            
           </div>
-          <div className="flex-col py-3">
+          <div  className="flex-col py-3">
             <button
-              className="category-name font-semibold  bg-slate-100 rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold  bg-slate-100 hover:bg-green-100 rounded-lg text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg  text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg  text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
-              className="category-name font-semibold  bg-slate-100 rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name font-semibold hover:bg-green-100  bg-slate-100 rounded-lg  text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold  rounded hover:border-green-500 text-slate-900 hover:text-green-500"
+              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg text-slate-900 hover:text-green-600"
               onClick={() => resetCheckbox("vaporizer")}
             >
               Vapes
@@ -428,7 +449,7 @@ export default function AllProducts() {
           {display && (
             <div>
               {weights.length > 0 && (
-                <div className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
@@ -490,9 +511,9 @@ export default function AllProducts() {
                   )}
                 </div>
               )}
-              <div className="border-t mt-5">
+              <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t mt-5">
                 <p style={{ paddingTop: "10px", fontWeight: "300" }}>
-                  THC: {thc[0]}% - {thc[1]}%
+                  thc: {thc[0]}% - {thc[1]}%
                 </p>
                 <Slider
                   getAriaLabel={() => "Minimum distance"}
@@ -531,7 +552,7 @@ export default function AllProducts() {
                 />
               </div>
               {types.length > 0 && (
-                <div className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
@@ -580,7 +601,7 @@ export default function AllProducts() {
                 </div>
               )}
               {effects.length > 0 && (
-                <div className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
@@ -610,6 +631,7 @@ export default function AllProducts() {
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={effect}
                         >
+                          
                           <input
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(effect)}
@@ -639,7 +661,7 @@ export default function AllProducts() {
               )}
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* mobile filter */}
 
@@ -661,7 +683,7 @@ export default function AllProducts() {
                   textAlign: "left",
                   marginLeft: "6px",
                 }}
-                className="text-slate-800 hover:border-green-500 hover:bg-green-100  rounded"
+                className="text-slate-800 hover:bg-green-500 hover:bg-green-100  rounded"
                 onClick={handleOpenModal}
               >
                 <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
@@ -671,13 +693,13 @@ export default function AllProducts() {
             </div>
             <div className="flex-col">
               <button
-                className="category-name  rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name  rounded-lg  text-slate-100 "
                 onClick={() => resetCheckbox(null)}
               >
                 All
               </button>
               <button
-                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border rounded-lg hover:border-green-500 text-slate-900 hover:text-green-600"
                 onClick={() => resetCheckbox("flower")}
               >
                 Flowers
@@ -950,8 +972,8 @@ export default function AllProducts() {
                     margin: ".2rem",
                   }}
                 >
-                  <ClearIcon className="" style={{fontSize:'16px ', marginRight:'3px'}}/>
                   {filter}
+                  <ClearIcon className="" style={{fontSize:'16px ', marginRight:'3px'}}/>
                 </span>
               ))}
             </div>

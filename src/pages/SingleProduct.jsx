@@ -1,7 +1,7 @@
 import React from "react";
 import NavbarTest from "../components/NavbarTest";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,20 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { motion } from "framer-motion";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
+import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
+import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+
+
+// import required modules
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 export default function SingleProduct() {
   const location = useLocation();
@@ -52,19 +66,29 @@ export default function SingleProduct() {
   const handleClick = () => {
     dispatch(addProduct({ ...product, quantity }));
   };
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <div>
       <div className="antialiased">
-        <NavbarTest />
 
         <div style={{paddingTop:'15vh'}} className="py-6">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
             <div className="flex flex-col md:flex-row -mx-4">
-              <div
-                style={{ margin: "10px", minWidth: "45%", overflow: "hidden" }}
-                className="flex items-center justify-center rounded bg-white border "
-              >
+           <div className="" style={{minWidth:'45%',maxWidth:'45%', height:'100%',paddingRight:'1rem', margin:'10px'}}>
+                 <Swiper
+        style={{
+          '--swiper-navigation-color': '#000',
+          '--swiper-pagination-color': '#000',
+        }}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper }}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper2 rounded-lg "
+
+      >
+<SwiperSlide>
                 <motion.img
                   whileHover={{ scale: 1.1 }}
                   transition={{
@@ -73,9 +97,42 @@ export default function SingleProduct() {
                     type: "spring",
                   }}
                   src={product.img}
-                  className="h-64 md:h-80 rounded  flex items-center justify-center"
+                  className="h-64 md:h-80  rounded-lg  flex items-center justify-center"
                 />
-              </div>
+                </SwiperSlide>
+                <SwiperSlide >
+                <motion.img
+                  whileHover={{ scale: 1.1 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: "easeInOut",
+                    type: "spring",
+                  }}
+                  src={product.img}
+                  className="h-64 md:h-80 rounded-lg  flex items-center justify-center"
+                />
+                </SwiperSlide>
+                </Swiper>
+                
+                <Swiper
+        onSwiper={setThumbsSwiper}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <img src={product.img} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={product.img} />
+        </SwiperSlide>
+      </Swiper>
+                
+                </div>
+            
               <div className="md:flex-1 px-4">
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -90,16 +147,27 @@ export default function SingleProduct() {
                     {product.type}
                   </p>
                 </div>
-                <div className="text-sm font-semibold text-slate-700" style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                <div className="text-sm font-base text-slate-500" style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+                  <ScienceOutlinedIcon className="mr-2 text-slate-500"/>
                   <p style={{paddingRight:'1rem'}}>thc: {product.thc}%</p>
                   <p>cbd: {product.cbd}%</p>
                 </div>
+
+                <div>
+                <FaceRetouchingNaturalIcon className="mr-2 text-slate-500"/> 
+
                 {product?.effect?.map((effect) => (
                   <span className="mb-4 text-gray-500 text-sm" key={effect}>
-                    {effect}{" "}
+                   {effect}{" "}
                   </span>
                 ))}
-               
+                </div>
+               <div className="pt-1">
+                <MonitorWeightOutlinedIcon className="mr-2 text-slate-500"/>
+                  <span className="mb-4 text-gray-500 text-sm" >
+                    {product.weight}gs{" "}
+                  </span>
+               </div>
                
                 <p
                   className="text-base text-slate-700"
@@ -125,25 +193,19 @@ export default function SingleProduct() {
                   style={{ display: "flex", alignItems: "center" }}
                   className="flex py-4 space-x-4"
                 >
-                  <div className="flex flex-col divide-y border-l">
-                    <button
-                      onClick={() => handleQuantity("add")}
-                      className="flex w-6 flex-1 select-none items-center justify-center bg-white leading-none transition duration-100 hover:bg-green-100 active:bg-gray-200"
-                    >
-                      <AddIcon
-                        className="text-slate-700"
-                        style={{ fontSize: "18px" }}
-                      />
-                    </button>
-                    <button
-                      onClick={() => handleQuantity("remove")}
-                      className="flex w-6 flex-1 select-none items-center justify-center bg-white leading-none transition duration-100 hover:bg-green-100 active:bg-gray-200"
-                    >
-                      <RemoveIcon
-                        className="text-slate-700"
-                        style={{ fontSize: "18px" }}
-                      />
-                    </button>
+                  <div className="flex">
+                  <motion.button
+                whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+                  style={{
+                    padding: "6px 6px",
+                    zIndex: "999",
+                  }}
+                  className="drop-shadow-md relative bg-slate-100 rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
+                  onClick={() => handleQuantity("remove")}
+                  >
+                  <RemoveIcon />
+                </motion.button>
+                    
                   </div>
                   <div className="relative">
                     {/* <button onClick={() => handleQuantity("add")}>Add</button> */}
@@ -154,20 +216,36 @@ export default function SingleProduct() {
                     >
                       quantity: {quantity}
                     </span>
+                    
                     {/* <button onClick={() => handleQuantity("remove")}>
                       Remove
                     </button> */}
                   </div>
+                  <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          transition={{ duration: 0.1 }}
+            style={{
+              padding: "6px 6px",
+              zIndex: "99",
+            }}                      onClick={() => handleQuantity("add")}
+            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+                    >
+                   <AddIcon />
+          </motion.button>
 
+                </div>
                   <button
                     style={{ padding: "7px 9px", }}
                     type="button"
                     onClick={handleClick}
-                    className="font-base hover:border border-slate-900 text-white hover:text-slate-900 text-base rounded bg-green-500 hover:bg-white hover:text-slate-900  "
+                    className="group w-full  [transform:translateZ(0)] px-6 py-3 rounded-lg bg-green-500 overflow-hidden relative before:absolute before:bg-white before:border before:border-2 before border-slate-900 before:bottom-0 before:left-0 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-0 before:transition before:ease-in-out before:duration-500 "
                   >
+                    <span class="relative z-0 text-black group-hover:text-gray-200 transition ease-in-out duration-500">
                     Add to cart
+                    </span>
                   </button>
-                </div>
+              
+
               </div>
             </div>
           </div>

@@ -53,8 +53,7 @@ const Cart = () => {
   ]);
 
   return (
-    <div className="bg-white">
-      <NavbarTest />
+    <div style={{paddingTop:'15vh'}} className="bg-white">
       {/* <Announcement /> */}
       <div className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
         <div className="mb-6 sm:mb-10 lg:mb-16">

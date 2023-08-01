@@ -27,7 +27,25 @@
   padding: 6px 9px;
   margin: 6px;
   font-size: 14px;
+  transition: all 0.2s ease-in-out;
+ 
 }
+
+.category-name:hover {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+
+
+
+}
+.search_btn{
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+.category-name:active {
+  box-shadow:none;
+}
+
 .category-title {
   overflow: hidden;
   white-space: nowrap;

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {  Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Cart from "./pages/Cart";
 import Success from "./pages/Success";
@@ -7,11 +7,20 @@ import TestFilter from "./pages/TestFilter";
 import SingleProduct from "./pages/SingleProduct";
 import Payment from "./pages/Payment";
 import Checkout from "./pages/Checkout";
+import NavbarTest from "./components/NavbarTest";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
+
+const location = useLocation();
+
   return (
-    <Router>
-      <Routes>
+    <>
+
+   
+      <NavbarTest />
+      <AnimatePresence>
+      <Routes location={location} key={location.key}>
         <Route exact path="/" element={<AllProducts />} />
         <Route path="/checkout" element={<Cart />} />
         <Route path="/form" element={<Checkout />} />
@@ -20,7 +29,9 @@ function App() {
         <Route path="/testfilter" element={<TestFilter />} />
         <Route path="/payment" element={<Payment />} />
       </Routes>
-    </Router>
+      </AnimatePresence>
+   
+    </>
   );
 }
 

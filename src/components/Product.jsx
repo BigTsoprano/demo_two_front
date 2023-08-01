@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { addProduct, removeSingleProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { motion } from "framer-motion";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { useEffect, useState } from "react";
 
@@ -31,54 +31,80 @@ const Product = ({ item }) => {
     }
   };
 
+  const [showBlur, setShowBlur] = useState(false);
+
+  const handleBlur = () => {
+    setShowBlur(true);
+    handleClick("add");
+  };
+
   return (
-    <motion.div layout  initial={{ opacity: 0, scale: 0.9 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.9 }}
-    transition={{ duration: 0.2 }}
-    className="product_one  bg-white rounded-lg  hover:border-green-500 ">
-      
-      <div style={{maxHeight:'25vh', height:'25vh'}} className="group  relative mb-2 block overflow-hidden transition duration-100 hover:shadow-sm  bg-gray-100  rounded lg:mb-3">
-      <div style={{display:'flex', justifyContent:'center', alignItems:'center',  position: "absolute",
-              top: "10px",
-              right: "10px",
-              flexDirection:'row-reverse',
-           
-              }}>
-          <button
-           
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.2 }}
+      className="product_one  bg-white rounded-lg  hover:border-green-500 "
+    >
+      <div
+        style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px' }}
+        className="group  relative mb-2 block overflow-hidden transition duration-100 hover:shadow-sm  bg-gray-100   lg:mb-3"
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          transition={{ duration: 0.1 }}
             style={{
-             
               padding: "6px 6px",
               zIndex: "99",
-           
-              
             }}
-            
-            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-150 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
             onClick={() => handleClick("add")}
           >
             <AddIcon />
-          </button>
-      
-        {quantity > 0 && (
-          <div className="" style={{}}>
-          
-            <span>
-              <button  
-                style={{
-                 
-                
-                  padding: "6px 6px",
-                  zIndex: "100",
-                }}
-              className="drop-shadow-md bg-red-500  active:text-green-500 border-slate-900 hover:bg-green-100 hover:text-green-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  " onClick={() => handleClick("remove")}><RemoveIcon/></button>
-            </span>
-            <span style={{margin:'20px'}}>{quantity}</span>
-          </div>
-        )}
+          </motion.button>
+
+          {quantity > 0 && (
+            <div className="" style={{}}>
+              <span>
+                <motion.button
+                whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+                  style={{
+                    padding: "6px 6px",
+                    zIndex: "999",
+                  }}
+                  className="drop-shadow-md relative bg-white rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
+                  onClick={() => handleClick("remove")}
+                >
+                  <RemoveIcon />
+                </motion.button>
+              </span>
+              <span className="relative" style={{ margin: "20px", zIndex:'999' }}>{quantity}</span>
+            </div>
+          )}
         </div>
-        <Link  to={`/product/${item._id}`}>
+        <Link to={`/product/${item._id}`}>
+
+          <AnimatePresence>
+          {quantity > 0 && (
+          <motion.div   initial={{ opacity: 0}}
+          animate={{ opacity: 1}}
+          exit={{ opacity: 0}}
+          transition={{ duration: 0.2 }}  style={{background: 'rgba(0,0,0,.05)', transition:'ease-in-out .3s '}} className="absolute w-full h-full transition duration-100 backdrop-blur-sm "></motion.div>
+          )}
+          </AnimatePresence>
+
           <img
             style={{ borderBottom: "1px solid #e5e5e5" }}
             src={item.img}
@@ -88,8 +114,9 @@ const Product = ({ item }) => {
           />
         </Link>
       </div>
-      
-      <div className="card_hover"
+
+      <div
+        className="card_hover"
         style={{
           position: "relative",
           bottom: "0",
@@ -97,7 +124,10 @@ const Product = ({ item }) => {
           width: "100%",
         }}
       >
-        <div style={{}} className="flex  items-start justify-between gap-2 px-2">
+        <div
+          style={{}}
+          className="flex  items-start justify-between gap-2 px-2"
+        >
           <div className="flex flex-col">
             <span className="text-green-600 text-xs">{item.type}</span>
             <Link to={`/product/${item._id}`}>
@@ -118,10 +148,7 @@ const Product = ({ item }) => {
               >
                 thc: {item.thc}%
               </p>
-              <p
-                style={{ paddingLeft: "5px" }}
-                className="text-xs font-base"
-              >
+              <p style={{ paddingLeft: "5px" }} className="text-xs font-base">
                 cbd: {item.cbd}%
               </p>
             </div>
@@ -150,7 +177,6 @@ const Product = ({ item }) => {
         >
           <ShoppingCartCheckoutIcon />
         </motion.button> */}
-   
       </div>
     </motion.div>
     // </Container>
