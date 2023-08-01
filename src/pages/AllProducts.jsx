@@ -473,7 +473,7 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isWeightOpened ? (
-                    <ul className="show_more px-2  text-sm font-base">
+                    <ul className={`${showMoreWeight? `show_more`:``}show_more px-2  text-sm font-base`}>
                       {weights.map((weight) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
@@ -504,7 +504,13 @@ export default function AllProducts() {
                   ) : (
                     ""
                   )}
-              
+                   <button onClick={() => setShowMoreWeight(!showMoreWeight)}
+      id="showMore" // Give the button an id so we can target it in CSS
+      className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 duration-150 cursor-pointer"
+      style={{ borderTop: "none" }}
+    >
+      {showMoreWeight ? "Show less" : "Show more"}
+    </button>
                 </div>
                 
               )}
@@ -622,7 +628,7 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isEffectOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-base">
+                    <ul className={`${showMoreEffect? `show_show`:``}show_show px-2  text-sm font-base`}>
                       {effects.map((effect) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
@@ -641,15 +647,12 @@ export default function AllProducts() {
                           <label htmlFor={effect}>{effect}</label>
                         </li>
                       ))}
-                      {!showMoreEffect ? (
-                        <button onClick={() => setShowMoreEffect(true)}>
-                          show more
-                        </button>
-                      ) : (
-                        <button onClick={() => setShowMoreEffect(false)}>
-                          show less
-                        </button>
-                      )}
+                     <button onClick={() => setShowMoreEffect(!showMoreEffect)}
+      className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 duration-150 cursor-pointer"
+      style={{ borderTop: "none" }}
+    >
+      {showMoreEffect ? "Show less" : "Show more"}
+    </button>
                     </ul>
                   ) : (
                     ""

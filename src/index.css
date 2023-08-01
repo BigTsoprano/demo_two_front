@@ -79,9 +79,10 @@ body {
    display: none;
  }
  
- #showMore:focus ~ .imx-4 li {
-   display: list-item;
+ .show_show li:nth-child(n+6) {
+   display: none;
  }
+ 
  
  
  .swiper {
