@@ -71,7 +71,7 @@ export default function AllProducts() {
   //filters for each filter category
   useEffect(() => {
     if (products) {
-      //   setFilteredProducts(products);
+         setFilteredProducts(products);
       setEffects([
         ...new Set(
           products
@@ -504,18 +504,25 @@ export default function AllProducts() {
                   ) : (
                     ""
                   )}
+                  {(weights.length > 5 && isWeightOpened) ? 
                    <button onClick={() => setShowMoreWeight(!showMoreWeight)}
       id="showMore" // Give the button an id so we can target it in CSS
-      className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 duration-150 cursor-pointer"
-      style={{ borderTop: "none" }}
+      className="underline  text-xs text-slate-500 underline-offset-[3px]   hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+      style={{ }}
     >
-      {showMoreWeight ? "Show less" : "Show more"}
+      {showMoreWeight ? "show less" : "show more"}
     </button>
+    : "" }
+    
+    
+
+    
                 </div>
                 
               )}
               <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t mt-5">
-                <p style={{ paddingTop: "10px", fontWeight: "300" }}>
+                <p className="text-sm pt-2 font-semibold">Potency</p>
+                <p className="text-sm text-slate-600 font-base" style={{ paddingTop: "10px",}}>
                   thc: {thc[0]}% - {thc[1]}%
                 </p>
                 <Slider
@@ -525,7 +532,7 @@ export default function AllProducts() {
                     width: 200,
                     marginLeft: 0,
                     marginTop: 0,
-                    color: "green",
+                    color: "#22C55E",
                   }}
                   value={thc}
                   onChange={rangeTHC}
@@ -534,8 +541,8 @@ export default function AllProducts() {
                   // color="green"
                   disableSwap
                 />
-                <p style={{ paddingTop: "20px", fontWeight: "300" }}>
-                  CBD: {cbd[0]}% - {cbd[1]}%
+                <p className="text-sm text-slate-600 font-base" style={{ paddingTop: "20px",}}>
+                  cbd: {cbd[0]}% - {cbd[1]}%
                 </p>
                 <Slider
                   getAriaLabel={() => "Minimum distance"}
@@ -544,7 +551,7 @@ export default function AllProducts() {
                     width: 200,
                     marginLeft: 0,
                     marginTop: 0,
-                    color: "green",
+                    color: "#22C55E",
                   }}
                   value={cbd}
                   onChange={rangeCBD}
@@ -647,12 +654,14 @@ export default function AllProducts() {
                           <label htmlFor={effect}>{effect}</label>
                         </li>
                       ))}
+                      {(effects.length > 5 && isEffectOpened) ?
                      <button onClick={() => setShowMoreEffect(!showMoreEffect)}
-      className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 duration-150 cursor-pointer"
-      style={{ borderTop: "none" }}
+                     className="underline  text-xs text-slate-500 underline-offset-[3px]   hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+                     style={{ borderTop: "none" }}
     >
-      {showMoreEffect ? "Show less" : "Show more"}
+      {showMoreEffect ? "show less" : "show more"}
     </button>
+    : "" }
                     </ul>
                   ) : (
                     ""

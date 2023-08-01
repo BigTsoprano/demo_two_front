@@ -222,24 +222,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <div
-              style={{
-                padding: "10px",
-                boxShadow: "rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset",
-              }}
-              className="border rounded bg-slate-50"
-            >
-              <p style={{ paddingBottom: "10px" }} className="font-semibold">
-                Sample checkout card
-              </p>
-              <p>
-                <span>Card #: </span>4242 4242 4242 4242
-              </p>
-              <p>
-                <span>Exp. date: </span>08/24
-              </p>
-              <p>CVC: 123</p>
-            </div>
+           
             <div
               style={{
                 display: "flex",
