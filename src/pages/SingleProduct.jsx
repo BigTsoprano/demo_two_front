@@ -47,7 +47,7 @@ export default function SingleProduct() {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          `http://localhost:5000/api/products?category=${product.categories[0]}`
+          `https://cart.01ninjas.com/api/products?category=${product.categories[0]}`
         );
         setSimilarProducts(res.data);
       } catch (err) {}
@@ -241,7 +241,7 @@ export default function SingleProduct() {
                     onClick={handleClick}
                     className="group w-full  [transform:translateZ(0)] px-6 py-3 rounded-lg bg-green-500 overflow-hidden relative before:shadow-md before:rounded-lg before:absolute before:bg-white before:border before:text-slate-900 before:border-slate-900 before:bottom-0 before:left-0 before:h-full before:w-full before:-translate-x-full hover:before:translate-x-0 before:transition before:ease-in-out before:duration-500 "
                   >
-                    <span class="relative z-0 text-black group-hover:text-slate-900 transition ease-in-out duration-500">
+                    <span class="relative z-0 text-white hover:text-black font-medium group-hover:text-slate-900 transition ease-in-out duration-500">
                     Add to cart
                     </span>
                   </motion.button>

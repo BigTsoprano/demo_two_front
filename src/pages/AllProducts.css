@@ -13,7 +13,7 @@
 .left {
   height: fit-content;
   max-width: 250px;
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 .left2 {
   display: none;
@@ -71,6 +71,9 @@
     display: flex;
     flex-direction: column;
     height: auto;
+    padding-left: 1rem;
+    
+    
   }
   .slider {
     position: fixed;

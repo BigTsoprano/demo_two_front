@@ -19,16 +19,42 @@ body {
    display: none;
  }
 .card_hover{
-   transition: all 0.2s ease-in-out;
-   padding-top: .8rem;
-   margin-top: -.8rem;
+   padding-top: .5rem;
    border-bottom-left-radius: 6px;
    border-bottom-right-radius: 6px;
 }
 .card_hover:hover{
-   background-color: #DCFCE7;
-   transition: all 0.2s ease-in-out;
 }
+.card_title {
+   position: relative;
+   color: #000;
+
+
+}
+.card_title:hover::after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(241, 245, 249, 0.7), rgba(255, 255, 255, 0));
+   background-size: 200%;
+   background-repeat: no-repeat;
+ 
+   pointer-events: none;
+   animation: shine 2s infinite;
+ }
+ @keyframes shine {
+   from {
+     background-position-x: 200%;
+   }
+   to {
+     background-position-x: -200%;
+   }
+ }
+
+
 
 .product_one{
    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;

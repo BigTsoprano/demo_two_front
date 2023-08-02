@@ -21,7 +21,7 @@ function Payment() {
     const makeRequest = async () => {
       try {
         const rawResponse = await fetch(
-          "http://localhost:5000/api/checkout/create-payment-intent",
+          "https://cart.01ninjas.com/api/checkout/create-payment-intent",
           {
             method: "POST",
             headers: {

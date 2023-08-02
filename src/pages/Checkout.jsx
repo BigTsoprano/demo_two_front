@@ -279,7 +279,7 @@ export default function Checkout() {
 
       {/*tailwind section*/}
 
-<div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+<div style={{paddingTop:'12vh'}} className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <form>
       <div className="space-y-10">
         <div className="border-b font-semibold border-gray-900/10 pb-2">
@@ -490,7 +490,7 @@ export default function Checkout() {
               //   disabled={isLoading || cart.products.length == 0}
               disabled={isLoading || cart.products.length == 0}
               type="submit"
-              className="bg-green-500 rounded-lg hover:bg-white hover:border hover:border-black hover:text-black transition duration-100">
+              className="bg-green-500 text-white font-medium rounded-lg hover:bg-white hover:border hover:border-black hover:text-black transition duration-100">
               {isLoading ? "Loading..." : "Submit"}
             </button>
 

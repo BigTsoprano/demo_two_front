@@ -16,19 +16,19 @@ import Slider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
-  color: '#3a8589',
+  color: '#22C55E',
   height: 3,
   padding: '13px 0',
   '& .MuiSlider-thumb': {
     height: 27,
     width: 27,
-    backgroundColor: '#fff',
-    border: '1px solid currentColor',
+    backgroundColor: '#Fff',
+    border: '1px solid #0F172A',
     '&:hover': {
-      boxShadow: '0 0 0 8px rgba(58, 133, 137, 0.16)',
+      boxShadow: 'none',
     },
     '& .airbnb-bar': {
-      height: 9,
+      height: 10,
       width: 1,
       backgroundColor: 'currentColor',
       marginLeft: 1,
@@ -50,9 +50,9 @@ function AirbnbThumbComponent(props) {
   return (
     <SliderThumb {...other}>
       {children}
-      <span className="airbnb-bar" />
-      <span className="airbnb-bar" />
-      <span className="airbnb-bar" />
+      <span className="airbnb-bar text-slate-900" />
+      <span className="airbnb-bar text-slate-900" />
+      <span className="airbnb-bar text-slate-900" />
     </SliderThumb>
   );
 }
@@ -99,8 +99,8 @@ export default function AllProducts() {
       try {
         const res = await axios.get(
           category
-            ? `http://localhost:5000/api/products?category=${category}`
-            : "http://localhost:5000/api/products"
+            ? `https://cart.01ninjas.com/api/products?category=${category}`
+            : "https://cart.01ninjas.com/api/products"
         );
         setProducts(res.data);
         setProducts2(res.data);
@@ -441,7 +441,7 @@ export default function AllProducts() {
           </div>
           <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-5 border-b">
             <button
-              style={{ width: "80%", padding: "6px", textAlign: "left" }}
+              style={{ width: "90%", padding: "6px", textAlign: "left" }}
               className="search_btn hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded-lg"
               onClick={handleOpenModal}
             >
@@ -458,37 +458,37 @@ export default function AllProducts() {
           </div>
           <div  className="flex-col py-3">
             <button
-              className="category-name font-semibold  bg-slate-100 hover:bg-green-100 rounded-lg text-slate-900 hover:text-green-600"
+              className="category-name font-semibold  bg-slate-100 hover:bg-green-100 rounded-lg text-slate-900 "
               onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg  text-slate-900 hover:text-green-600"
+              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg  text-slate-900 "
               onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg text-slate-900 hover:text-green-600"
+              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg text-slate-900 "
               onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
-              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg  text-slate-900 hover:text-green-600"
+              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg  text-slate-900 "
               onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
-              className="category-name font-semibold hover:bg-green-100  bg-slate-100 rounded-lg  text-slate-900 hover:text-green-600"
+              className="category-name font-semibold hover:bg-green-100  bg-slate-100 rounded-lg  text-slate-900 "
               onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
-              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg text-slate-900 hover:text-green-600"
+              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg text-slate-900 "
               onClick={() => resetCheckbox("vaporizer")}
             >
               Vapes
@@ -576,8 +576,8 @@ export default function AllProducts() {
                 <AirbnbSlider
         slots={{ thumb: AirbnbThumbComponent }}
                 size='small'
-                marks
                 valueLabelDisplay="auto"
+                className="text-slate-900"
 
                   getAriaLabel={() => "Minimum distance"}
                   style={{
@@ -585,7 +585,7 @@ export default function AllProducts() {
                     width: 190,
                     marginLeft: 0,
                     marginTop: 0,
-                    color: "#22C55E",
+                   
                   }}
                   value={thc}
                   onChange={rangeTHC}
@@ -600,7 +600,6 @@ export default function AllProducts() {
                  <AirbnbSlider
         slots={{ thumb: AirbnbThumbComponent }}
                 size="small"
-                marks
                 valueLabelDisplay="auto"
 
                   getAriaLabel={() => "Minimum distance"}
@@ -739,7 +738,7 @@ export default function AllProducts() {
             <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
               <p
                 style={{ paddingTop: "12vh", marginLeft: "1rem" }}
-                className="filter-title"
+                className="filter-title text-sm font-semibold"
               >
                 Filter By
               </p>
@@ -762,37 +761,37 @@ export default function AllProducts() {
             </div>
             <div className="flex-col">
               <button
-                className="category-name  rounded-lg  text-slate-900 bg-slate-100 "
+                className="category-name  rounded-lg text-sm font-semibold  text-slate-900 bg-slate-100 "
                 onClick={() => resetCheckbox(null)}
               >
                 All
               </button>
               <button
-                className="category-name border rounded-lg bg-slate-100  text-slate-900 hover:text-green-600"
+                className="category-name text-sm font-semibold border rounded-lg bg-slate-100  text-slate-900 hover:text-green-600"
                 onClick={() => resetCheckbox("flower")}
               >
                 Flowers
               </button>
               <button
-                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("edible")}
               >
                 Edibles
               </button>
               <button
-                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name border text-sm font-semibold rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("concentrate")}
               >
                 Concentrates
               </button>
               <button
-                className="category-name  border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name  text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("pre-roll")}
               >
                 Pre-rolls
               </button>
               <button
-                className="category-name border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
                 onClick={() => resetCheckbox("vaporizer")}
               >
                 Vaporizers
@@ -805,8 +804,8 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
                   >
-                    <div className="flex items-center text-slate-900 gap-x-2">
-                      Weight:
+                    <div className="flex items-center text-sm font-semibold text-slate-900 gap-x-2">
+                      Weight
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -850,14 +849,68 @@ export default function AllProducts() {
                   )}
                 </div>
               )}
+                 <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t  mt-5">
+                <p className="text-sm px-2   pt-2 font-semibold">Potency</p>
+                <p className="text-sm px-2  text-slate-600 font-base" style={{ paddingTop: "10px",}}>
+                  thc: {thc[0]}% - {thc[1]}%
+                </p>
+                <AirbnbSlider
+        slots={{ thumb: AirbnbThumbComponent }}
+                size='small'
+                valueLabelDisplay="auto"
+                className="text-slate-900"
+
+                  getAriaLabel={() => "Minimum distance"}
+                  style={{
+                    height: 3,
+                    width: '80%',
+                    marginLeft: '1rem',
+                    marginRight: '1rem',
+                    marginTop: 0,
+                    
+                   
+                  }}
+                  value={thc}
+                  onChange={rangeTHC}
+                  // valueLabelDisplay="auto"
+                  // getAriaValueText={() => `$`}
+                  // color="green"
+                  disableSwap
+                />
+                <p className="text-sm px-2  text-slate-600 font-base" style={{ paddingTop: "20px",}}>
+                  cbd: {cbd[0]}% - {cbd[1]}%
+                </p>
+                 <AirbnbSlider
+        slots={{ thumb: AirbnbThumbComponent }}
+                size="small"
+                valueLabelDisplay="auto"
+
+                  getAriaLabel={() => "Minimum distance"}
+                  style={{
+                    height: 3,
+                    width: '80%',
+                    marginLeft: '1rem',
+                    marginTop: 0,
+                    color: "#22C55E",
+                
+
+                  }}
+                  value={cbd}
+                  onChange={rangeCBD}
+                  // valueLabelDisplay="auto"
+                  // getAriaValueText={() => `$`}
+                  // color="green"
+                  disableSwap
+                />
+              </div>
               {types.length > 0 && (
                 <div className="border-t">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
                   >
-                    <div className="flex text-slate-900 items-center gap-x-2">
-                      Type:
+                    <div className="flex text-sm font-semibold text-slate-900 items-center gap-x-2">
+                      Type
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -905,8 +958,8 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <div className="flex items-center text-slate-900 gap-x-2">
-                      Effect:
+                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
+                      Effect
                     </div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -949,16 +1002,16 @@ export default function AllProducts() {
                 </div>
               )}
             </div>
-            <div style={{ marginTop: "20px" }}>
+            <div className="" style={{ margin:'1rem 0', paddingBottom:'1rem' }}>
               <button
                 style={{
                   padding: "10px 12px",
-                  width: "100%",
-                  boxShadow:
-                    "rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px",
+                  width: "96%",
+                  
+                  
                 }}
                 onClick={handleSliderToggle}
-                className="filter-button text-base text-white bg-green-500 hover:bg-white transition duration-100 hover:text-slate-900 "
+                className="filter-button rounded-lg text-base text-white  bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
               >
                 Apply
               </button>
@@ -993,7 +1046,7 @@ export default function AllProducts() {
                 {/* button for filter mobile */}
                 <button
                   style={{ padding: "6px 12px", marginLeft: "2rem" }}
-                  className="mobile_btn border hover:border-green-500 text-slate-900 hover:text-green-500 rounded"
+                  className="mobile_btn bg-slate-100 font-medium text-slate-900 hover:bg-green-100 rounded-lg"
                   onClick={handleSliderToggle}
                 >
                   Filter <TuneOutlinedIcon style={{ marginLeft: "6px" }} />
@@ -1047,7 +1100,7 @@ export default function AllProducts() {
               ))}
             </div>
           )}
-          <div className=" bg-white sm:py-8 lg:py-10 flex justify-between w-full">
+          <div className=" bg-white sm:py-8 lg:py-3 flex justify-between w-full">
             {unmatchedFilters ? (
               <div>no matched results</div>
             ) : (
