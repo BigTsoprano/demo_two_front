@@ -13,7 +13,7 @@ import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -47,7 +47,7 @@ export default function SingleProduct() {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(
-          `https://cart.01ninjas.com/api/products?category=${product.categories[0]}`
+          `http://localhost:5000/api/products?category=${product.categories[0]}`
         );
         setSimilarProducts(res.data);
       } catch (err) {}
@@ -316,7 +316,34 @@ export default function SingleProduct() {
             </div>
           )}
         </div> */}
-        <Link to={`/product/${item._id}`}>
+        <Link  to={`/product/${item._id}`}>
+ <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <motion.button
+          whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+          transition={{ duration: 0.1 }}
+            style={{
+              padding: "6px 6px",
+              zIndex: "99",
+            }}
+            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            onClick={() => handleClick("add")}
+          >
+            <LoginOutlinedIcon />
+          </motion.button>
+          </div>
+          </Link>
+        
+        <Link  to={`/product/${item._id}`}>
 
           {/* <AnimatePresence>
           {quantity > 0 && (

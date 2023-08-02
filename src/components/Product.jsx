@@ -39,7 +39,7 @@ const Product = ({ item }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.2 }}
-      className="product_one  bg-white rounded-lg  hover:border-green-500 "
+      className="product_one  bg-slate-100 rounded-lg  hover:border-green-500 "
     >
       <div
         style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px' }}
@@ -100,7 +100,7 @@ const Product = ({ item }) => {
           </AnimatePresence>
 
           <img
-            style={{ borderBottom: "1px solid #e5e5e5" }}
+            style={{ }}
             src={item.img}
             loading="lazy"
             alt="Photo by Austin Wade"

@@ -8,8 +8,11 @@ import {
   removeSingleProduct,
 } from "../redux/cartRedux";
 import { useState } from "react";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 import { motion, AnimatePresence } from "framer-motion";
+import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 
 
@@ -36,10 +39,11 @@ const dispatch = useDispatch();
 
 
   return (
+    <div>
    <div className="nav_bar drop-shadow-sm bg-white">
     <div className="navbar_wrap">
     <Link  to="/">
-<h1 style={{color:'#22c44e', fontWeight:'600', fontSize:'18px'}}>Your logo</h1>
+<h1 className='text-slate-900' style={{ fontWeight:'600', fontSize:'18px'}}>Demo</h1>
 </Link>
 
 <div 
@@ -104,8 +108,8 @@ className="popover  shadow-md border-t border-b border-r border-l"
                   <p className="font-semibold text-sm">{product.title}</p>
                   <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
                   <div style={{display:'flex', flexDirection:'row-reverse', justifyContent:'space-between', alignItems:'center',}} >
-                  <p style={{marginLeft:'2rem'}} className="text-xs text-slate-600">weight: {product.weight}gs</p>
-                  <p className="text-xs text-slate-600">quanity: {product.quantity}</p>
+                  <p style={{marginLeft:'2rem',display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><MonitorWeightOutlinedIcon/>: {product.weight}gs</p>
+                  <p style={{display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><ShoppingBagOutlinedIcon/>: {product.quantity}</p>
                   </div>
                   </div>
                   </div>
@@ -127,6 +131,7 @@ className="popover  shadow-md border-t border-b border-r border-l"
 </div>
     </div>
    </div>
+    </div>
   );
 }
 
