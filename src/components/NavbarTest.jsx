@@ -49,7 +49,7 @@ const dispatch = useDispatch();
 <div 
  onMouseEnter={handlePopoverEnter}
  onMouseLeave={handlePopoverLeave}
-  style={{marginRight:'1rem', height:'100%'}} className="hover:border hover:shadow-lg active:shadow-none ">
+  style={{marginRight:'1rem', height:'100%'}} className="hover:text-slate-600 text-slate-800">
 <button >
 <div className="relative py-2">
 <div className="t-0 absolute left-3">
@@ -95,7 +95,7 @@ const dispatch = useDispatch();
  }}
 onMouseEnter={handlePopoverEnter}
 onMouseLeave={handlePopoverLeave}
-className="popover  shadow-md border-t border-b border-r border-l"
+className="popover   border-t"
   style={{minHeight:'20vh', minWidth:'300px',width:'30%', height:'auto', position:'absolute', backgroundColor:'#fff', right:'0', padding:'1rem', top:'10vh', borderBottomLeftRadius:'8px'}}
 
   >
@@ -119,7 +119,7 @@ className="popover  shadow-md border-t border-b border-r border-l"
                   </div>
                 </div>
               ))}
-<div className="py-3 text-sm " style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+<div className="py-3 text-sm border-t" style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
              <p className="font-semibold">SubTotal:</p> <p>${cart.total}</p>
              </div>
              <Link to="/checkout">

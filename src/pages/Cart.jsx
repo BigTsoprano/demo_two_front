@@ -16,7 +16,7 @@ import {
   removeSingleProduct,
 } from "../redux/cartRedux";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-
+import { motion } from "framer-motion";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const KEY = import.meta.env.VITE_APP_STRIPE;
@@ -51,11 +51,26 @@ const Cart = () => {
     cart.total,
     // , navigate
   ]);
+  
+  const containerVariants = {
+    hidden: { x: "-100%" },
+    visible: { x: 0 ,
+    transition: {duration: 0.7, delay: 0.3, ease: "linear" }
+    },
+    exit: {
+      x: "-100%",
+      transition:{ease: "easeInOut"}
+    }
+  };
+
 
   return (
-    <div style={{paddingTop:'15vh'}} className="bg-white">
+    <div  style={{paddingTop:'15vh'}} className="bg-white">
       {/* <Announcement /> */}
-      <div className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
+      <motion.div  initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={containerVariants} className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
         <div className="mb-6 sm:mb-10 lg:mb-16">
           <h2 className="mb-4 text-left text-lg font-bold text-gray-800 border-b  md:mb-6 lg:text-lg">
             Your Cart {cart.quantity > 0 ? "" : "is empty"}
@@ -264,7 +279,7 @@ const Cart = () => {
           </div>
         </div>
         {/* </Bottom> */}
-      </div>
+      </motion.div>
       {/* <Footer /> */}
     </div>
   );

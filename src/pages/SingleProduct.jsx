@@ -79,8 +79,26 @@ export default function SingleProduct() {
   };
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+
+  const containerVariants = {
+
+    hidden: { x: "-100%" },
+    visible: { x: 0 ,
+    transition: {duration: 0.4, delay: 0.3, ease: "linear" }
+    },
+    exit: {
+      x: "-100%",
+      transition:{ease: "easeInOut"}
+    }
+  };
+
+
+
   return (
-    <div>
+    <motion.div 
+    animate="visible"
+    exit="exit"
+    variants={containerVariants}>
       <div className="antialiased">
 
         <div style={{paddingTop:'15vh'}} className="py-6">
@@ -265,7 +283,7 @@ export default function SingleProduct() {
 
         <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
         <header>
-      <h2 className="text-lg font-bold text-gray-900 sm:text-lg">
+      <h2 style={{paddingTop:'4rem', }} className="text-lg font-bold border-t text-gray-900 sm:text-lg">
         Related products
       </h2>
 
@@ -379,11 +397,11 @@ export default function SingleProduct() {
           </AnimatePresence> */}
 
           <img
-            style={{ borderBottom: "1px solid #e5e5e5" }}
+            style={{ borderBottom: "1px solid #e5e5e5" , }}
             src={item.img}
             loading="lazy"
             alt="Photo by Austin Wade"
-            className="w-full h-full bg-white object-contain shadow-0 object-center transition duration-200 "
+            className="w-full h-full bg-white object-contain hover:shadow-md object-center transition duration-200 "
           />
         </Link>
       </div>
@@ -411,7 +429,7 @@ export default function SingleProduct() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                paddingTop: "10px",
+                
               }}
             >
               <ScienceOutlinedIcon style={{fontSize:'18x', marginRight:'3px'}} className="text-slate-500"/>
@@ -464,6 +482,6 @@ export default function SingleProduct() {
         </ul>
       </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
