@@ -149,7 +149,7 @@ export default function AllProducts() {
         ),
       ]);
     }
-  }, [products, category, showMoreWeight, showMoreEffect]);
+  }, [products]);
   //   console.log(filteredProducts);
   //handle filter checkbox
   const handleClick = (e) => {
@@ -569,7 +569,8 @@ export default function AllProducts() {
                 
               )}
               <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t mt-5">
-                <p className="text-sm pt-2 font-semibold">Potency</p>
+                <p style={{marginRight:'1rem'}} className="text-sm pt-2 font-semibold">Potency</p>
+               <div style={{marginLeft:'1rem'}}>
                 <p className="text-sm text-slate-600 font-base" style={{ paddingTop: "10px",}}>
                   thc: {thc[0]}% - {thc[1]}%
                 </p>
@@ -585,6 +586,7 @@ export default function AllProducts() {
                     width: 190,
                     marginLeft: 0,
                     marginTop: 0,
+                    
                    
                   }}
                   value={thc}
@@ -619,6 +621,7 @@ export default function AllProducts() {
                   // color="green"
                   disableSwap
                 />
+                </div>
               </div>
               {types.length > 0 && (
                 <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">

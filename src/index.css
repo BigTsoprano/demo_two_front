@@ -23,15 +23,14 @@ body {
    border-bottom-left-radius: 6px;
    border-bottom-right-radius: 6px;
 }
-.card_hover:hover{
-}
+
 .card_title {
    position: relative;
    color: #000;
 
 
 }
-.card_title:hover::after {
+.card_hover:hover::after {
    content: "";
    position: absolute;
    top: 0;
@@ -43,7 +42,7 @@ body {
    background-repeat: no-repeat;
  
    pointer-events: none;
-   animation: shine 2s infinite;
+   animation: shine 3s infinite;
  }
  @keyframes shine {
    from {

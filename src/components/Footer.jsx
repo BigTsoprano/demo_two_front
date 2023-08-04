@@ -12,11 +12,11 @@ function Footer() {
           name: "Services",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/about",
           name: "About us",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/price",
           name: "Pricing",
         },
         {
@@ -29,27 +29,27 @@ function Footer() {
       label: "Resources",
       items: [
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/ecommerce",
           name: "Ecommerce",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/branding",
           name: "Branding",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/custom",
           name: "Custom software",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/cms",
           name: "CMS",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/it",
           name: "IT services",
         },
         {
-          href: "/",
+          href: "https://acannaconnect.com/services/pos",
           name: "Pos system",
         },
         // {
@@ -99,12 +99,12 @@ function Footer() {
 
           <div>
             <a
-              className="leading-relaxed text-slate-50 max-w-xs mt-2 text-base"
+              className="leading-relaxed text-slate-50 max-w-xs mt-2 text-sm"
               href="tel:+12013287539"
             >
               📱: +1(201)328-7539
             </a>
-            <p className="leading-relaxed text-slate-50 max-w-xs mt-2 text-base">
+            <p className="leading-relaxed text-slate-50 max-w-xs mt-2 text-sm">
               ✉️: canna@01ninjas.com
             </p>
           </div>
@@ -122,7 +122,7 @@ function Footer() {
                 <li key={idx}>
                   <a
                     href={el.href}
-                    className="hover:underline hover:text-green-500 text-white"
+                    className="hover:underline text-sm hover:text-green-500 text-white"
                   >
                     {el.name}
                   </a>

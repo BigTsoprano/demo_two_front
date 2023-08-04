@@ -23,7 +23,18 @@ import 'swiper/css/thumbs';
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-
+function getColorFromType(type) {
+  switch(type) {
+      case "sativa":
+          return "text-green-500";
+      case "indica":
+          return "text-yellow-500";
+      case "hybrid":
+          return "text-indigo-500";
+      default:
+          return "text-gray-500";
+  }
+}
 export default function SingleProduct() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -267,12 +278,25 @@ export default function SingleProduct() {
           {similarProducts.map((item) => (
             <li
               key={item._id}
-              className="product_one  bg-white rounded-lg  hover:border-green-500"
+              className="product_one  bg-slate-100 rounded-lg  hover:border-green-500"
             >
               <div
-        style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px' }}
+        style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px', }}
         className="group  relative mb-2 block overflow-hidden transition duration-100 hover:shadow-sm  bg-gray-100   lg:mb-3"
       >
+
+
+<span    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "absolute",
+                      top: "10px",
+                      left: "10px",
+                    }}
+                    className={`${getColorFromType(item.type)} tracking-wide text-xs font-medium`}>{item.type}</span>
+
+
         {/* <div
           style={{
             display: "flex",
@@ -378,7 +402,6 @@ export default function SingleProduct() {
           className="flex  items-start justify-between gap-2 px-2"
         >
           <div className="flex flex-col">
-            <span className="text-green-600 text-xs">{item.type}</span>
             <Link to={`/product/${item._id}`}>
               <p className="text-sm font-semibold  text-slate-900 transition duration-100 hover:text-gray-500 lg:text-sm">
                 {item.title}
@@ -391,6 +414,7 @@ export default function SingleProduct() {
                 paddingTop: "10px",
               }}
             >
+              <ScienceOutlinedIcon style={{fontSize:'18x', marginRight:'3px'}} className="text-slate-500"/>
               <p
                 style={{ paddingRight: "5px" }}
                 className="text-xs font-base border-r "
@@ -401,8 +425,16 @@ export default function SingleProduct() {
                 cbd: {item.cbd}%
               </p>
             </div>
-          </div>
+            <div>
+              <FaceRetouchingNaturalIcon style={{fontSize:'12x', paddingRight:'3px'}} className="text-slate-500"/>
+              {item?.effect?.map((effect) => (
+                <span className="mb-4 text-gray-500 text-xs" key={effect}>
+                  {effect}{" "}
+                </span>
+              ))}
+            </div>
 
+          </div>
           <div className="flex flex-col items-end">
             <span className="font-base text-sm text-gray-600 lg:text-sm">
               ${item.price}

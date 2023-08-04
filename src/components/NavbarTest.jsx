@@ -108,8 +108,8 @@ className="popover  shadow-md border-t border-b border-r border-l"
                   <p className="font-semibold text-sm">{product.title}</p>
                   <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
                   <div style={{display:'flex', flexDirection:'row-reverse', justifyContent:'space-between', alignItems:'center',}} >
-                  <p style={{marginLeft:'2rem',display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><MonitorWeightOutlinedIcon/>: {product.weight}gs</p>
-                  <p style={{display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><ShoppingBagOutlinedIcon/>: {product.quantity}</p>
+                  <p style={{marginLeft:'2rem',display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><MonitorWeightOutlinedIcon style={{fontSize:"16px"}} className="text-slate-500"/>: {product.weight}gs</p>
+                  <p style={{display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><ShoppingBagOutlinedIcon style={{fontSize:"16px"}} className="text-slate-500"/>: {product.quantity}</p>
                   </div>
                   </div>
                   </div>

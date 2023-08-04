@@ -71,8 +71,8 @@ const Cart = () => {
             margin: "1rem 0",
           }}
         >
-          <div style={{ minWidth: "50%", height: "auto" }}>
-            <div className=" flex flex-col  sm:divide-y shadow-sm rounded border">
+          <div className="" style={{ minWidth: "50%", height: "auto" }}>
+            <div style={{boxShadow: 'rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px'}} className=" flex flex-col  sm:divide-y shadow-sm rounded-lg border-b -drop-shadow-md">
               {cart.products.map((product) => (
                 <div key={product._id}>
                   <div
@@ -130,21 +130,7 @@ const Cart = () => {
                             marginTop: "1rem",
                           }}
                         >
-                          <button
-                            onClick={() =>
-                              dispatch(addProduct({ ...product, quantity: 1 }))
-                            }
-                            className="select-none px-2 text-sm font-semibold hover:text-green-600 transition duration-100 text-slate-800 active:text-indigo-700"
-                          >
-                            +
-                          </button>
-                          <p
-                            style={{ padding: "4px 6px" }}
-                            className="text-xs border rounded text-slate-600"
-                          >
-                            quanity: {product.quantity}
-                          </p>
-                          <button
+                         <button
                             onClick={() =>
                               dispatch(
                                 removeSingleProduct({ ...product, quantity: 1 })
@@ -153,6 +139,21 @@ const Cart = () => {
                             className="select-none px-2 text-sm font-semibold hover:text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
                           >
                             -
+                          </button>
+                          <p
+                            style={{ padding: "4px 6px" }}
+                            className="text-xs border rounded text-slate-600"
+                          >
+                            quanity: {product.quantity}
+                          </p>
+                          
+                          <button
+                            onClick={() =>
+                              dispatch(addProduct({ ...product, quantity: 1 }))
+                            }
+                            className="select-none px-2 text-sm font-semibold hover:text-green-600 transition duration-100 text-slate-800 active:text-indigo-700"
+                          >
+                            +
                           </button>
                         </div>
                       </div>
@@ -193,17 +194,17 @@ const Cart = () => {
             </div>
           </div>
           <div
-            style={{ minWidth: "40%", margin: "1rem" }}
+            style={{ minWidth: "40%", margin: "0 1rem"}}
             className="flex flex-col items-start gap-4"
           >
-            <div className="w-full rounded-lg bg-green-100 p-4 sm:max-w-xs">
+            <div style={{boxShadow: 'rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset'}} className="w-full rounded-lg bg-green-100 p-4 sm:max-w-xs">
               <div className="space-y-1">
-                <div className="flex justify-between gap-4 text-base text-slate-500">
-                  <span>Subtotal</span>
+                <div className="flex justify-between gap-4 text-sm font-semibold text-slate-600">
+                  <span>Subtotal:</span>
                   <span>${cart.total}</span>
                 </div>
 
-                <div className="flex justify-between gap-4 text-gray-500">
+                <div className="flex justify-between gap-4 text-sm font-bold text-slate-600">
                   <span>Pick up</span>
                   <span>$0</span>
                 </div>
@@ -211,10 +212,10 @@ const Cart = () => {
 
               <div className="mt-4 border-t pt-4">
                 <div className="flex items-start justify-between gap-4 text-gray-800">
-                  <span className="text-base font-bold">Total</span>
+                  <span className="text-sm font-bold">Total</span>
 
                   <span className="flex flex-col items-end">
-                    <span className="text-base font-bold">
+                    <span className="text-sm font-bold">
                       ${cart.total} USD
                     </span>
                     <span className="text-xs text-gray-500">including VAT</span>
@@ -233,7 +234,7 @@ const Cart = () => {
               <Link to="/">
                 <button
                   style={{ padding: "10px 16px", marginRight: "2rem" }}
-                  className="border rounded hover:text-green-600 hover:border-green-500"
+                  className=" rounded-lg shadow-sm bg-slate-100 hover:text-slate-900 hover:border hover:border-black transition duration-100 hover:border-slate-900 hover:bg-white"
                 >
                   keep shopping
                 </button>
@@ -252,7 +253,7 @@ const Cart = () => {
                 <Link to="/form">
                   <button
                     style={{ padding: "10px 16px" }}
-                    className="inline-block hover:border border-slate-900  rounded bg-green-500  text-center text-sm font-base text-white hover:text-slate-900 outline-none ring-indigo-300 transition duration-100 hover:bg-white hover:text-slate-900 focus-visible:ring active:bg-green-600 md:text-base"
+                    className="inline-block hover:border border-slate-900  rounded-lg bg-green-500  text-center text-sm font-base text-white hover:text-slate-900 outline-none ring-indigo-300 transition duration-100 hover:bg-white hover:text-slate-900 focus-visible:ring active:bg-green-600 md:text-base"
                   >
                     Checkout <KeyboardArrowRightIcon />
                   </button>
