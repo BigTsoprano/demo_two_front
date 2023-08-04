@@ -9,7 +9,7 @@ export default function Modal({ closeModal }) {
   // const [showHits, setShowHits] = useState(false);
 
   return (
-    <div style={{zIndex:'999', height:'100%', width:'100%'}} className="fixed inset-0 z-10 overflow-y-auto">
+    <div style={{zIndex:'99999', height:'100%', width:'100%'}} className="fixed inset-0 z-10 overflow-y-auto">
       <div className="fixed inset-0 w-full h-full bg-black opacity-40" onClick={closeModal}></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div style={{maxHeight:'60vh', overflowY:'scroll'}} className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
