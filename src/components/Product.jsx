@@ -88,7 +88,7 @@ const Product = ({ item }) => {
           transition={{ duration: 0.1 }}
             style={{
               padding: "6px 6px",
-              zIndex: "99",
+              zIndex: "9",
             }}
             className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
             onClick={() => handleClick("add")}
@@ -103,7 +103,7 @@ const Product = ({ item }) => {
                 whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
                   style={{
                     padding: "6px 6px",
-                    zIndex: "999",
+                    zIndex: "9",
                   }}
                   className="drop-shadow-md relative bg-white rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
                   onClick={() => handleClick("remove")}
@@ -111,11 +111,11 @@ const Product = ({ item }) => {
                   <RemoveIcon />
                 </motion.button>
               </span>
-              <span className="relative" style={{ margin: "20px", zIndex:'999' }}>{quantity}</span>
+              <span className="relative" style={{ margin: "20px", zIndex:'9' }}>{quantity}</span>
             </div>
           )}
         </div>
-        <Link to={`/product/${item._id}`}>
+        <Link to={`/product/${item._id}`} onClick={() => window.scrollTo(0, 0)} >
 
           <AnimatePresence>
           {quantity > 0 && (
@@ -149,14 +149,20 @@ const Product = ({ item }) => {
           style={{}}
           className="flex  items-start justify-between gap-2 px-2"
         >
-          <div className="flex flex-col">
-          <Link to={`/product/${item._id}`}>
-            
-
+          <div className="flex flex-col w-full">
+<div style={{display:'flex', justifyContent:'space-between',}} >
+          <Link to={`/product/${item._id}`} onClick={() => window.scrollTo(0, 0)}>
             <p className="card_title text-sm font-semibold  text-slate-900 transition duration-100 hover:text-slate-600  lg:text-sm">
               {item.title}
             </p>
           </Link>
+          <div className="flex flex-col items-end">
+            <span className="font-base text-sm font-semibold text-gray-800 lg:text-sm">
+              ${item.price}
+            </span>
+            {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
+          </div>
+          </div>
           <div style={{display:'flex', flexDirection:'row', alignItems:'center', paddingTop:'6px'}}>
          <FaceRetouchingNaturalIcon className="text-slate-500 mr-1" style={{fontSize:'16px'}}/>
          {item?.effect?.map((effect) => (
@@ -193,12 +199,7 @@ const Product = ({ item }) => {
            
           </div>
 
-          <div className="flex flex-col items-end">
-            <span className="font-base text-sm font-semibold text-gray-800 lg:text-sm">
-              ${item.price}
-            </span>
-            {/* <span className="text-sm text-red-500 line-through">$39.99</span> */}
-          </div>
+        
         </div>
         {/* <motion.button
           whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}

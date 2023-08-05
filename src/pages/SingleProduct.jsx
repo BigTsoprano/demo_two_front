@@ -358,7 +358,7 @@ export default function SingleProduct() {
             </div>
           )}
         </div> */}
-        <Link  to={`/product/${item._id}`}>
+        <Link  to={`/product/${item._id}` } onClick={() => window.scrollTo(0, 0)}>
  <div
           style={{
             display: "flex",
@@ -385,7 +385,7 @@ export default function SingleProduct() {
           </div>
           </Link>
         
-        <Link  to={`/product/${item._id}`}>
+        <Link  to={`/product/${item._id}`} onClick={() => window.scrollTo(0, 0)}>
 
           {/* <AnimatePresence>
           {quantity > 0 && (

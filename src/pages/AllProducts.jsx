@@ -4,16 +4,19 @@ import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import Footer from "../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
 import ClearIcon from '@mui/icons-material/Clear';
+import Sticky from 'react-stickynode';
 
 import Modal from "../components/Modal";
 import SearchIcon from "@mui/icons-material/Search";
 import PropTypes from 'prop-types';
 import Slider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
+import Checkbox from '@mui/joy/Checkbox';
+import Done from '@mui/icons-material/Done';
+
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: '#22C55E',
@@ -235,6 +238,7 @@ export default function AllProducts() {
         );
       }
     }
+    window.scrollTo(0, 0);
   };
   //   console.log(displayFilters);
 
@@ -377,6 +381,7 @@ export default function AllProducts() {
       type: [],
       effect: [],
     });
+    window.scrollTo(0, 0);
   };
   useEffect(() => {
     setTimeout(() => {
@@ -406,43 +411,31 @@ export default function AllProducts() {
 
 
   return (
-    <div className="bg-white">
+    <div className="bg-white flex">
 
       <div
-        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',marginBottom:'-4rem', paddingBottom:'4rem', minHeight:'120vh' }}
-        className="bottom flex  "
+        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',minHeight:'120vh' }}
+        className="bottom relative flex  "
       >
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
+       
         <motion.div initial="hidden"
       animate="visible"
       exit="exit"
       variants={containerVariants}
-      style={{marginTop:'-4rem', paddingTop:'4rem'}}
-      className="left border-r bg-white  rounded ">
-          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
-            <p
-              style={{ display: "flex", alignItems: "flex-end" }}
-              className="filter-title"
-            >
-              <TuneOutlinedIcon
-                style={{ fontsize: "16px", paddingRight: "3px" }}
-              />
+      style={{marginTop:'-2rem', paddingTop:'2rem'}}
+      className="left border-r  bg-slate-100   rounded ">
+          
 
-              <span className="filter-title">Filters</span>
               {displayFilters.length > 0 && (
-                <span>
-                  <span>({displayFilters.length})</span>{" "}
-                  <span>
-                    <button onClick={handleClearAll}>Clear All</button>
-                  </span>
-                </span>
+             <button  onClick={handleClearAll} className="relative m-2 overflow-hidden group"><span className="invisible w-full">filter Refinement clear</span><span className="absolute top-0 left-0 text-slate-900 py-1 group-hover:-translate-y-full text-sm transition-transform ease-in-out duration-500 hover:duration-300">Filter(s)<span className="filter_btn bg-white ml-1 text-sm py-1 px-2 rounded-lg">{displayFilters.length}</span></span><span className="absolute top-0 left-0 translate-y-full group-hover:translate-y-0 transition-transform ease-in-out duration-500 text-sm font-medium hover:duration-300">Clear all</span></button>
+                
               )}
-            </p>
-          </div>
-          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-5 border-b">
+          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-1 ">
+            
             <button
-              style={{ width: "90%", padding: "6px", textAlign: "left" }}
-              className="search_btn hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-slate-100 rounded-lg"
+              style={{ width: "90%", padding: "9px", textAlign: "left" }}
+              className="search_btn py-2 hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-white rounded-lg"
               onClick={handleOpenModal}
             >
               <SearchIcon
@@ -457,38 +450,39 @@ export default function AllProducts() {
             
           </div>
           <div  className="flex-col py-3">
+            <p className="p-2 text-sm font-medium">Categories</p>
             <button
-              className="category-name font-semibold  bg-slate-100 hover:bg-green-100 rounded-lg text-slate-900 "
+              className="category-name font-medium  bg-white hover:bg-green-100 rounded-lg text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox(null)}
             >
               All
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg  text-slate-900 "
+              className="category-name bg-white font-medium hover:bg-green-100 rounded-lg  text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox("flower")}
             >
               Flowers
             </button>
             <button
-              className="category-name bg-slate-100 font-semibold hover:bg-green-100 rounded-lg text-slate-900 "
+              className="category-name bg-white font-medium hover:bg-green-100 rounded-lg text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox("edible")}
             >
               Edibles
             </button>
             <button
-              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg  text-slate-900 "
+              className="category-name bg-white hover:bg-green-100 font-medium  rounded-lg  text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox("concentrate")}
             >
               Concentrates
             </button>
             <button
-              className="category-name font-semibold hover:bg-green-100  bg-slate-100 rounded-lg  text-slate-900 "
+              className="category-name font-medium hover:bg-green-100  bg-white rounded-lg  text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox("pre-roll")}
             >
               Pre-rolls
             </button>
             <button
-              className="category-name bg-slate-100 hover:bg-green-100 font-semibold  rounded-lg text-slate-900 "
+              className="category-name bg-white hover:bg-green-100 font-medium rounded-lg text-slate-700 hover:text-slate-900"
               onClick={() => resetCheckbox("vaporizer")}
             >
               Vapes
@@ -497,12 +491,12 @@ export default function AllProducts() {
           {display && (
             <div>
               {weights.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
                   >
-                    <div className="flex items-center font-semibold text-sm text-slate-900 gap-x-2">
+                    <div className="flex items-center font-medium text-sm text-slate-900 gap-x-2">
                       Weight
                     </div>
                     <svg
@@ -527,7 +521,26 @@ export default function AllProducts() {
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={weight}
                         >
-                          <input
+                         
+                         <Checkbox
+                                uncheckedIcon={<Done className="p-1"/>}
+                                slotProps={{
+                                  root: ({ checked, focusVisible }) => ({
+                                    sx: !checked
+                                      ? {
+                                          '& svg': { opacity: focusVisible ? 1 : 0 },
+                                          '&:hover svg': {
+                                            opacity: 1,
+                                          },
+                                        }
+                                      : undefined,
+                                  }),
+                                }}
+                          
+                          className="border border-slate-300 rounded"
+                          variant="plain"
+                          size="sm"
+                          color="success"
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(weight + "g")}
                             type="checkbox"
@@ -555,7 +568,7 @@ export default function AllProducts() {
                   {(weights.length > 5 && isWeightOpened) ? 
                    <button onClick={() => setShowMoreWeight(!showMoreWeight)}
       id="showMore" // Give the button an id so we can target it in CSS
-      className="underline  text-xs text-slate-500 underline-offset-[3px]   hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+      className="relative ml-3 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
       style={{ }}
     >
       {showMoreWeight ? "show less" : "show more"}
@@ -568,10 +581,10 @@ export default function AllProducts() {
                 </div>
                 
               )}
-              <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t mt-5">
-                <p style={{marginRight:'1rem'}} className="text-sm pt-2 font-semibold">Potency</p>
+              <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className=" mt-5">
+                <p style={{marginRight:'1rem'}} className="text-sm pt-2 font-medium">Potency</p>
                <div style={{marginLeft:'1rem'}}>
-                <p className="text-sm text-slate-600 font-base" style={{ paddingTop: "10px",}}>
+                <p className="text-sm text-slate-800 p-1 mb-1 font-base" style={{ paddingTop: "10px",}}>
                   thc: {thc[0]}% - {thc[1]}%
                 </p>
                 <AirbnbSlider
@@ -583,7 +596,7 @@ export default function AllProducts() {
                   getAriaLabel={() => "Minimum distance"}
                   style={{
                     height: 3,
-                    width: 190,
+                    width: '85%',
                     marginLeft: 0,
                     marginTop: 0,
                     
@@ -596,9 +609,13 @@ export default function AllProducts() {
                   // color="green"
                   disableSwap
                 />
-                <p className="text-sm text-slate-600 font-base" style={{ paddingTop: "20px",}}>
+                <div>
+                <p 
+                
+                className="text-sm rounded-lg  text-slate-800 mb-1 font-base" style={{ padding: "5px", width:'fit-content',}}>
                   cbd: {cbd[0]}% - {cbd[1]}%
                 </p>
+                </div>
                  <AirbnbSlider
         slots={{ thumb: AirbnbThumbComponent }}
                 size="small"
@@ -607,7 +624,7 @@ export default function AllProducts() {
                   getAriaLabel={() => "Minimum distance"}
                   style={{
                     height: 3,
-                    width: 190,
+                    width: '85%',
                     marginLeft: 0,
                     marginTop: 0,
                     color: "#22C55E",
@@ -624,12 +641,12 @@ export default function AllProducts() {
                 </div>
               </div>
               {types.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
                   >
-                    <div className="flex text-sm font-semibold text-slate-900 items-center gap-x-2">
+                    <div className="flex text-sm font-medium text-slate-900 items-center gap-x-2">
                       Type
                     </div>
                     <svg
@@ -654,7 +671,26 @@ export default function AllProducts() {
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={type}
                         >
-                          <input
+                         
+                         <Checkbox
+                                uncheckedIcon={<Done className="p-1"/>}
+                                slotProps={{
+                                  root: ({ checked, focusVisible }) => ({
+                                    sx: !checked
+                                      ? {
+                                          '& svg': { opacity: focusVisible ? 1 : 0 },
+                                          '&:hover svg': {
+                                            opacity: 1,
+                                          },
+                                        }
+                                      : undefined,
+                                  }),
+                                }}
+                          
+                          className="border border-slate-300 rounded"
+                          variant="plain"
+                          size="sm"
+                          color="success"
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(type)}
                             type="checkbox"
@@ -673,12 +709,12 @@ export default function AllProducts() {
                 </div>
               )}
               {effects.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t">
+                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="pb-10">
                   <button
-                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    className="w-full  flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
+                    <div className="flex text-sm font-medium items-center text-slate-900 gap-x-2">
                       Effect
                     </div>
                     <svg
@@ -697,15 +733,33 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isEffectOpened ? (
-                    <ul className={`${showMoreEffect? `show_show`:``}show_show px-2  text-sm font-base`}>
+                    <ul className={`${showMoreEffect? `show_show`:``}show_show px-2 pb-12 text-sm font-base`}>
                       {effects.map((effect) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={effect}
                         >
                           
-                          <input
-                            style={{ accentColor: "#22C55E" }}
+                          <Checkbox
+                                uncheckedIcon={<Done className="p-1"/>}
+                                slotProps={{
+                                  root: ({ checked, focusVisible }) => ({
+                                    sx: !checked
+                                      ? {
+                                          '& svg': { opacity: focusVisible ? 1 : 0 },
+                                          '&:hover svg': {
+                                            opacity: 1,
+                                          },
+                                        }
+                                      : undefined,
+                                  }),
+                                }}
+                          
+                          className="border border-slate-300 rounded"
+                          variant="plain"
+                          size="sm"
+                          color="success"
+                            style={{  }}
                             checked={displayFilters.includes(effect)}
                             type="checkbox"
                             name="effect"
@@ -718,7 +772,7 @@ export default function AllProducts() {
                       ))}
                       {(effects.length > 5 && isEffectOpened) ?
                      <button onClick={() => setShowMoreEffect(!showMoreEffect)}
-                     className="underline  text-xs text-slate-500 underline-offset-[3px]   hover:no-underline hover:bg-[url(&#x27;https://snippets.alexandru.so/squiggle.svg&#x27;)]"
+                     className="relative ml-2 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
                      style={{ borderTop: "none" }}
     >
       {showMoreEffect ? "show less" : "show more"}
@@ -737,8 +791,8 @@ export default function AllProducts() {
         {/* mobile filter */}
 
         <div className={`slider ${isSliderOpen ? "active" : ""}`}>
-          <div className="left2 border-r bg-white  rounded-lg ">
-            <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 border-b">
+          <div style={{zIndex:'9999', position:'relative'}} className="left2 border-r bg-white  rounded-lg ">
+            <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 ">
               <p
                 style={{ paddingTop: "12vh", marginLeft: "1rem" }}
                 className="filter-title text-sm font-semibold"
@@ -866,7 +920,7 @@ export default function AllProducts() {
                   getAriaLabel={() => "Minimum distance"}
                   style={{
                     height: 3,
-                    width: '80%',
+                    width: '100%',
                     marginLeft: '1rem',
                     marginRight: '1rem',
                     marginTop: 0,
@@ -1060,7 +1114,7 @@ export default function AllProducts() {
                     name="HeadlineAct"
                     style={{ padding: "10px 12px", marginLeft: "2rem" }}
                     id="HeadlineAct"
-                    className="mt-1.5 w-full rounded bg-slate-100 text-gray-700 sm:text-sm"
+                    className="mt-1.5 w-full rounded-lg bg-slate-100 text-gray-700 sm:text-sm"
                     onChange={(e) => {
                       const selectedOption = e.target.value;
                       // Perform sorting logic based on selectedOption
@@ -1116,7 +1170,6 @@ export default function AllProducts() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

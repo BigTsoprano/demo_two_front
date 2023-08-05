@@ -6,32 +6,33 @@ const Products = ({ products }) => {
   const productVariants = {
     hidden: { opacity:0 },
     visible: { opacity: 1 ,
-    transition: {duration: 0.5, ease: "linear"}
+    transition: {duration: 0.3, ease: "linear"}
     },
     exit: {
       opacity: 0,
-      transition:{ease: "easeInOut"}
+      transition:{ease: "linear"}
     }
   };
 
   return (
-    <div className="mx-auto  max-w-screen-2xl  ">
-      <motion.div  
+    <div className=" grid gap-x-4 gap-y-8 grid-cols-2 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
       
-      variants={productVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+      <AnimatePresence>
+
+      
         {products &&
           products.map((item) => (
-            <motion.div layout key={item._id}>
-              <AnimatePresence>
+            <motion.div    variants={productVariants}       
+
+            initial="hidden"
+            animate="visible"
+            exit="exit" layout key={item._id}>
+              
                 <Product item={item} />
-              </AnimatePresence>
             </motion.div>
-          ))}
-      </motion.div>
+
+))}
+</AnimatePresence>
     </div>
   );
 };

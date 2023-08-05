@@ -9,10 +9,12 @@ import Payment from "./pages/Payment";
 import Checkout from "./pages/Checkout";
 import NavbarTest from "./components/NavbarTest";
 import { AnimatePresence } from "framer-motion";
+import Footer from "./components/Footer";
 
 function App() {
 
 const location = useLocation();
+
 
   return (
     <>
@@ -20,6 +22,7 @@ const location = useLocation();
    
       <NavbarTest />
       <AnimatePresence>
+        
       <Routes location={location} key={location.key}>
         <Route exact path="/" element={<AllProducts />} />
         <Route path="/checkout" element={<Cart />} />
@@ -30,6 +33,7 @@ const location = useLocation();
         <Route path="/payment" element={<Payment />} />
       </Routes>
       </AnimatePresence>
+      <Footer />
    
     </>
   );

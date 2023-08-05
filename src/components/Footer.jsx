@@ -77,7 +77,7 @@ function Footer() {
     },
   ];
   return (
-    <footer style={{width:'100%'}} className="text-slate-50 bg-slate-950  px-4 py-4  mx-auto md:px-8">
+    <footer style={{width:'100%', position:'-webkit-sticky',top:'0'}} className="text-slate-50 bg-slate-950   px-4 py-4  mx-auto md:px-8">
       <div className="gap-6 justify-between md:flex">
         <div className="flex-1">
           <div className=" flex row items-center">

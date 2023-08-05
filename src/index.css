@@ -11,10 +11,13 @@ body {
 
 
 
-   overflow-x: hidden;
 }
 .popover{
-   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+
+   
+   
+   z-index: 9;
 
 
 }
@@ -60,8 +63,7 @@ body {
 
 .product_one{
    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-
+display:'flex';
 }
 .product_one:hover{
    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;   
@@ -88,12 +90,12 @@ body {
 .nav_bar{
    display:flex;
    width: 100%;
-   z-index: 1000;
+   z-index: 999;
    height:10vh;
    position: fixed;
-   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  
- }
+   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+
+}
  
  .navbar_wrap{
    display:flex;
@@ -156,6 +158,16 @@ body {
  
 
 @media screen and (max-device-width: 640px) {
+   html,
+body {
+
+  
+ 
+
+
+
+   overflow-x: hidden;
+}
 .product{
  width: auto;
 display: flex;
@@ -180,7 +192,7 @@ align-items: center;
    flex-direction: row !important;
 }
 .product_one{
-   min-width: 310px !important;
+   /* min-width: 310px !important; */
 }
 
 }

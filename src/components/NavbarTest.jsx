@@ -40,7 +40,7 @@ const dispatch = useDispatch();
 
   return (
     <div>
-   <div className="nav_bar drop-shadow-sm bg-white">
+   <div className="nav_bar  bg-white">
     <div className="navbar_wrap">
     <Link  to="/">
 <h1 className='text-slate-900' style={{ fontWeight:'600', fontSize:'18px'}}>Demo</h1>
