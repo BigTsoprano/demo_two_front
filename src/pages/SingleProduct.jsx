@@ -281,9 +281,9 @@ export default function SingleProduct() {
           </div>
         </div>
 
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+        <div className="max-w-screen-xl px-4 pb-9 mx-auto sm:px-6 border-t bg-slate-50 lg:px-8">
         <header>
-      <h2 style={{paddingTop:'4rem', }} className="text-lg font-bold border-t text-gray-900 sm:text-lg">
+      <h2 style={{paddingTop:'4rem', }} className="text-lg font-bold  text-gray-900 sm:text-lg">
         Related products
       </h2>
 
@@ -296,7 +296,7 @@ export default function SingleProduct() {
           {similarProducts.map((item) => (
             <li
               key={item._id}
-              className="product_one  bg-slate-100 rounded-lg  hover:border-green-500"
+              className="product_one border bg-slate-100 rounded-lg  "
             >
               <div
         style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px', }}

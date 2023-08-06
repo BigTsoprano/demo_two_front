@@ -15,9 +15,10 @@ import {
   removeItem,
   removeSingleProduct,
 } from "../redux/cartRedux";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { motion } from "framer-motion";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const KEY = import.meta.env.VITE_APP_STRIPE;
 
@@ -65,13 +66,13 @@ const Cart = () => {
 
 
   return (
-    <div  style={{paddingTop:'15vh'}} className="bg-white">
+    <div  style={{paddingTop:'10vh', minHeight:'100vh'}} className="bg-slate-100">
       {/* <Announcement /> */}
       <motion.div  initial="hidden"
       animate="visible"
       exit="exit"
       variants={containerVariants} className="mx-auto max-w-screen-lg px-4 md:px-8 pt-12">
-        <div className="mb-6 sm:mb-10 lg:mb-16">
+        <div className="mb-2 sm:mb-5 lg:mb-10">
           <h2 className="mb-4 text-left text-lg font-bold text-gray-800 border-b  md:mb-6 lg:text-lg">
             Your Cart {cart.quantity > 0 ? "" : "is empty"}
           </h2>
@@ -87,46 +88,45 @@ const Cart = () => {
           }}
         >
           <div className="" style={{ minWidth: "50%", height: "auto" }}>
-            <div style={{boxShadow: 'rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px'}} className=" flex flex-col  sm:divide-y shadow-sm rounded-lg border-b -drop-shadow-md">
+            <div style={{boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px'}} className=" flex flex-col bg-white  sm:divide-y shadow-sm rounded-lg border-b -drop-shadow-md">
               {cart.products.map((product) => (
-                <div key={product._id}>
-                  <div
+                <ul className="space-y-4" key={product._id}>
+                  <li
                     style={{
-                      margin: "0 20px",
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
+                      padding:'10px'
+                      // margin: "0 20px",
+                      // display: "flex",
+                      // flexDirection: "row",
+                      // alignItems: "center",
                     }}
-                    className="flex flex-wrap gap-4 sm:py-2.5 lg:gap-6"
+                    className="flex items-center gap-4"
                   >
-                    <div className="group relative block h-35 w-20 overflow-hidden rounded-lg bg-white ">
                       <img
                         src={product.img}
                         loading="lazy"
                         alt="Photo by vahid kanani"
-                        className="h-full w-full object-contain  object-center transition duration-200 group-hover:scale-110"
+                        className="h-16 w-16 rounded object-cover"
                       />
-                    </div>
 
                     <div className="flex flex-1 flex-col justify-between">
-                      <div>
+                      
+                       
+                        <div style={{display:'flex', alignItems:'center'}}>
+
+                        <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+
+                       <a  
+                          
+                        >
+                          <p                           className="text-sm font-medium text-gray-900"
+>
+                          {product.title}
+                          </p>
+                        </a>
                         <span className="block text-xs text-green-500">
                           {product.type}
                         </span>
-                        <a
-                          href="#"
-                          className="mb-1 inline-block text-sm font-semibold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-sm"
-                        >
-                          {product.title}
-                        </a>
-
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                          }}
-                        >
+                       
                           <p
                             style={{ marginRight: "1rem" }}
                             className="text-xs text-slate-600"
@@ -136,57 +136,39 @@ const Cart = () => {
                           <p className="text-xs text-slate-600">
                             type: {product.categories}
                           </p>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            marginTop: "1rem",
-                          }}
-                        >
+                        </dl>
+                        <div style={{display:'flex', alignItems:'center', marginTop:'10px'}} className="flex flex-1 items-center justify-end gap-2">
+
                          <button
                             onClick={() =>
                               dispatch(
                                 removeSingleProduct({ ...product, quantity: 1 })
                               )
                             }
-                            className="select-none px-2 text-sm font-semibold hover:text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
+                            className="select-none  p-1 rounded-full flex items-center bg-slate-100 text-sm font-semibold hover:text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
                           >
-                            -
+                            <RemoveIcon style={{ fontSize: "16px" }} />
                           </button>
+                          <div>
+                            
                           <p
-                            style={{ padding: "4px 6px" }}
+                            style={{ padding: "4px 6px",margin:'0 auto' }}
                             className="text-xs border rounded text-slate-600"
                           >
-                            quanity: {product.quantity}
+                            {product.quantity}
                           </p>
-                          
+                          </div>
                           <button
                             onClick={() =>
                               dispatch(addProduct({ ...product, quantity: 1 }))
                             }
-                            className="select-none px-2 text-sm font-semibold hover:text-green-600 transition duration-100 text-slate-800 active:text-indigo-700"
+                            className="select-none p-1 bg-slate-900 text-white flex items-center rounded-full text-sm font-semibold  transition duration-100 text-slate-800 active:text-indigo-700"
                           >
-                            +
+                            <AddIcon style={{ fontSize: "16px" }} />
                           </button>
-                        </div>
-                      </div>
-                      <div>
-                        {/* <span className="mb-1 block font-bold text-gray-800 md:text-lg">
-                      $49.99
-                    </span> */}
-                      </div>
-                    </div>
-
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column-reverse",
-                        alignItems: "flex-end",
-                        marginBottom: "1rem",
-                        marginRight: "1rem",
-                      }}
+                          </div>
+                          {/* <div
+                     
                       className="flex w-full   sm:w-auto sm:border-none sm:pt-0"
                     >
                       <button
@@ -202,9 +184,19 @@ const Cart = () => {
                           ${product.price * product.quantity}
                         </span>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </div> */}
+
+                        </div>
+                      </div>
+                      <div>
+                        {/* <span className="mb-1 block font-bold text-gray-800 md:text-lg">
+                      $49.99
+                    </span> */}
+                      </div>
+
+                   
+                  </li>
+                </ul>
               ))}
             </div>
           </div>
@@ -249,7 +241,7 @@ const Cart = () => {
               <Link to="/">
                 <button
                   style={{ padding: "10px 16px", marginRight: "2rem" }}
-                  className=" rounded-lg shadow-sm bg-slate-100 hover:text-slate-900 hover:border hover:border-black transition duration-100 hover:border-slate-900 hover:bg-white"
+                  className=" rounded-lg shadow-sm bg-white hover:text-slate-900 hover:border hover:border-black transition duration-100 hover:border-slate-900 hover:bg-white"
                 >
                   keep shopping
                 </button>
@@ -281,6 +273,9 @@ const Cart = () => {
         {/* </Bottom> */}
       </motion.div>
       {/* <Footer /> */}
+
+     
+      
     </div>
   );
 };

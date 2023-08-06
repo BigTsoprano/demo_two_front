@@ -6,6 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { motion, AnimatePresence } from "framer-motion";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 import { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ const Product = ({ item }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.1 }}
-      className="product_one  bg-slate-100 rounded-lg   "
+      className="product_one border bg-slate-100 rounded-lg   "
     >
       <div
         style={{ maxHeight: "25vh", height: "25vh", borderTopLeftRadius:'8px', borderTopRightRadius:'8px' }}
@@ -87,13 +88,16 @@ const Product = ({ item }) => {
           whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
           transition={{ duration: 0.1 }}
             style={{
-              padding: "6px 6px",
+              padding: ".55rem",
               zIndex: "9",
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center',
             }}
-            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            className="rounded-full drop-shadow-sm hover:drop-shadow-xl  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-slate-800  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
             onClick={() => handleClick("add")}
           >
-            <AddIcon />
+            <AddIcon style={{fontSize:'19px'}} />
           </motion.button>
 
           {quantity > 0 && (
@@ -102,16 +106,18 @@ const Product = ({ item }) => {
                 <motion.button
                 whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
                   style={{
-                    padding: "6px 6px",
+                    padding: ".50rem",
                     zIndex: "9",
+                    
+                    
                   }}
-                  className="drop-shadow-md relative bg-white rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
+                  className="drop-shadow-md relative bg-white rounded-full active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
                   onClick={() => handleClick("remove")}
                 >
-                  <RemoveIcon />
+                  <RemoveIcon style={{fontSize:'19px'}} />
                 </motion.button>
               </span>
-              <span className="relative" style={{ margin: "20px", zIndex:'9' }}>{quantity}</span>
+              <span className="relative bg-white py-1 px-2 shadow-2xl rounded-lg" style={{ margin: "20px", zIndex:'9' }}>{quantity}</span>
             </div>
           )}
         </div>
@@ -126,9 +132,10 @@ const Product = ({ item }) => {
           )}
           </AnimatePresence>
 
-          <img
+          <LazyLoadImage
             style={{ }}
             src={item.img}
+            width={600} height={400}
             loading="lazy"
             alt="Photo by Austin Wade"
             className="w-full h-full bg-white object-contain shadow-0 object-center transition duration-200 "

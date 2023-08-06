@@ -89,7 +89,7 @@ export default function Checkout() {
   console.log(medicalExpirationInOrder);
 
   return (
-    <>
+    <div className="flex-row items-center">
       {/* <div >
         <div style={{paddingTop:'15vh'}} className="wrapper ml-40 mr-40">
           <h1 className="text-3xl font-bold border-b pb-5">Checkout</h1>
@@ -279,19 +279,76 @@ export default function Checkout() {
 
       {/*tailwind section*/}
 
-<div style={{paddingTop:'12vh'}} className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <form>
-      <div className="space-y-10">
+<div style={{paddingTop:'6vh',}} className=" bg-slate-100 py-16 mx-auto p-2 sm:max-w-xl md:max-w-full lg:max-w-screen-xl lg:py-20">
+      <div>
+      <form className=" p-4 rounded-lg"style={{marginTop:'10vh', }}>
         <div className="border-b font-semibold border-gray-900/10 pb-2">
          <p>Complete checkout</p>
         </div>
+      <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}} className="space-y-5 flex">
 
-        <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Customer information</h2>
+        <div className="flex flex-col max-w-md p-6 space-y-4 divide-y sm:w-96 sm:p-10 divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
+	<h2 className="text-2xl font-semibold">Order items</h2>
+	{cart.products.map((item) => (
+  <ul key={item._id} className="flex flex-col pt-4 space-y-2">
+		<li  className="flex items-start justify-between">
+			<h3>{item.title}
+				<span className="text-sm dark:text-violet-400">x{item.quantity}</span>
+			</h3>
+			<div className="text-right">
+				<span className="block">$7.50</span>
+				<span className="text-sm dark:text-gray-400">à $2.50</span>
+			</div>
+		</li>
+		
+	</ul>
+  ))}
+	<div className="pt-4 space-y-2">
+		<div>
+			<div className="flex justify-between">
+				<span>Subtotal</span>
+				<span>$21.50</span>
+			</div>
+			<div className="flex items-center space-x-2 text-xs">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-3 h-3 mt-1 fill-current dark:text-violet-400">
+					<path d="M485.887,263.261,248,25.373A31.791,31.791,0,0,0,225.373,16H64A48.055,48.055,0,0,0,16,64V225.078A32.115,32.115,0,0,0,26.091,248.4L279.152,486.125a23.815,23.815,0,0,0,16.41,6.51q.447,0,.9-.017a23.828,23.828,0,0,0,16.79-7.734L486.581,296.479A23.941,23.941,0,0,0,485.887,263.261ZM295.171,457.269,48,225.078V64A16.019,16.019,0,0,1,64,48H225.373L457.834,280.462Z"></path>
+					<path d="M148,96a52,52,0,1,0,52,52A52.059,52.059,0,0,0,148,96Zm0,72a20,20,0,1,1,20-20A20.023,20.023,0,0,1,148,168Z"></path>
+				</svg>
+				<span className="dark:text-gray-400">Spend $20.00, get 20% off</span>
+			</div>
+		</div>
+		<div className="flex justify-between">
+			<span>Discount</span>
+			<span>-$4.30</span>
+		</div>
+	</div>
+	<div className="pt-4 space-y-2">
+		<div className="flex justify-between">
+			<span>Service fee</span>
+			<span>$0.50</span>
+		</div>
+		<div className="flex flex-col">
+			<div className="flex justify-between">
+				<span>Delivery fee</span>
+				<span>$4.00</span>
+			</div>
+			<a rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-violet-400">How do our fees work?</a>
+		</div>
+		<div className="space-y-6">
+			<div className="flex justify-between">
+				<span>Total</span>
+				<span className="font-semibold">$22.70</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+        <div  style={{boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px', maxWidth:'60%',}} className="bg-white p-5 rounded-lg border-gray-900/10 pb-12">
+          <h2 className="text-base  font-semibold leading-7 text-gray-900">Customer information</h2>
           <p className="mt-1 text-sm leading-6 text-gray-600">Fill information to complete checkout</p>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div style={{maxWidth:'500px'}} className="sm:col-span-3">
+          <div className="mt-10  grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                 First name
               </label>
@@ -310,7 +367,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'500px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Last name
               </label>
@@ -330,7 +387,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'500px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
@@ -349,7 +406,7 @@ export default function Checkout() {
                     />
               </div>
             </div>
-            <div style={{maxWidth:'500px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Phone number
               </label>
@@ -371,7 +428,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'300px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'100px'}} className="sm:col-span-3">
               <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
                 Date of birth
               </label>
@@ -498,6 +555,7 @@ export default function Checkout() {
       </div>
     </form>
     </div>
-    </>
+    </div>
+    </div>
   );
 }

@@ -13,11 +13,10 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function NavbarTest() {
-  const quantity = useSelector((state) => state.cart.quantity);
 const [show, setShow] = useState(false);
 const [leaveTimeout, setLeaveTimeout] = useState(null);
 
@@ -54,7 +53,7 @@ const dispatch = useDispatch();
 <div className="relative py-2">
 <div className="t-0 absolute left-3">
   <p className="flex h-2 w-2 items-center text-bold justify-center rounded-full bg-green-100 p-3 text-sm text-slate-900">
-    {quantity}
+    {cart.quantity}
   </p>
 </div>
 <Link className="text-sm" style={{display:'flex', flexDirection:'row', alignItems:'flex-end', padding:'6px'}} to="/checkout">
@@ -101,23 +100,111 @@ className="popover   border-t"
   >
     <p  style={{display:'flex', justifyContent:'center'}} className="font-semibold text-lg">Your cart</p>
 {cart.products.map((product) => (
-                <div style={{display:'flex', flexDirection:'row'}} className="py-3" key={product._id}>
-                  <img style={{height:'auto', width:'50px'}} src={product.img} alt={product.title} />
-                  <div>
-                  <p className="text-xs text-green-600">{product.type}</p>
-                  <p className="font-semibold text-sm">{product.title}</p>
-                  <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
-                  <div style={{display:'flex', flexDirection:'row-reverse', justifyContent:'space-between', alignItems:'center',}} >
-                  <p style={{marginLeft:'2rem',display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><MonitorWeightOutlinedIcon style={{fontSize:"16px"}} className="text-slate-500"/>: {product.weight}gs</p>
-                  <p style={{display:'flex', alignItems:'center'}} className="text-xs text-slate-600"><ShoppingBagOutlinedIcon style={{fontSize:"16px"}} className="text-slate-500"/>: {product.quantity}</p>
-                  </div>
-                  </div>
-                  </div>
-                  <div style={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center', position:'absolute', right:'20px'}}>
-                  <p className="text-sm text-slate-700" >${product.price * product.quantity}</p>
-                  <button style={{paddingTop:'10px', display:'flex', flexDirection:'row', alignItems:'center'}} className="text-xs text-red-600" onClick={() => dispatch(removeItem(product))}><DeleteForeverIcon style={{fontSize:'16px'}} />delete</button>
-                  </div>
-                </div>
+                 <ul className="space-y-4" key={product._id}>
+                 <li
+                   style={{
+                     padding:'10px'
+                     // margin: "0 20px",
+                     // display: "flex",
+                     // flexDirection: "row",
+                     // alignItems: "center",
+                   }}
+                   className="flex items-center gap-4"
+                 >
+                     <img
+                       src={product.img}
+                       loading="lazy"
+                       alt="Photo by vahid kanani"
+                       className="h-16 w-16 rounded object-cover"
+                     />
+
+                   <div className="flex flex-1 flex-col justify-between">
+                     
+                      
+                       <div style={{display:'flex', alignItems:'center'}}>
+
+                       <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                       <span className="block text-xs text-green-500">
+                         {product.type}
+                       </span>
+                       <a
+                         href="#"
+                         className="text-sm font-medium text-gray-900"
+                       >
+                         {product.title}
+                       </a>
+                    
+                      
+                         <p
+                           style={{ marginRight: "1rem" }}
+                           className="text-xs text-slate-600"
+                         >
+                           weight: {product.weight}gs
+                         </p>
+                         {/* <p className="text-xs text-slate-600">
+                           type: {product.categories}
+                         </p> */}
+                       </dl>
+                       <div style={{display:'flex', alignItems:'center', marginTop:'10px'}} className="flex flex-1 items-center justify-end gap-2">
+
+                        <button
+                           onClick={() =>
+                             dispatch(
+                               removeSingleProduct({ ...product, quantity: 1 })
+                             )
+                           }
+                           className="select-none flex items-center p-1 bg-slate-100 rounded-full text-sm font-semibold hover:text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
+                         >
+                           <RemoveIcon style={{ fontSize: "16px" }} />
+                         </button>
+                         <div>
+                       
+                         <p
+                           style={{ padding: "4px 6px",margin:'0 auto' }}
+                           className="text-xs border rounded text-slate-600"
+                         >
+                           {product.quantity}
+                         </p>
+                         </div>
+                         <button
+                           onClick={() =>
+                             dispatch(addProduct({ ...product, quantity: 1 }))
+                           }
+                           className="select-none shadow-lg hover:shadow-none flex items-center p-1 text-white rounded-full bg-slate-900  transition duration-100 hover:text-white active:text-green-500"
+                         >
+                           <AddIcon style={{ fontSize: "16px" }} />
+                         </button>
+                         </div>
+                         {/* <div
+                    
+                     className="flex w-full   sm:w-auto sm:border-none sm:pt-0"
+                   >
+                     <button
+                       onClick={() => dispatch(removeItem(product))}
+                       className="select-none items-center text-xs font-semibold text-red-500 transition duration-100 hover:text-slate-600 active:text-indigo-700"
+                     >
+                       <DeleteForeverIcon style={{ fontSize: "16px" }} />{" "}
+                       delete
+                     </button>
+
+                     <div className="ml-4 flex items-center pt-3 sm:pt-2 md:ml-8 lg:ml-16">
+                       <span className="block font-semibold text-slate-800 md:text-base">
+                         ${product.price * product.quantity}
+                       </span>
+                     </div>
+                   </div> */}
+
+                       </div>
+                     </div>
+                     <div>
+                       {/* <span className="mb-1 block font-bold text-gray-800 md:text-lg">
+                     $49.99
+                   </span> */}
+                     </div>
+
+                  
+                 </li>
+               </ul>
               ))}
 <div className="py-3 text-sm border-t" style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
              <p className="font-semibold">SubTotal:</p> <p>${cart.total}</p>

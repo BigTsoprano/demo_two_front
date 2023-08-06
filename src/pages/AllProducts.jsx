@@ -415,7 +415,7 @@ export default function AllProducts() {
 
       <div
         style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',minHeight:'120vh' }}
-        className="bottom relative flex  "
+        className="bottom relative flex bg-white "
       >
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
        
