@@ -1005,7 +1005,7 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <div className="flex text-sm font-medium items-center text-slate-900 gap-x-2">
+                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
                       Effect
                     </div>
                     <svg
