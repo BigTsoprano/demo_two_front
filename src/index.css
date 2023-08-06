@@ -89,7 +89,7 @@ display:'flex';
 .nav_bar{
    display:flex;
    width: 100%;
-   z-index: 999;
+   z-index: 1000;
    height:10vh;
    position: fixed;
    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;

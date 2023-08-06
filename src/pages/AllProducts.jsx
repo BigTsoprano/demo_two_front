@@ -1,5 +1,5 @@
 import NavbarTest from "../components/NavbarTest";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer, useState, useRef } from "react";
 import axios from "axios";
 import Products from "../components/Products";
 import "./AllProducts.css";
@@ -392,8 +392,13 @@ export default function AllProducts() {
   const [isSliderOpen, setIsSliderOpen] = useState(false);
 
   const handleSliderToggle = () => {
-    setIsSliderOpen(!isSliderOpen);
+    if (sidebarRef.current) {
+      sidebarRef.current.scrollTop = 0;
+    }
+        setIsSliderOpen(!isSliderOpen);
+    
   };
+  const sidebarRef = useRef();
 
   const containerVariants = {
     hidden: { x: "-100%" },
@@ -423,8 +428,8 @@ export default function AllProducts() {
       animate="visible"
       exit="exit"
       variants={containerVariants}
-    
-      className="left border-r  bg-slate-100   rounded ">
+      ref={sidebarRef}
+      className={`left ${isSliderOpen ? "active" : ""}`}>
           
 
               {displayFilters.length > 0 && (
@@ -774,297 +779,35 @@ export default function AllProducts() {
       {showMoreEffect ? "show less" : "show more"}
     </button>
     : "" }
+  
                     </ul>
+                    
                   ) : (
                     ""
                   )}
+                    <button
+                style={{
+                  padding: "10px 12px",
+                  width: "96%",
+
+                  
+                  
+                }}
+                onClick={handleSliderToggle}
+                className="filter-button rounded-lg text-base text-white mb-3 bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
+              >
+                Apply
+              </button>
                 </div>
               )}
+              
             </div>
           )}
         </motion.div>
 
         {/* mobile filter */}
 
-        <div className={`slider ${isSliderOpen ? "active  bg-slate-100" : ""}`}>
-          <div style={{zIndex:'9999', position:'relative'}} className="left2   rounded-lg ">
-            
-            <div style={{paddingTop:'14vh'}} className="py-5 ">
-              <button
-                style={{
-                  width: "80%",
-                  padding: "6px",
-                  textAlign: "left",
-                  marginLeft: "6px",
-                }}
-                className="text-slate-800 hover:bg-green-100 bg-white  rounded-lg"
-                onClick={handleOpenModal}
-              >
-                <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
-                Search
-              </button>
-              {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
-            </div>
-            <p className='text-sm font-medium py-2'>Categories</p>
-            <div className="flex-col">
-              <button
-                className="category-name  rounded-lg text-sm font-semibold  text-slate-900 bg-white "
-                onClick={() => resetCheckbox(null)}
-              >
-                All
-              </button>
-              <button
-                className="category-name text-sm font-semibold  rounded-lg bg-white  text-slate-900 "
-                onClick={() => resetCheckbox("flower")}
-              >
-                Flowers
-              </button>
-              <button
-                className="category-name text-sm font-semibold rounded-lg bg-white text-slate-900 "
-                onClick={() => resetCheckbox("edible")}
-              >
-                Edibles
-              </button>
-              <button
-                className="category-name text-sm font-semibold rounded-lg bg-white text-slate-900 "
-                onClick={() => resetCheckbox("concentrate")}
-              >
-                Concentrates
-              </button>
-              <button
-                className="category-name  text-sm font-semibold  rounded-lg bg-white  text-slate-900"
-                onClick={() => resetCheckbox("pre-roll")}
-              >
-                Pre-rolls
-              </button>
-              <button
-                className="category-name text-sm font-semibold  rounded-lg bg-white text-slate-900 "
-                onClick={() => resetCheckbox("vaporizer")}
-              >
-                Vaporizers
-              </button>
-            </div>
-            <div>
-              {weights.length > 0 && (
-                <div className="">
-                  <button
-                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    onClick={() => setIsWeightOpened(!isWeightOpened)}
-                  >
-                    <div className="flex items-center text-sm font-medium text-slate-900 gap-x-2">
-                      Weight
-                    </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className={`w-5 h-5 duration-150 ${
-                        isWeightOpened ? "rotate-180" : ""
-                      }`}
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                  {isWeightOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
-                      {weights.map((weight) => (
-                        <li
-                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                          key={weight}
-                        >
-                          <input
-                            style={{ accentColor: "#22C55E" }}
-                            checked={displayFilters.includes(weight + "g")}
-                            type="checkbox"
-                            name="weight"
-                            id={weight + "g"}
-                            value={weight}
-                            onChange={(e) => handleClick(e)}
-                          />
-                          <label className={weight + "g"} htmlFor={weight}>
-                            {weight}g
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              )}
-                 <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="  mt-5">
-                <p className="text-sm px-2   pt-2 font-medium">Potency</p>
-                <p className="text-sm px-2  text-slate-600 font-base" style={{ paddingTop: "10px",}}>
-                  thc: {thc[0]}% - {thc[1]}%
-                </p>
-                <AirbnbSlider
-        slots={{ thumb: AirbnbThumbComponent }}
-                size='small'
-                valueLabelDisplay="auto"
-                className="text-slate-900"
-
-                  getAriaLabel={() => "Minimum distance"}
-                  style={{
-                    height: 3,
-                    width: '80%',
-                    marginLeft: '1rem',
-                    marginRight: '1rem',
-                    marginTop: 0,
-                    
-                   
-                  }}
-                  value={thc}
-                  onChange={rangeTHC}
-                  // valueLabelDisplay="auto"
-                  // getAriaValueText={() => `$`}
-                  // color="green"
-                  disableSwap
-                />
-                <p className="text-sm px-2  text-slate-600 font-base" style={{ paddingTop: "20px",}}>
-                  cbd: {cbd[0]}% - {cbd[1]}%
-                </p>
-                 <AirbnbSlider
-        slots={{ thumb: AirbnbThumbComponent }}
-                size="small"
-                valueLabelDisplay="auto"
-
-                  getAriaLabel={() => "Minimum distance"}
-                  style={{
-                    height: 3,
-                    width: '80%',
-                    marginLeft: '1rem',
-                    marginTop: 0,
-                    color: "#22C55E",
-                
-
-                  }}
-                  value={cbd}
-                  onChange={rangeCBD}
-                  // valueLabelDisplay="auto"
-                  // getAriaValueText={() => `$`}
-                  // color="green"
-                  disableSwap
-                />
-              </div>
-              {types.length > 0 && (
-                <div className="border-t">
-                  <button
-                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    onClick={() => setIsTypeOpened(!isTypeOpened)}
-                  >
-                    <div className="flex text-sm font-medium text-slate-900 items-center gap-x-2">
-                      Type
-                    </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className={`w-5 h-5 duration-150 ${
-                        isTypeOpened ? "rotate-180" : ""
-                      }`}
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                  {isTypeOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
-                      {types.map((type) => (
-                        <li
-                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
-                          key={type}
-                        >
-                          <input
-                            style={{ accentColor: "#22C55E" }}
-                            checked={displayFilters.includes(type)}
-                            type="checkbox"
-                            name="type"
-                            id={type}
-                            value={type}
-                            onChange={(e) => handleClick(e)}
-                          />
-                          <label htmlFor={type}>{type}</label>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              )}
-              {effects.length > 0 && (
-                <div className="border-t">
-                  <button
-                    className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    onClick={() => setIsEffectOpened(!isEffectOpened)}
-                  >
-                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
-                      Effect
-                    </div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className={`w-5 h-5 duration-150 ${
-                        isEffectOpened ? "rotate-180" : ""
-                      }`}
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </button>
-                  {isEffectOpened ? (
-                    <ul className="imx-4 px-2  text-sm font-medium">
-                      {effects.map((effect) => (
-                        <li
-                          className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
-                          key={effect}
-                        >
-                          <input
-                            style={{ accentColor: "#22C55E" }}
-                            checked={displayFilters.includes(effect)}
-                            type="checkbox"
-                            name="effect"
-                            id={effect}
-                            value={effect}
-                            onChange={(e) => handleClick(e)}
-                          />
-                          <label htmlFor={effect}>{effect}</label>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="" style={{ margin:'1rem 0', paddingBottom:'1rem' }}>
-              <button
-                style={{
-                  padding: "10px 12px",
-                  width: "96%",
-                  
-                  
-                }}
-                onClick={handleSliderToggle}
-                className="filter-button rounded-lg text-base text-white  bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
-              >
-                Apply
-              </button>
-            </div>
-          </div>
-        </div>
+       
 
         <div className="right m-5 ">
           <div
