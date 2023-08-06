@@ -414,7 +414,7 @@ export default function AllProducts() {
     <div className="bg-white flex">
 
       <div
-        style={{ display: "flex", alignItems: "baseline",paddingTop:'11vh',minHeight:'120vh' }}
+       
         className="bottom relative flex bg-white "
       >
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
@@ -423,7 +423,7 @@ export default function AllProducts() {
       animate="visible"
       exit="exit"
       variants={containerVariants}
-      style={{marginTop:'-2rem', paddingTop:'2rem'}}
+    
       className="left border-r  bg-slate-100   rounded ">
           
 
@@ -431,19 +431,15 @@ export default function AllProducts() {
              <button  onClick={handleClearAll} className="relative m-2 overflow-hidden group"><span className="invisible w-full">filter Refinement clear</span><span className="absolute top-0 left-0 text-slate-900 py-1 group-hover:-translate-y-full text-sm transition-transform ease-in-out duration-500 hover:duration-300">Filter(s)<span className="filter_btn bg-white ml-1 text-sm py-1 px-2 rounded-lg">{displayFilters.length}</span></span><span className="absolute top-0 left-0 translate-y-full group-hover:translate-y-0 transition-transform ease-in-out duration-500 text-sm font-medium hover:duration-300">Clear all</span></button>
                 
               )}
-          <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="py-1 ">
+          <div className="py-1 pl-8 -ml-8">
             
             <button
-              style={{ width: "90%", padding: "9px", textAlign: "left" }}
-              className="search_btn py-2 hover:bg-green-100 text-slate-800 text-sm active:border hover:border-indigo-500 bg-white rounded-lg"
+              className="search_btn py-2 hover:bg-green-100 text-slate-800  text-sm active:border hover:border-indigo-500 bg-white rounded-lg"
               onClick={handleOpenModal}
             >
               <SearchIcon
-                style={{
-                  color: "#292929",
-                  marginRight: "3px",
-                  fontSize: "18px",
-                }}
+              className="text-slate-600 mr-2 text-sm"
+           
               />{" "}
               Search
             </button>

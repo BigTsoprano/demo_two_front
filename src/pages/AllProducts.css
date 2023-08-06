@@ -28,11 +28,17 @@ he
   max-height: 98vh;
   bottom:98vh;
   padding-bottom: 2rem;
+  margin-top: -2rem;
+  padding-top: 2rem;
   
 }
 
 .bottom{
-  align-items: start;
+  align-items: baseline;
+  display: flex;
+  padding-top: 11vh;
+  min-height: 120vh;
+
 }
 .right{
  
@@ -77,6 +83,10 @@ box-shadow: none;
 }
 .search_btn{
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+width: 90%;
+padding:9px;
+text-align: left;
+
 }
 .category-name:active {
   box-shadow:none;
