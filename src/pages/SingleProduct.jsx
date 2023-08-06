@@ -176,10 +176,26 @@ export default function SingleProduct() {
                     {product.type}
                   </p>
                 </div>
-                <div className="text-sm font-base text-slate-500" style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
-                  <ScienceOutlinedIcon className="mr-2 text-slate-500"/>
+                <div className="flex items-center space-x-4 my-1">
+                  <div>
+                    <div
+                      style={{ display: "flex", alignItems: "center" }}
+                      className="rounded bg-white border  py-1 px-3"
+                    >
+                      <span className="font-bold text-green-600 text-base">
+                        <span className="text-slate-700 mr-1">$</span>{" "}
+                        {product.price}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p>Details</p>
+                <div style={{display:'flex', flexDirection:'column'}} className="text-sm  font-base text-slate-500" >
+                  <span><ScienceOutlinedIcon style={{fontSize:'24px'}} className="mr-2 text-slate-500 font-medium"/>Effects</span>
+                  <div className="flex">
                   <p style={{paddingRight:'1rem'}}>thc: {product.thc}%</p>
                   <p>cbd: {product.cbd}%</p>
+                  </div>
                 </div>
 
                 <div>
@@ -191,34 +207,15 @@ export default function SingleProduct() {
                   </span>
                 ))}
                 </div>
+
                <div className="pt-1">
                 <MonitorWeightOutlinedIcon className="mr-2 text-slate-500"/>
                   <span className="mb-4 text-gray-500 text-sm" >
                     {product.weight}gs{" "}
                   </span>
                </div>
-               
-                <p
-                  className="text-base text-slate-700"
-                  style={{ paddingTop: "10px" }}
-                >
-                  {product.desc}
-                </p>
-                <div className="flex items-center space-x-4 my-4">
-                  <div>
-                    <div
-                      style={{ display: "flex", alignItems: "center" }}
-                      className="rounded bg-white border  py-1 px-3"
-                    >
-                      <span className="font-bold text-green-600 text-base">
-                        <span className="text-slate-700 mr-1 mt-1">$</span>{" "}
-                        {product.price}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div
+          
+               <div
                   style={{ display: "flex", alignItems: "center" }}
                   className="flex py-4 space-x-4"
                 >
@@ -229,7 +226,7 @@ export default function SingleProduct() {
                     padding: "6px 6px",
                     zIndex: "999",
                   }}
-                  className="drop-shadow-md relative bg-slate-100 rounded-lg active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
+                  className="drop-shadow-md relative bg-slate-100 rounded-full active:text-green-500  hover:bg-green-100 hover:text-slate-600  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-900  "
                   onClick={() => handleQuantity("remove")}
                   >
                   <RemoveIcon />
@@ -240,10 +237,10 @@ export default function SingleProduct() {
                     {/* <button onClick={() => handleQuantity("add")}>Add</button> */}
 
                     <span
-                      style={{ padding: "9px 10px" }}
+                      style={{ padding: "6px 10px" }}
                       className="cursor-pointer appearance-none rounded border border-gray-200 text-sm text-slate-600 flex items-end "
                     >
-                      quantity: {quantity}
+                     {quantity}
                     </span>
                     
                     {/* <button onClick={() => handleQuantity("remove")}>
@@ -257,13 +254,13 @@ export default function SingleProduct() {
               padding: "6px 6px",
               zIndex: "99",
             }}                      onClick={() => handleQuantity("add")}
-            className="rounded-lg drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            className="rounded-full drop-shadow-md hover:drop-shadow-lg  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-green-100 hover:text-green-600 active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
                     >
                    <AddIcon />
           </motion.button>
 
                 </div>
-                  <motion.button
+               <motion.button
                     whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
                     style={{ padding: "9px 9px", }}
                     type="button"
@@ -274,6 +271,16 @@ export default function SingleProduct() {
                     Add to cart
                     </span>
                   </motion.button>
+                <p
+                  className="text-base text-slate-700"
+                  style={{ paddingTop: "10px" }}
+                >
+                  {product.desc}
+                </p>
+                
+
+              
+     
               
 
               </div>

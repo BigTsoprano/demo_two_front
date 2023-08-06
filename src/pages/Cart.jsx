@@ -213,7 +213,7 @@ const Cart = () => {
           >
             <div
               style={{ boxShadow: "rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset" }}
-              className="w-full rounded-lg bg-green-100 p-4 sm:max-w-xs"
+              className="subtotal_sect w-full rounded-lg bg-green-100 p-4 sm:max-w-xs"
             >
               <div className="space-y-1">
                 <div className="flex justify-between gap-4 text-sm font-semibold text-slate-600">

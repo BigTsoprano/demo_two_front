@@ -411,11 +411,11 @@ export default function AllProducts() {
 
 
   return (
-    <div className="bg-white flex">
+    <div className="all_product_section bg-white flex ">
 
       <div
        
-        className="bottom relative flex bg-white "
+        className="bottom relative flex  "
       >
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
        
@@ -786,17 +786,10 @@ export default function AllProducts() {
 
         {/* mobile filter */}
 
-        <div className={`slider ${isSliderOpen ? "active" : ""}`}>
-          <div style={{zIndex:'9999', position:'relative'}} className="left2 border-r bg-white  rounded-lg ">
-            <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="filter pb-5 ">
-              <p
-                style={{ paddingTop: "12vh", marginLeft: "1rem" }}
-                className="filter-title text-sm font-semibold"
-              >
-                Filter By
-              </p>
-            </div>
-            <div className="py-5 border-b">
+        <div className={`slider ${isSliderOpen ? "active  bg-slate-100" : ""}`}>
+          <div style={{zIndex:'9999', position:'relative'}} className="left2   rounded-lg ">
+            
+            <div style={{paddingTop:'14vh'}} className="py-5 ">
               <button
                 style={{
                   width: "80%",
@@ -804,7 +797,7 @@ export default function AllProducts() {
                   textAlign: "left",
                   marginLeft: "6px",
                 }}
-                className="text-slate-800 hover:bg-green-500 bg-slate-100  rounded-lg"
+                className="text-slate-800 hover:bg-green-100 bg-white  rounded-lg"
                 onClick={handleOpenModal}
               >
                 <SearchIcon style={{ color: "#292929", marginRight: "3px" }} />{" "}
@@ -812,39 +805,40 @@ export default function AllProducts() {
               </button>
               {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
             </div>
+            <p className='text-sm font-medium py-2'>Categories</p>
             <div className="flex-col">
               <button
-                className="category-name  rounded-lg text-sm font-semibold  text-slate-900 bg-slate-100 "
+                className="category-name  rounded-lg text-sm font-semibold  text-slate-900 bg-white "
                 onClick={() => resetCheckbox(null)}
               >
                 All
               </button>
               <button
-                className="category-name text-sm font-semibold border rounded-lg bg-slate-100  text-slate-900 hover:text-green-600"
+                className="category-name text-sm font-semibold  rounded-lg bg-white  text-slate-900 "
                 onClick={() => resetCheckbox("flower")}
               >
                 Flowers
               </button>
               <button
-                className="category-name text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name text-sm font-semibold rounded-lg bg-white text-slate-900 "
                 onClick={() => resetCheckbox("edible")}
               >
                 Edibles
               </button>
               <button
-                className="category-name border text-sm font-semibold rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name text-sm font-semibold rounded-lg bg-white text-slate-900 "
                 onClick={() => resetCheckbox("concentrate")}
               >
                 Concentrates
               </button>
               <button
-                className="category-name  text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name  text-sm font-semibold  rounded-lg bg-white  text-slate-900"
                 onClick={() => resetCheckbox("pre-roll")}
               >
                 Pre-rolls
               </button>
               <button
-                className="category-name text-sm font-semibold border rounded-lg bg-slate-100 hover:border-green-500 text-slate-900 hover:text-green-500"
+                className="category-name text-sm font-semibold  rounded-lg bg-white text-slate-900 "
                 onClick={() => resetCheckbox("vaporizer")}
               >
                 Vaporizers
@@ -852,12 +846,12 @@ export default function AllProducts() {
             </div>
             <div>
               {weights.length > 0 && (
-                <div className="border-t">
+                <div className="">
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
                   >
-                    <div className="flex items-center text-sm font-semibold text-slate-900 gap-x-2">
+                    <div className="flex items-center text-sm font-medium text-slate-900 gap-x-2">
                       Weight
                     </div>
                     <svg
@@ -902,8 +896,8 @@ export default function AllProducts() {
                   )}
                 </div>
               )}
-                 <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="border-t  mt-5">
-                <p className="text-sm px-2   pt-2 font-semibold">Potency</p>
+                 <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="  mt-5">
+                <p className="text-sm px-2   pt-2 font-medium">Potency</p>
                 <p className="text-sm px-2  text-slate-600 font-base" style={{ paddingTop: "10px",}}>
                   thc: {thc[0]}% - {thc[1]}%
                 </p>
@@ -916,7 +910,7 @@ export default function AllProducts() {
                   getAriaLabel={() => "Minimum distance"}
                   style={{
                     height: 3,
-                    width: '100%',
+                    width: '80%',
                     marginLeft: '1rem',
                     marginRight: '1rem',
                     marginTop: 0,
@@ -962,7 +956,7 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
                   >
-                    <div className="flex text-sm font-semibold text-slate-900 items-center gap-x-2">
+                    <div className="flex text-sm font-medium text-slate-900 items-center gap-x-2">
                       Type
                     </div>
                     <svg
@@ -1011,7 +1005,7 @@ export default function AllProducts() {
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
                   >
-                    <div className="flex text-sm font-semibold items-center text-slate-900 gap-x-2">
+                    <div className="flex text-sm font-medium items-center text-slate-900 gap-x-2">
                       Effect
                     </div>
                     <svg
@@ -1098,11 +1092,11 @@ export default function AllProducts() {
               >
                 {/* button for filter mobile */}
                 <button
-                  style={{ padding: "6px 12px", marginLeft: "2rem" }}
-                  className="mobile_btn bg-slate-100 font-medium text-slate-900 hover:bg-green-100 rounded-lg"
+                  style={{ padding: "8px 12px", marginLeft: "2rem" }}
+                  className="mobile_btn bg-white hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
                   onClick={handleSliderToggle}
                 >
-                  Filter <TuneOutlinedIcon style={{ marginLeft: "6px" }} />
+            <TuneOutlinedIcon style={{ marginRight: "6px" }} />      Filter 
                 </button>
                 {/* button for search modal*/}
                 <div>
@@ -1110,7 +1104,7 @@ export default function AllProducts() {
                     name="HeadlineAct"
                     style={{ padding: "10px 12px", marginLeft: "2rem" }}
                     id="HeadlineAct"
-                    className="mt-1.5 w-full rounded-lg bg-slate-100 text-gray-700 sm:text-sm"
+                    className="mt-1.5 w-full rounded-lg bg-white border  text-gray-700 sm:text-sm"
                     onChange={(e) => {
                       const selectedOption = e.target.value;
                       // Perform sorting logic based on selectedOption
