@@ -7,7 +7,6 @@ import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import { motion, AnimatePresence } from "framer-motion";
 import "instantsearch.css/themes/satellite.css";
 import ClearIcon from '@mui/icons-material/Clear';
-import Sticky from 'react-stickynode';
 
 import Modal from "../components/Modal";
 import SearchIcon from "@mui/icons-material/Search";
@@ -815,7 +814,7 @@ marginBottom:'10vh'
           <div style={{position:'sticky', top:'11vh', zIndex:'99'}}>
         <button
                   style={{ padding: "8px 12px"}}
-                  className="mobile_btn bg-white hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
+                  className="mobile_btn bg-white border hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
                   onClick={handleSliderToggle}
                 >
             <TuneOutlinedIcon style={{ marginRight: "6px" }} />      Filter 
@@ -823,13 +822,13 @@ marginBottom:'10vh'
                 </div>
           <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center'}}>
           <div
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ display: "flex", justifyContent:'flex-end' }}
             className="search-sort pb-5 flex w-full justify-between "
           >
             
                   <select
                     name="HeadlineAct"
-                    style={{ padding: "10px 12px", marginLeft: "2rem" }}
+                    style={{ padding: "10px 12px", marginLeft: "2rem", maxWidth:'200px' }}
                     id="HeadlineAct"
                     className="mt-1.5 w-full rounded-lg bg-white border  text-gray-700 sm:text-sm"
                     onChange={(e) => {

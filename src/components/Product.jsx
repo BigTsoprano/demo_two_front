@@ -67,7 +67,6 @@ const Product = ({ item }) => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.1 }}
       className="product_one border bg-slate-100 rounded-lg   "
     >
       <div
@@ -107,8 +106,8 @@ const Product = ({ item }) => {
           }}
         >
           <motion.button
-            whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
-            transition={{ duration: 0.1 }}
+            whileTap={{ scale: 0.8}}
+            whileHover={{scale:1.2}}
             style={{
               padding: ".55rem",
               zIndex: "9",
@@ -116,7 +115,7 @@ const Product = ({ item }) => {
               justifyContent: "center",
               alignItems: "center",
             }}
-            className="rounded-full drop-shadow-sm hover:drop-shadow-xl  bg-slate-900  active:text-green-500  transition duration-200 hover:bg-slate-800  active:shadow-none active:bg-white active:text-slate-900 text-sm font-semibold text-slate-50  "
+            className="rounded-full drop-shadow-sm hover:drop-shadow-xl  bg-slate-900  active:text-green-500   hover:bg-slate-800  active:shadow-none active:bg-slate-800 active:text-slate-100 text-sm font-semibold text-slate-50  "
             onClick={() => handleClick("add")}
           >
             <AddIcon style={{ fontSize: "19px" }} />
@@ -126,7 +125,7 @@ const Product = ({ item }) => {
             <div className="" style={{}}>
               <span>
                 <motion.button
-                  whileTap={{ scale: 0.9, type: "spring", bounce: 50 }}
+                  whileTap={{ scale: 0.8}}
                   style={{
                     padding: ".50rem",
                     zIndex: "9",

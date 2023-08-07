@@ -35,6 +35,10 @@ export default function NavbarTest() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const handleClick =() => {
+    window.scrollTo(0, 0);
+  }
+
   return (
     <div>
       <div className="nav_bar  bg-white">
@@ -54,7 +58,7 @@ export default function NavbarTest() {
             style={{ marginRight: "1rem", height: "100%" }}
             className="hover:text-slate-600 text-slate-800"
           >
-            <button>
+            <button onClick={handleClick}>
               <div className="relative py-2">
                 <div className="t-0 absolute left-3">
                   <p className="flex h-2 w-2 items-center text-bold justify-center rounded-full bg-green-100 p-3 text-sm text-slate-900">
@@ -253,7 +257,7 @@ export default function NavbarTest() {
                     <p className="font-semibold">SubTotal:</p>{" "}
                     <p>${cart.total}</p>
                   </div>
-                  <Link to="/checkout">
+                  <Link to="/checkout#cart">
                     <button
                       style={{ padding: "10px 12px", width: "100%" }}
                       className="bg-green-500 hover:border text-white hover:text-slate-900 rounded-lg hover:bg-white border-slate-900"

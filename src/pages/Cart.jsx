@@ -5,7 +5,6 @@ import styled from "styled-components";
 // import Footer from "../components/Footer";
 // import { Link } from "react-router-dom";
 import NavbarTest from "../components/NavbarTest";
-import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,11 +19,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-const KEY = import.meta.env.VITE_APP_STRIPE;
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
   //   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,32 +29,13 @@ const Cart = () => {
   //     setStripeToken(token);
   //   };
 
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: cart.total * 100,
-        });
-        // navigate("/success", {
-        //   state: { data: res.data, cart: cart.products },
-        // });
-        console.log(res.data);
-        console.log(res.data);
-      } catch {}
-    };
-    stripeToken && makeRequest();
-  }, [
-    stripeToken,
-    cart.total,
-    // , navigate
-  ]);
+
 
   const containerVariants = {
     hidden: { x: "-100%" },
     visible: {
       x: 0,
-      transition: { duration: 0.7, delay: 0.3, ease: "linear" },
+      transition: { duration: 0.4, ease: "linear" },
     },
     exit: {
       x: "-100%",
@@ -66,7 +44,7 @@ const Cart = () => {
   };
 
   return (
-    <div
+    <div id="cart"
       style={{ paddingTop: "10vh", minHeight: "100vh" }}
       className="bg-slate-100"
     >

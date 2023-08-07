@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetCart } from "../redux/cartRedux";
 import { publicRequest } from "../requestMethods";
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { Link } from "react-router-dom";
 
 
@@ -288,7 +287,7 @@ export default function Checkout() {
       <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between'}} className="checkout_wrap space-y-5 flex">
 
         <div className="receipt flex flex-col max-w-md p-6 space-y-4 divide-y sm:w-96 sm:p-10 divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
-	<h2 className="text-2xl font-semibold">Order items</h2>
+	<h2 className="text-base font-semibold">Order items</h2>
 	{cart.products.map((item) => (
   <ul key={item._id} className="flex flex-col pt-4 space-y-2">
 		<li  className="flex items-start justify-between">
@@ -333,7 +332,7 @@ export default function Checkout() {
           <p className="mt-1 text-sm leading-6 text-gray-600">Fill information to complete checkout</p>
 
           <div className="mt-10  grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'300px'}} className="sm:col-span-3">
               <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                 First name
               </label>
@@ -352,7 +351,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'300px'}} className="sm:col-span-3">
               <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Last name
               </label>
@@ -372,7 +371,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'300px'}} className="sm:col-span-3">
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
               </label>
@@ -391,7 +390,7 @@ export default function Checkout() {
                     />
               </div>
             </div>
-            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'300px'}} className="sm:col-span-3">
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Phone number
               </label>
@@ -413,7 +412,7 @@ export default function Checkout() {
               </div>
             </div>
 
-            <div style={{maxWidth:'100px'}} className="sm:col-span-3">
+            <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
                 Date of birth
               </label>
@@ -470,7 +469,7 @@ export default function Checkout() {
                       />
              </div>
            </div>
-           <div style={{maxWidth:'100px'}}  >
+           <div style={{maxWidth:'150px'}}  >
              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                State of issue
              </label>
@@ -491,7 +490,7 @@ export default function Checkout() {
                    
              </div>
            </div>
-           <div style={{maxWidth:'300px'}} className="sm:col-span-3">
+           <div style={{maxWidth:'200px'}} className="sm:col-span-3">
               <label htmlFor="dob" className="block text-sm font-medium leading-6 text-gray-900">
                 Card expiration date
               </label>
@@ -524,7 +523,7 @@ export default function Checkout() {
   
     </form>
     <div className="mt-6 ml-10 flex items-center justify-start gap-x-6">
-        <Link to="/checkout">
+        <Link to="/checkout#cart">
         <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
           back
         </button>
