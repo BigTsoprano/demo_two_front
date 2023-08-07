@@ -3,7 +3,6 @@ import "./App.css";
 import Cart from "./pages/Cart";
 import Success from "./pages/Success";
 import AllProducts from "./pages/AllProducts";
-import TestFilter from "./pages/TestFilter";
 import SingleProduct from "./pages/SingleProduct";
 import Checkout from "./pages/Checkout";
 import NavbarTest from "./components/NavbarTest";
@@ -28,7 +27,6 @@ const location = useLocation();
         <Route path="/form" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
         <Route path="/product/:id" element={<SingleProduct />} />
-        <Route path="/testfilter" element={<TestFilter />} />
       </Routes>
       </AnimatePresence>
       <Footer />

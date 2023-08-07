@@ -1,5 +1,4 @@
 import React from "react";
-import NavbarTest from "../components/NavbarTest";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { publicRequest } from "../requestMethods";
@@ -7,8 +6,7 @@ import { addProduct } from "../redux/cartRedux";
 import { useDispatch, useSelector } from "react-redux";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { motion, AnimatePresence } from "framer-motion";
-import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { motion} from "framer-motion";
 import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
