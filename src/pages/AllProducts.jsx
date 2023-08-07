@@ -812,39 +812,21 @@ marginBottom:'10vh'
        
 
         <div className="right m-5 ">
-          <div
-            style={{ display: "flex", alignItems: "center" }}
-            className="search-sort pb-5 flex w-full justify-between "
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-                textAlign: "left",
-              }}
-              className="category-title px-5"
-            >
-              {category ? category : "All products"}
-            </div>
-            <div className="sort absolute right-28">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                {/* button for filter mobile */}
-                <button
-                  style={{ padding: "8px 12px", marginLeft: "2rem" }}
+          <div style={{position:'sticky', top:'11vh', zIndex:'99'}}>
+        <button
+                  style={{ padding: "8px 12px"}}
                   className="mobile_btn bg-white hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
                   onClick={handleSliderToggle}
                 >
             <TuneOutlinedIcon style={{ marginRight: "6px" }} />      Filter 
                 </button>
-                {/* button for search modal*/}
-                <div>
+                </div>
+          <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center'}}>
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+            className="search-sort pb-5 flex w-full justify-between "
+          >
+            
                   <select
                     name="HeadlineAct"
                     style={{ padding: "10px 12px", marginLeft: "2rem" }}
@@ -868,9 +850,23 @@ marginBottom:'10vh'
                     <option value="desc">Price (High to Low)</option>
                     <option value="asc">Price (Low to High)</option>
                   </select>
-                </div>
-              </div>
+
+
+
+</div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                textAlign: "left",
+                width:'200px',
+              }}
+              className="category-title px-5"
+            >
+              {category ? category : "All products"}
             </div>
+            
+            
           </div>
           {displayFilters.length > 0 && (
             <div style={{display:'flex', alignItems:'center'}} className="">

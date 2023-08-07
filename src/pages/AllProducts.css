@@ -41,6 +41,8 @@ he
 }
 .right{
  
+display: flex;
+flex-direction: column;
 
 }
 .left2 {
@@ -127,13 +129,20 @@ transition: left 0.5s ease-in-out;
   .mobile_btn {
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    /* position: sticky;
+    top: 10vh;
+
+    top: 10vh;
+    z-index: 999; */
+  }
+  .bottom{
+    
   }
   .mobile_btn:hover{
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     transition: all 0.2s ease-in-out;
   }
   .category-title {
-    padding-top: 90px;
   }
   .search-sort {
     border: none !important;
