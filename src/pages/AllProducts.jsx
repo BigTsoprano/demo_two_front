@@ -1,48 +1,55 @@
-import NavbarTest from "../components/NavbarTest";
+// React imports
 import { useEffect, useReducer, useState, useRef } from "react";
-import axios from "axios";
-import Products from "../components/Products";
-import "./AllProducts.css";
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import { motion, AnimatePresence } from "framer-motion";
-import "instantsearch.css/themes/satellite.css";
-import ClearIcon from '@mui/icons-material/Clear';
 
-import Modal from "../components/Modal";
+// Third-party library imports
+import axios from "axios";
+import PropTypes from "prop-types";
+import { motion } from "framer-motion";
+import Slider, { SliderThumb } from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
+import Checkbox from "@mui/joy/Checkbox";
+
+// MUI icons imports
+import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import ClearIcon from "@mui/icons-material/Clear";
 import SearchIcon from "@mui/icons-material/Search";
-import PropTypes from 'prop-types';
-import Slider, { SliderThumb } from '@mui/material/Slider';
-import { styled } from '@mui/material/styles';
-import Checkbox from '@mui/joy/Checkbox';
-import Done from '@mui/icons-material/Done';
+import Done from "@mui/icons-material/Done";
+
+// Local imports
+import Products from "../components/Products";
+import Modal from "../components/Modal";
+
+// Style imports
+import "./AllProducts.css";
+import "instantsearch.css/themes/satellite.css";
 
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
-  color: '#22C55E',
+  color: "#22C55E",
   height: 3,
-  padding: '13px 0',
-  '& .MuiSlider-thumb': {
+  padding: "13px 0",
+  "& .MuiSlider-thumb": {
     height: 27,
     width: 27,
-    backgroundColor: '#Fff',
-    border: '1px solid #0F172A',
-    '&:hover': {
-      boxShadow: 'none',
+    backgroundColor: "#Fff",
+    border: "1px solid #0F172A",
+    "&:hover": {
+      boxShadow: "none",
     },
-    '& .airbnb-bar': {
+    "& .airbnb-bar": {
       height: 10,
       width: 1,
-      backgroundColor: 'currentColor',
+      backgroundColor: "currentColor",
       marginLeft: 1,
       marginRight: 1,
     },
   },
-  '& .MuiSlider-track': {
+  "& .MuiSlider-track": {
     height: 3,
   },
-  '& .MuiSlider-rail': {
-    color: theme.palette.mode === 'dark' ? '#bfbfbf' : '#d8d8d8',
-    opacity: theme.palette.mode === 'dark' ? undefined : 1,
+  "& .MuiSlider-rail": {
+    color: theme.palette.mode === "dark" ? "#bfbfbf" : "#d8d8d8",
+    opacity: theme.palette.mode === "dark" ? undefined : 1,
     height: 3,
   },
 }));
@@ -82,7 +89,6 @@ export default function AllProducts() {
   const [isWeightOpened, setIsWeightOpened] = useState(true);
   const [isTypeOpened, setIsTypeOpened] = useState(true);
   const [isEffectOpened, setIsEffectOpened] = useState(true);
-  const [isVisible, setIsVisible] = useState(false);
   const [display, setDisplay] = useState(false);
   const [showMoreWeight, setShowMoreWeight] = useState(false);
   const [showMoreEffect, setShowMoreEffect] = useState(false);
@@ -121,14 +127,14 @@ export default function AllProducts() {
   //filters for each filter category
   useEffect(() => {
     if (products) {
-         setFilteredProducts(products);
+      setFilteredProducts(products);
       setEffects([
         ...new Set(
           products
             .map((product) => product.effect)
             .filter((effect) => effect != undefined)
             .flat()
-            // .slice(0, showMoreEffect ? 99 : 7)
+          // .slice(0, showMoreEffect ? 99 : 7)
         ),
       ]);
 
@@ -147,7 +153,7 @@ export default function AllProducts() {
             .filter((effect) => effect != undefined)
             .sort((a, b) => b - a)
             .flat()
-            // .slice(0, showMoreWeight ? 99 : 7)
+          // .slice(0, showMoreWeight ? 99 : 7)
         ),
       ]);
     }
@@ -394,62 +400,61 @@ export default function AllProducts() {
     if (sidebarRef.current) {
       sidebarRef.current.scrollTop = 0;
     }
-        setIsSliderOpen(!isSliderOpen);
-    
+    setIsSliderOpen(!isSliderOpen);
   };
   const sidebarRef = useRef();
 
   const containerVariants = {
     hidden: { x: "-100%" },
-    visible: { x: 0 ,
-    transition: {duration: 0.7, delay: 0.3, ease: "linear" }
+    visible: {
+      x: 0,
+      transition: { duration: 0.7, delay: 0.3, ease: "linear" },
     },
     exit: {
       x: "-100%",
-      transition:{ease: "easeInOut"}
-    }
+      transition: { ease: "easeInOut" },
+    },
   };
 
-
-
-
-
   return (
-    <div className="all_product_section bg-white flex ">
-
-      <div
-       
-        className="bottom relative flex  "
-      >
+    <div className="all_product_section bg-white  ">
+      <div className="bottom relative flex  ">
         {modalOpen && <Modal closeModal={() => setModalOpen(false)} />}
-       
-        <motion.div initial="hidden"
-      animate="visible"
-      exit="exit"
-      variants={containerVariants}
-      ref={sidebarRef}
-      className={`left ${isSliderOpen ? "active" : ""}`}>
-          
-
-              {displayFilters.length > 0 && (
-             <button  onClick={handleClearAll} className="relative m-2 overflow-hidden group"><span className="invisible w-full">filter Refinement clear</span><span className="absolute top-0 left-0 text-slate-900 py-1 group-hover:-translate-y-full text-sm transition-transform ease-in-out duration-500 hover:duration-300">Filter(s)<span className="filter_btn bg-white ml-1 text-sm py-1 px-2 rounded-lg">{displayFilters.length}</span></span><span className="absolute top-0 left-0 translate-y-full group-hover:translate-y-0 transition-transform ease-in-out duration-500 text-sm font-medium hover:duration-300">Clear all</span></button>
-                
-              )}
+        {/* seperate component*/}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={containerVariants}
+          ref={sidebarRef}
+          className={`left ${isSliderOpen ? "active" : ""}`}
+        >
+          {displayFilters.length > 0 && (
+            <button
+              onClick={handleClearAll}
+              className="relative m-2 overflow-hidden group"
+            >
+              <span className="invisible w-full">filter Refinement clear</span>
+              <span className="absolute top-0 left-0 text-slate-900 py-1 group-hover:-translate-y-full text-sm transition-transform ease-in-out duration-500 hover:duration-300">
+                Filter(s)
+                <span className="filter_btn bg-white ml-1 text-sm py-1 px-2 rounded-lg">
+                  {displayFilters.length}
+                </span>
+              </span>
+              <span className="absolute top-0 left-0 translate-y-full group-hover:translate-y-0 transition-transform ease-in-out duration-500 text-sm font-medium hover:duration-300">
+                Clear all
+              </span>
+            </button>
+          )}
           <div className="py-1 pl-8 -ml-8">
-            
             <button
               className="search_btn py-2 hover:bg-green-100 text-slate-800  text-sm active:border hover:border-indigo-500 bg-white rounded-lg"
               onClick={handleOpenModal}
             >
-              <SearchIcon
-              className="text-slate-600 mr-2 text-sm"
-           
-              />{" "}
-              Search
+              <SearchIcon className="text-slate-600 mr-2 text-sm" /> Search
             </button>
-            
           </div>
-          <div  className="flex-col py-3">
+          <div className="flex-col py-3">
             <p className="p-2 text-sm font-medium">Categories</p>
             <button
               className="category-name font-medium  bg-white hover:bg-green-100 rounded-lg text-slate-700 hover:text-slate-900"
@@ -491,7 +496,10 @@ export default function AllProducts() {
           {display && (
             <div>
               {weights.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="">
+                <div
+                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
+                  className=""
+                >
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsWeightOpened(!isWeightOpened)}
@@ -515,32 +523,36 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isWeightOpened ? (
-                    <ul className={`${showMoreWeight? `show_more`:``}show_more px-2  text-sm font-base`}>
+                    <ul
+                      className={`${
+                        showMoreWeight ? `show_more` : ``
+                      }show_more px-2  text-sm font-base`}
+                    >
                       {weights.map((weight) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={weight}
                         >
-                         
-                         <Checkbox
-                                uncheckedIcon={<Done className="p-1"/>}
-                                slotProps={{
-                                  root: ({ checked, focusVisible }) => ({
-                                    sx: !checked
-                                      ? {
-                                          '& svg': { opacity: focusVisible ? 1 : 0 },
-                                          '&:hover svg': {
-                                            opacity: 1,
-                                          },
-                                        }
-                                      : undefined,
-                                  }),
-                                }}
-                          
-                          className="border border-slate-300 rounded"
-                          variant="plain"
-                          size="sm"
-                          color="success"
+                          <Checkbox
+                            uncheckedIcon={<Done className="p-1" />}
+                            slotProps={{
+                              root: ({ checked, focusVisible }) => ({
+                                sx: !checked
+                                  ? {
+                                      "& svg": {
+                                        opacity: focusVisible ? 1 : 0,
+                                      },
+                                      "&:hover svg": {
+                                        opacity: 1,
+                                      },
+                                    }
+                                  : undefined,
+                              }),
+                            }}
+                            className="border border-slate-300 rounded"
+                            variant="plain"
+                            size="sm"
+                            color="success"
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(weight + "g")}
                             type="checkbox"
@@ -555,93 +567,95 @@ export default function AllProducts() {
                           <label className={weight + "g"} htmlFor={weight}>
                             {weight}g
                           </label>
-                          
                         </li>
-                        
                       ))}
-
                     </ul>
-                    
                   ) : (
                     ""
                   )}
-                  {(weights.length > 5 && isWeightOpened) ? 
-                   <button onClick={() => setShowMoreWeight(!showMoreWeight)}
-      id="showMore" // Give the button an id so we can target it in CSS
-      className="relative ml-3 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
-      style={{ }}
-    >
-      {showMoreWeight ? "show less" : "show more"}
-    </button>
-    : "" }
-    
-    
-
-    
+                  {weights.length > 5 && isWeightOpened ? (
+                    <button
+                      onClick={() => setShowMoreWeight(!showMoreWeight)}
+                      id="showMore" // Give the button an id so we can target it in CSS
+                      className="relative ml-3 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
+                    >
+                      {showMoreWeight ? "show less" : "show more"}
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </div>
-                
               )}
-              <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className=" mt-5">
-                <p style={{marginRight:'1rem'}} className="text-sm pt-2 font-medium">Potency</p>
-               <div style={{marginLeft:'1rem'}}>
-                <p className="text-sm text-slate-800 p-1 mb-1 font-base" style={{ paddingTop: "10px",}}>
-                  thc: {thc[0]}% - {thc[1]}%
+              <div
+                style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
+                className=" mt-5"
+              >
+                <p
+                  style={{ marginRight: "1rem" }}
+                  className="text-sm pt-2 font-medium"
+                >
+                  Potency
                 </p>
-                <AirbnbSlider
-        slots={{ thumb: AirbnbThumbComponent }}
-                size='small'
-                valueLabelDisplay="auto"
-                className="text-slate-900"
-
-                  getAriaLabel={() => "Minimum distance"}
-                  style={{
-                    height: 3,
-                    width: '85%',
-                    marginLeft: 0,
-                    marginTop: 0,
-                    
-                   
-                  }}
-                  value={thc}
-                  onChange={rangeTHC}
-                  // valueLabelDisplay="auto"
-                  // getAriaValueText={() => `$`}
-                  // color="green"
-                  disableSwap
-                />
-                <div>
-                <p 
-                
-                className="text-sm rounded-lg  text-slate-800 mb-1 font-base" style={{ padding: "5px", width:'fit-content',}}>
-                  cbd: {cbd[0]}% - {cbd[1]}%
-                </p>
-                </div>
-                 <AirbnbSlider
-        slots={{ thumb: AirbnbThumbComponent }}
-                size="small"
-                valueLabelDisplay="auto"
-
-                  getAriaLabel={() => "Minimum distance"}
-                  style={{
-                    height: 3,
-                    width: '85%',
-                    marginLeft: 0,
-                    marginTop: 0,
-                    color: "#22C55E",
-                
-
-                  }}
-                  value={cbd}
-                  onChange={rangeCBD}
-                  // valueLabelDisplay="auto"
-                  // getAriaValueText={() => `$`}
-                  // color="green"
-                  disableSwap
-                />
+                <div style={{ marginLeft: "1rem" }}>
+                  <p
+                    className="text-sm text-slate-800 p-1 mb-1 font-base"
+                    style={{ paddingTop: "10px" }}
+                  >
+                    thc: {thc[0]}% - {thc[1]}%
+                  </p>
+                  <AirbnbSlider
+                    slots={{ thumb: AirbnbThumbComponent }}
+                    size="small"
+                    valueLabelDisplay="auto"
+                    className="text-slate-900"
+                    getAriaLabel={() => "Minimum distance"}
+                    style={{
+                      height: 3,
+                      width: "85%",
+                      marginLeft: 0,
+                      marginTop: 0,
+                    }}
+                    value={thc}
+                    onChange={rangeTHC}
+                    // valueLabelDisplay="auto"
+                    // getAriaValueText={() => `$`}
+                    // color="green"
+                    disableSwap
+                  />
+                  <div>
+                    <p
+                      className="text-sm rounded-lg  text-slate-800 mb-1 font-base"
+                      style={{ padding: "5px", width: "fit-content" }}
+                    >
+                      cbd: {cbd[0]}% - {cbd[1]}%
+                    </p>
+                  </div>
+                  <AirbnbSlider
+                    slots={{ thumb: AirbnbThumbComponent }}
+                    size="small"
+                    valueLabelDisplay="auto"
+                    getAriaLabel={() => "Minimum distance"}
+                    style={{
+                      height: 3,
+                      width: "85%",
+                      marginLeft: 0,
+                      marginTop: 0,
+                      color: "#22C55E",
+                    }}
+                    value={cbd}
+                    onChange={rangeCBD}
+                    // valueLabelDisplay="auto"
+                    // getAriaValueText={() => `$`}
+                    // color="green"
+                    disableSwap
+                  />
                 </div>
               </div>
               {types.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="">
+                <div
+                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
+                  className=""
+                >
                   <button
                     className="w-full flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsTypeOpened(!isTypeOpened)}
@@ -671,26 +685,26 @@ export default function AllProducts() {
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded  hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={type}
                         >
-                         
-                         <Checkbox
-                                uncheckedIcon={<Done className="p-1"/>}
-                                slotProps={{
-                                  root: ({ checked, focusVisible }) => ({
-                                    sx: !checked
-                                      ? {
-                                          '& svg': { opacity: focusVisible ? 1 : 0 },
-                                          '&:hover svg': {
-                                            opacity: 1,
-                                          },
-                                        }
-                                      : undefined,
-                                  }),
-                                }}
-                          
-                          className="border border-slate-300 rounded"
-                          variant="plain"
-                          size="sm"
-                          color="success"
+                          <Checkbox
+                            uncheckedIcon={<Done className="p-1" />}
+                            slotProps={{
+                              root: ({ checked, focusVisible }) => ({
+                                sx: !checked
+                                  ? {
+                                      "& svg": {
+                                        opacity: focusVisible ? 1 : 0,
+                                      },
+                                      "&:hover svg": {
+                                        opacity: 1,
+                                      },
+                                    }
+                                  : undefined,
+                              }),
+                            }}
+                            className="border border-slate-300 rounded"
+                            variant="plain"
+                            size="sm"
+                            color="success"
                             style={{ accentColor: "#22C55E" }}
                             checked={displayFilters.includes(type)}
                             type="checkbox"
@@ -709,7 +723,10 @@ export default function AllProducts() {
                 </div>
               )}
               {effects.length > 0 && (
-                <div style={{paddingLeft:'2rem', marginLeft:'-2rem'}} className="pb-10">
+                <div
+                  style={{ paddingLeft: "2rem", marginLeft: "-2rem" }}
+                  className="pb-10"
+                >
                   <button
                     className="w-full  flex items-center justify-between text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     onClick={() => setIsEffectOpened(!isEffectOpened)}
@@ -733,33 +750,36 @@ export default function AllProducts() {
                     </svg>
                   </button>
                   {isEffectOpened ? (
-                    <ul className={`${showMoreEffect? `show_show`:``}show_show px-2 pb-12 text-sm font-base`}>
+                    <ul
+                      className={`${
+                        showMoreEffect ? `show_show` : ``
+                      }show_show px-2 pb-12 text-sm font-base`}
+                    >
                       {effects.map((effect) => (
                         <li
                           className="flex items-center gap-x-2 text-slate-700 p-2 rounded hover:bg-green-100 active:bg-gray-100 duration-100"
                           key={effect}
                         >
-                          
                           <Checkbox
-                                uncheckedIcon={<Done className="p-1"/>}
-                                slotProps={{
-                                  root: ({ checked, focusVisible }) => ({
-                                    sx: !checked
-                                      ? {
-                                          '& svg': { opacity: focusVisible ? 1 : 0 },
-                                          '&:hover svg': {
-                                            opacity: 1,
-                                          },
-                                        }
-                                      : undefined,
-                                  }),
-                                }}
-                          
-                          className="border border-slate-300 rounded"
-                          variant="plain"
-                          size="sm"
-                          color="success"
-                            style={{  }}
+                            uncheckedIcon={<Done className="p-1" />}
+                            slotProps={{
+                              root: ({ checked, focusVisible }) => ({
+                                sx: !checked
+                                  ? {
+                                      "& svg": {
+                                        opacity: focusVisible ? 1 : 0,
+                                      },
+                                      "&:hover svg": {
+                                        opacity: 1,
+                                      },
+                                    }
+                                  : undefined,
+                              }),
+                            }}
+                            className="border border-slate-300 rounded"
+                            variant="plain"
+                            size="sm"
+                            color="success"
                             checked={displayFilters.includes(effect)}
                             type="checkbox"
                             name="effect"
@@ -770,109 +790,106 @@ export default function AllProducts() {
                           <label htmlFor={effect}>{effect}</label>
                         </li>
                       ))}
-                      {(effects.length > 5 && isEffectOpened) ?
-                     <button onClick={() => setShowMoreEffect(!showMoreEffect)}
-                     className="relative ml-2 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
-                     style={{ borderTop: "none" }}
-    >
-      {showMoreEffect ? "show less" : "show more"}
-    </button>
-    : "" }
-  
+                      {effects.length > 5 && isEffectOpened ? (
+                        <button
+                          onClick={() => setShowMoreEffect(!showMoreEffect)}
+                          className="relative ml-2 after:absolute after:bg-slate-400 text-xs text-slate-500 after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-left after:scale-x-100 hover:after:origin-bottom-right hover:after:scale-x-0 after:transition-transform after:ease-in-out after:duration-300"
+                          style={{ borderTop: "none" }}
+                        >
+                          {showMoreEffect ? "show less" : "show more"}
+                        </button>
+                      ) : (
+                        ""
+                      )}
                     </ul>
-                    
-                    
                   ) : (
                     ""
                   )}
-                      <button
-                style={{
-                  padding: "10px 12px",
-                  width: "96%",
-marginBottom:'10vh'
-                  
-                  
-                }}
-                onClick={handleSliderToggle}
-                className="filter-button rounded-lg text-base text-white  bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
-              >
-                Apply
-              </button>
-                
+                  <button
+                    style={{
+                      padding: "10px 12px",
+                      width: "96%",
+                      marginBottom: "10vh",
+                    }}
+                    onClick={handleSliderToggle}
+                    className="filter-button rounded-lg text-base text-white  bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
+                  >
+                    Apply
+                  </button>
                 </div>
               )}
-              
             </div>
           )}
         </motion.div>
 
-        {/* mobile filter */}
-
-       
+        {/* seperate component */}
 
         <div className="right m-5 ">
-          <div style={{position:'sticky', top:'11vh', zIndex:'99'}}>
-        <button
-                  style={{ padding: "8px 12px"}}
-                  className="mobile_btn bg-white border hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
-                  onClick={handleSliderToggle}
-                >
-            <TuneOutlinedIcon style={{ marginRight: "6px" }} />      Filter 
-                </button>
-                </div>
-          <div style={{display:'flex', flexDirection:'row-reverse', alignItems:'center'}}>
+          <div style={{ position: "sticky", top: "11vh", zIndex: "99" }}>
+            <button
+              style={{ padding: "8px 12px" }}
+              className="mobile_btn bg-white border hover:bg-green-100  font-medium text-slate-900 hover:bg-green-100 rounded-lg"
+              onClick={handleSliderToggle}
+            >
+              <TuneOutlinedIcon style={{ marginRight: "6px" }} /> Filter
+            </button>
+          </div>
           <div
-            style={{ display: "flex", justifyContent:'flex-end' }}
-            className="search-sort pb-5 flex w-full justify-between "
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              alignItems: "center",
+            }}
           >
-            
-                  <select
-                    name="HeadlineAct"
-                    style={{ padding: "10px 12px", marginLeft: "2rem", maxWidth:'200px' }}
-                    id="HeadlineAct"
-                    className="mt-1.5 w-full rounded-lg bg-white border  text-gray-700 sm:text-sm"
-                    onChange={(e) => {
-                      const selectedOption = e.target.value;
-                      // Perform sorting logic based on selectedOption
-                      if (selectedOption === "asc") {
-                        setSort("asc");
-                        // Perform sorting in ascending order
-                      } else if (selectedOption === "desc") {
-                        setSort("desc");
-                        // Perform sorting in descending order
-                      } else if (selectedOption === "clear") {
-                        setSort(""); // Clear the sorting value
-                      }
-                    }}
-                  >
-                    <option value="clear">Sort price</option>
-                    <option value="desc">Price (High to Low)</option>
-                    <option value="asc">Price (Low to High)</option>
-                  </select>
-
-
-
-</div>
+            <div
+              style={{ display: "flex", justifyContent: "flex-end" }}
+              className="search-sort pb-5 flex w-full justify-between "
+            >
+              <select
+                name="HeadlineAct"
+                style={{
+                  padding: "10px 12px",
+                  marginLeft: "2rem",
+                  maxWidth: "200px",
+                }}
+                id="HeadlineAct"
+                className="mt-1.5 w-full rounded-lg bg-white border  text-gray-700 sm:text-sm"
+                onChange={(e) => {
+                  const selectedOption = e.target.value;
+                  // Perform sorting logic based on selectedOption
+                  if (selectedOption === "asc") {
+                    setSort("asc");
+                    // Perform sorting in ascending order
+                  } else if (selectedOption === "desc") {
+                    setSort("desc");
+                    // Perform sorting in descending order
+                  } else if (selectedOption === "clear") {
+                    setSort(""); // Clear the sorting value
+                  }
+                }}
+              >
+                <option value="clear">Sort price</option>
+                <option value="desc">Price (High to Low)</option>
+                <option value="asc">Price (Low to High)</option>
+              </select>
+            </div>
             <div
               style={{
                 display: "flex",
                 justifyContent: "flex-start",
                 textAlign: "left",
-                width:'200px',
+                width: "200px",
               }}
               className="category-title px-5"
             >
               {category ? category : "All products"}
             </div>
-            
-            
           </div>
           {displayFilters.length > 0 && (
-            <div style={{display:'flex', alignItems:'center'}} className="">
+            <div style={{ display: "flex", alignItems: "center" }} className="">
               {displayFilters.map((filter, index) => (
                 <span
-                
-                className="bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition duration-150 delay-50 text-xs font-semibold rounded-lg "
+                  className="bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition duration-150 delay-50 text-xs font-semibold rounded-lg "
                   key={filter}
                   id={index}
                   onClick={() => handleClickDisplayFilters(index)}
@@ -882,20 +899,21 @@ marginBottom:'10vh'
                   }}
                 >
                   {filter}
-                  <ClearIcon className="" style={{fontSize:'16px ', marginRight:'3px'}}/>
+                  <ClearIcon
+                    className=""
+                    style={{ fontSize: "16px ", marginRight: "3px" }}
+                  />
                 </span>
               ))}
             </div>
           )}
-          <div className=" bg-white sm:py-8 lg:py-3 flex justify-between w-full">
+          <div className=" bg-white sm:py-8 lg:py-3 flex justify-between w-auto">
             {unmatchedFilters ? (
               <div>no matched results</div>
             ) : (
-             
               <Products
                 products={filteredProducts.length ? filteredProducts : products}
               />
-             
             )}
           </div>
         </div>

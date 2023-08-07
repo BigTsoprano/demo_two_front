@@ -45,7 +45,7 @@ const Cart = () => {
 
   return (
     <div id="cart"
-      style={{ paddingTop: "10vh", minHeight: "100vh" }}
+      style={{ paddingTop: "10vh", minHeight: "120vh" }}
       className="bg-slate-100"
     >
       {/* <Announcement /> */}

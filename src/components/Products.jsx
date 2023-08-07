@@ -1,22 +1,22 @@
 import Product from "./Product";
 import { motion, AnimatePresence } from "framer-motion";
+import SkeletonProduct from "./SkeletonProduct";
 
 const Products = ({ products }) => {
 
   const productVariants = {
-    hidden: { opacity:0 },
-    visible: { opacity: 1 ,
-    transition: {duration: 0.3, ease: "linear"}
-    },
+   
     exit: {
-      opacity: 0,
+      scale: .8,
       transition:{ease: "linear"}
     }
   };
 
   return (
-    <div className="product_wrap bg-white grid gap-x-4 gap-y-8 grid-cols-2 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="product_wrap w-full bg-white grid gap-x-4 gap-y-8 grid-cols-2 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
       
+
+
       <AnimatePresence>
 
       
@@ -24,8 +24,7 @@ const Products = ({ products }) => {
           products.map((item) => (
             <motion.div    variants={productVariants}       
 
-            initial="hidden"
-            animate="visible"
+           
             exit="exit" layout key={item._id}>
               
                 <Product item={item} />
@@ -33,6 +32,8 @@ const Products = ({ products }) => {
 
 ))}
 </AnimatePresence>
+{!products && [1,2,3,4,5,6,7,8,9].map((n) => <SkeletonProduct key={n}/>)}
+
     </div>
   );
 };

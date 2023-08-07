@@ -149,9 +149,7 @@ display:'flex';
    align-items: center;
  }
  
- .swiper-slide img {
-  
- }
+ 
 .receipt{
    min-width: 350px;
 }
@@ -159,6 +157,90 @@ display:'flex';
    min-width: 350px;
 }
  
+
+.skeleton{
+   background: #ddd;
+   margin: 10px 0;
+   border-radius: 4px;
+   overflow: hidden;
+
+}
+.skeleton.text {
+   width: 60%;
+   height: 10px;
+   margin-left:10px;
+
+
+}
+.skeleton.price {
+   width: 20px;
+
+   height: 20px;
+   margin-right:10px;
+   background: #bfbfbf;
+
+
+}
+.skeleton.text2 {
+   width: 70%;
+   height: 10px;
+   margin-left:10px;
+
+}
+.skeleton.title{
+   width: 50%;
+background: #bfbfbf;
+   height: 15px;
+ margin-left:10px;
+   padding-top:15px;
+}
+.skeleton-wrap{
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
+
+}
+.skeleton-wrapper{
+   position: relative;
+   overflow: hidden;
+
+}
+.shimmer-wrapper{
+   position: absolute;
+   /* parent must be relative position & overflow hidden */
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   animation: loading 1s infinite;
+}
+.shimmer{
+   width: 50%;
+   height: 100%;
+   background: rgba(241, 245, 249,0.2);
+   transform: skewX(-20deg);
+   box-shadow: 0 0 30px 30px rgba(255,255,255,0.2);
+
+}
+@keyframes loading {
+   0% { transform: translateX(-150%) }
+   50% { transform: translateX(50%) }
+   100% { transform: translateX(200%) }
+ }
+
+.skeleton.thumbnail{
+   background-color: #fff;
+   width:100%;
+   height: 150px;
+   
+   
+}
+.skeleton-product{
+
+height:100px;
+width:100%;
+
+}
 
 @media screen and (max-device-width: 640px) {
    html,

@@ -43,6 +43,8 @@ he
  
 display: flex;
 flex-direction: column;
+width: fill-available;
+
 
 }
 .left2 {
