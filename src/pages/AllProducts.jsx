@@ -782,22 +782,24 @@ export default function AllProducts() {
   
                     </ul>
                     
+                    
                   ) : (
                     ""
                   )}
-                    <button
+                      <button
                 style={{
                   padding: "10px 12px",
                   width: "96%",
-
+marginBottom:'10vh'
                   
                   
                 }}
                 onClick={handleSliderToggle}
-                className="filter-button rounded-lg text-base text-white mb-3 bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
+                className="filter-button rounded-lg text-base text-white  bg-green-500 hover:bg-white hover:border transition duration-100 hover:text-slate-900 "
               >
                 Apply
               </button>
+                
                 </div>
               )}
               
